@@ -1,0 +1,15 @@
+
+    body {
+        width: auto;
+        margin: auto;
+    }
+
+
+    .form-horizontal {
+    text-align:center; 
+    margin-left:auto; 
+    margin-right:auto; 
+    width: 800px;
+    }
+
+

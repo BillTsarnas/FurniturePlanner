@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- Appenders -->
+	<appender name="COEV_LOG" class="org.apache.log4j.RollingFileAppender">
+		<param name="File"   value="/home/vasilis/furniture.log" />
+		<param name="Append" value="true" />
+		<param name="MaxBackupIndex" value="10"/>
+		<param name="MaxFileSize" value="5MB"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] %d{dd MMM yyyy HH:mm:ss,SSS} %c{1} %L %m%n"/>
+		</layout>
+	</appender>
+
+	<!-- Categories -->
+	<category name="org.uniof.manchester.pattern.web" additivity="false">
+		<priority value="error"/>
+		<appender-ref ref="COEV_LOG" />
+	</category>
+	<root>
+		<priority value="error"/>
+		<appender-ref ref="COEV_LOG"/>
+	</root>
+</log4j:configuration>
