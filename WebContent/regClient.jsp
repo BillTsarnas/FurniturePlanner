@@ -4,11 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="regClient.css">
+
+<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="css/regClient.css">
+<link rel="stylesheet" href="css/googleapis.css"/>
+
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 
 <title>Order Details</title>
 </head>
