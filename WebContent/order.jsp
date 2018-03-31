@@ -72,8 +72,8 @@
                 </tbody>
         </table>
 
-        <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
-        <button type="button" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/.jsp'">Next</button>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/regClient.jsp'">Cancel</button>
+        <button type="button" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/tofillit.jsp'">Save</button>
         
         </div>
     </div> 
