@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.uniof.manchester.pattern.web.Client;
+import org.uniof.manchester.pattern.web.Furniture;
+import org.uniof.manchester.pattern.web.Installment;
+import org.uniof.manchester.pattern.web.Order;
 
 
 public class DatabaseManager {
@@ -69,6 +73,46 @@ public class DatabaseManager {
 			ps.executeUpdate();
 			
 		} finally {
+			try {
+				ps.close();
+			} catch (Exception e) {}
+		}
+	}
+	
+public Order getOrderUserById(Connection conn, int clientId) throws SQLException {
+		
+		Order orden = null;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+
+		try {
+		
+			String query =null;
+			query = "select orderid, name, surname, totalcost, clientId, status from ORDERS where userId=?";
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, clientId);
+			rs = ps.executeQuery();
+			
+			  
+			
+			while(rs.next()){
+				
+				int orderId = rs.getInt("orderid");
+				String name = rs.getString("name");
+				float totalcost = rs.getFloat("totalcost");
+				clientId = rs.getInt("clientId");
+				String status = rs.getString("status");
+			
+				orden = new Order( orderId, null,clientId, status, null, totalcost,name);
+			
+			}
+			
+			return orden;
+	
+		} finally {
+			try {
+				rs.close();
+			} catch (Exception e) {}
 			try {
 				ps.close();
 			} catch (Exception e) {}
