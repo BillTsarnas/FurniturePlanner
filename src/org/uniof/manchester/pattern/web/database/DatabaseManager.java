@@ -10,7 +10,7 @@ import org.uniof.manchester.pattern.web.Client;
 
 public class DatabaseManager {
 	
-	public Client getClientById(Connection conn, int clientId) throws SQLException {
+	public Client getUserById(Connection conn, int clientId) throws SQLException {
 		
 		Client user = null;
 		ResultSet rs = null;
