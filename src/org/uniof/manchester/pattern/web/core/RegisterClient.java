@@ -78,14 +78,12 @@ public class RegisterClient extends HttpServlet {
 		try {
 				conn  = getConnection();	
 				DatabaseManager dbManager = new DatabaseManager(); 
-				//Client client = dbManager.getUserById(conn, 1);
 				Client client = new Client(0,  firstName,  lastName,  mphone,  phone,  email,
 						address+", "+city+", "+postCode+", "+country);
 				
 				dbManager.setUser(client, conn);
 				
 				request.setAttribute("user", client);
-				//this.getServletContext().getRequestDispatcher("/userForm.jsp").forward(request, response);
 			
 			
 				

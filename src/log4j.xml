@@ -4,7 +4,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 	<!-- Appenders -->
 	<appender name="COEV_LOG" class="org.apache.log4j.RollingFileAppender">
-		<param name="File"   value="/home/vasilis/furniture.log" />
+		<param name="File"   value="C:/log_apps/furniture.log" />
 		<param name="Append" value="true" />
 		<param name="MaxBackupIndex" value="10"/>
 		<param name="MaxFileSize" value="5MB"/>
