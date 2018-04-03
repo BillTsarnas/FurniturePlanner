@@ -89,11 +89,11 @@ public class RegisterClient extends HttpServlet {
 				
 		}catch (SQLException e)
 		{
-			LOG.error("Problemas en la generaci�n del excel de calificaciones desde SQL " +  e);
+			LOG.error("Problems on SQL " +  e);
 			throw new RuntimeException("SQL error : " + e.getMessage());
 		} catch (Exception e) {
-			LOG.fatal("Excepci�n al generar el reporte : " + e.getMessage());
-			throw new RuntimeException("Excepci�n al generar el reporte : " + e.getMessage());
+			LOG.fatal("Problems on Report : " + e.getMessage());
+			throw new RuntimeException("Exception  : " + e.getMessage());
 		}
 		finally 
 		{
@@ -101,7 +101,7 @@ public class RegisterClient extends HttpServlet {
 			{	if(conn!=null){conn.close();}	
 			} catch (SQLException e) 
 			{
-				LOG.error("Problemas al cerrar la conexi�n despues de crear el excel de calificaciones,", e);
+				LOG.error("Problems closing connection,", e);
 				throw new ServletException(e.getMessage(), e);
 			}
 	   }

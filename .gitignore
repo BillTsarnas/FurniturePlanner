@@ -11,3 +11,11 @@ build/classes/org/uniof/manchester/pattern/web/Client.class
 build/classes/org/uniof/manchester/pattern/web/core/RegisterClient.class
 build/classes/org/uniof/manchester/pattern/web/database/DatabaseManager.class
 src/log4j.xml
+/build/
+.settings/.jsdtscope
+.settings/org.eclipse.wst.jsdt.ui.superType.name
+.settings/org.eclipse.wst.jsdt.ui.superType.container
+.DS_Store
+src/log4j.xml
+src/log4j.xml
+src/log4j.xml
