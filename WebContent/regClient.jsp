@@ -100,8 +100,9 @@
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <div class="pull-right">
-                    <button type="submit" class="btn btn-default">Cancel</button>
-                    <button type="button" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/order.jsp'">Save</button>
+                    <button type="button" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <!-- onclick="window.location.href='http://localhost:8080/FurniturePlanner/order.jsp'" -->
                   </div>
                 </div>
               </div>

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -78,22 +79,25 @@ public class RegisterClient extends HttpServlet {
 		try {
 				conn  = getConnection();	
 				DatabaseManager dbManager = new DatabaseManager(); 
+				//Client client = dbManager.getUserById(conn, 1);
 				Client client = new Client(0,  firstName,  lastName,  mphone,  phone,  email,
 						address+", "+city+", "+postCode+", "+country);
 				
 				dbManager.setUser(client, conn);
 				
-				request.setAttribute("user", client);
+				//redirect to the order page
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");
+				requestDispatcher.forward(request, response);
 			
 			
 				
 		}catch (SQLException e)
 		{
-			LOG.error("Problems on SQL " +  e);
+			LOG.error("Problemas en la generaci�n del excel de calificaciones desde SQL " +  e);
 			throw new RuntimeException("SQL error : " + e.getMessage());
 		} catch (Exception e) {
-			LOG.fatal("Problems on Report : " + e.getMessage());
-			throw new RuntimeException("Exception  : " + e.getMessage());
+			LOG.fatal("Excepci�n al generar el reporte : " + e.getMessage());
+			throw new RuntimeException("Excepci�n al generar el reporte : " + e.getMessage());
 		}
 		finally 
 		{
@@ -101,7 +105,7 @@ public class RegisterClient extends HttpServlet {
 			{	if(conn!=null){conn.close();}	
 			} catch (SQLException e) 
 			{
-				LOG.error("Problems closing connection,", e);
+				LOG.error("Problemas al cerrar la conexi�n despues de crear el excel de calificaciones,", e);
 				throw new ServletException(e.getMessage(), e);
 			}
 	   }

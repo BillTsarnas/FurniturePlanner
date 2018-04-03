@@ -20,7 +20,7 @@ public class DatabaseManager {
 
 			
 			String query =null;
-			query = "select userid, name, surname, mphone, hphone, email, adress from users where userId=?";
+			query = "select userid, name, surname, mphone, hphone, email, address from USERS where userId=?";
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, clientId);
 			rs = ps.executeQuery();
@@ -57,7 +57,7 @@ public class DatabaseManager {
 			
 		try {
 			String query =null;
-				query = "INSERT INTO users (name, surname, mphone, hphone, email, adress) VALUES (?,?,?,?,?,?)";
+				query = "INSERT INTO USERS (name, surname, mphone, hphone, email, address) VALUES (?,?,?,?,?,?)";
 				ps = conn.prepareStatement(query);
 				ps.setString(1, usuario.getName());
 				ps.setString(2, usuario.getSurname());
