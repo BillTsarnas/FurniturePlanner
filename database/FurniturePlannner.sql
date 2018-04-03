@@ -36,16 +36,20 @@ insert into USERS (name,surname,mphone,hphone, email, address) VALUES
 ('Ruben 11','Padilla Robles','55185211806','555435685411','rubpad@gmail.com','mar marmara 377 int 301'   );
 
 
+DROP TABLE ORDERS;
+
 CREATE TABLE ORDERS 
 (
     orderId                  int NOT NULL AUTO_INCREMENT,
+    name                     varchar(255),  
     userId	 				 int,
     installmentId            int,
+    totalcost                float,
 	status                   int,
     PRIMARY KEY(orderId)
 );
 
-
+DROP TABLE INSTALLMENTS;
 
 CREATE TABLE INSTALLMENTS 
 (
@@ -55,6 +59,8 @@ CREATE TABLE INSTALLMENTS
     PRIMARY KEY(installmentId)
 );
 
+DROP TABLE ORDER_FURNITURE;
+
 CREATE TABLE ORDER_FURNITURE 
 (
     orderId                  int,
@@ -63,16 +69,19 @@ CREATE TABLE ORDER_FURNITURE
     PRIMARY KEY(orderId, furnitureId)
 );
 
+DROP TABLE FURNITURE;
 
 CREATE TABLE FURNITURE 
 (
     furnitureId              int NOT NULL AUTO_INCREMENT,
+    name                     varchar(255),  
     materialsId 			 int,
     numOfExtraParts          int,
     numOfCuts 				 int,
     PRIMARY KEY(furnitureId)
 );
 
+DROP TABLE MATERIAL_CATALOGUE;
 
 CREATE TABLE MATERIAL_CATALOGUE 
 (
@@ -83,12 +92,16 @@ CREATE TABLE MATERIAL_CATALOGUE
     PRIMARY KEY(materialId)
 );
 
+DROP TABLE FURNITURE_EXTRAPARTS;
+
 CREATE TABLE FURNITURE_EXTRAPARTS 
 (
     userId                  int NOT NULL AUTO_INCREMENT,
     furnitureId             int,
     PRIMARY KEY(userId,furnitureId)
 );
+
+DROP TABLE EXTRAPARTS_CATALOGUE;
 
 CREATE TABLE EXTRAPARTS_CATALOGUE 
 (
@@ -98,6 +111,8 @@ CREATE TABLE EXTRAPARTS_CATALOGUE
     PRIMARY KEY(extraPartsId)
 );
 
+DROP TABLE BOXES_FURNITURE;
+
 CREATE TABLE BOXES_FURNITURE 
 (
     furnitureId             int NOT NULL AUTO_INCREMENT,
@@ -105,6 +120,8 @@ CREATE TABLE BOXES_FURNITURE
     size                    int,
     PRIMARY KEY(furnitureId,boxId)
 );
+
+DROP TABLE BOX;
 
 CREATE TABLE BOX
 (
@@ -114,3 +131,4 @@ CREATE TABLE BOX
     depth                   int,
     PRIMARY KEY(boxId)
 );
+
