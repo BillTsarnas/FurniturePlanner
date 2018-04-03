@@ -4,11 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import org.uniof.manchester.pattern.web.Client;
-import org.uniof.manchester.pattern.web.Furniture;
-import org.uniof.manchester.pattern.web.Installment;
 import org.uniof.manchester.pattern.web.Order;
 
 
@@ -55,9 +52,11 @@ public class DatabaseManager {
 		}
 	}
 	
-	public  void setUser(Client usuario, Connection conn) throws SQLException {
+	public  int setUser(Client usuario, Connection conn) throws SQLException {
 		
 			PreparedStatement ps = null;
+			PreparedStatement ps2 = null;
+			ResultSet rs = null;
 			
 		try {
 			String query =null;
@@ -70,11 +69,31 @@ public class DatabaseManager {
 				ps.setString(5, usuario.getEmail());
 				ps.setString(6, usuario.getAddress());
 			
-			ps.executeUpdate();
+			ps.executeUpdate();	
+			String query2 =null;
+			query = "select max(userid) from USERS";
+			ps2 = conn.prepareStatement(query2);
+			rs = ps.executeQuery();
+
+			int clientId = 0;
+			
+			
+			while(rs.next()){
+				
+				clientId = rs.getInt("userid");
+			}
+			
+			return clientId;
 			
 		} finally {
 			try {
 				ps.close();
+			} catch (Exception e) {}
+			try {
+				rs.close();
+			} catch (Exception e) {}
+			try {
+				ps2.close();
 			} catch (Exception e) {}
 		}
 	}
@@ -118,6 +137,30 @@ public Order getOrderUserById(Connection conn, int clientId) throws SQLException
 			} catch (Exception e) {}
 		}
 	}
+
+
+public  void setOrder(Order orden, Connection conn) throws SQLException {
+	
+	PreparedStatement ps = null;
+	
+try {
+	String query =null;
+		query = "INSERT INTO ORDERS (name, userId, totalcost, status) VALUES (?,?,?,?)";
+		ps = conn.prepareStatement(query);
+		ps.setString(1, orden.getName());
+		ps.setInt(2, orden.getClientId());
+		ps.setFloat(3, orden.getTotalcost());
+		ps.setString(4, orden.getStatus());
+	
+	ps.executeUpdate();
+	
+} finally {
+	try {
+		ps.close();
+	} catch (Exception e) {}
+}
+}
+
 	
 
 }

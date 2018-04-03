@@ -13,6 +13,8 @@ public class Order {
 	float totalcost;
 	
 
+
+
 	public Order(int orderID, ArrayList<Furniture> furnitures, int  clientId, String status, ArrayList<Installment> installments,
 			float totalcost, String name) {
 		this.orderID = orderID;
@@ -75,5 +77,13 @@ public class Order {
 		this.totalcost = totalcost;
 	}
 
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }
