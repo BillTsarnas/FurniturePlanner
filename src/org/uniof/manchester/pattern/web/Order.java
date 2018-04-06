@@ -8,12 +8,9 @@ public class Order {
     private ArrayList<Furniture> furnitures;
 	private ArrayList<Installment> installments;
 	private int clientId;
-	String status;
-	String name;
-	float totalcost;
-	
-
-
+	private String status;
+	private String name;
+	private float totalcost;
 
 	public Order(int orderID, ArrayList<Furniture> furnitures, int  clientId, String status, ArrayList<Installment> installments,
 			float totalcost, String name) {

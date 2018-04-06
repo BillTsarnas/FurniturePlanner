@@ -83,7 +83,7 @@ public class RegisterClient extends HttpServlet {
 				Client client = new Client(0,  firstName,  lastName,  mphone,  phone,  email,
 						address+", "+city+", "+postCode+", "+country);
 				
-				dbManager.setUser(client, conn);
+				dbManager.setClient(client, conn);
 				
 				//redirect to the order page
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");

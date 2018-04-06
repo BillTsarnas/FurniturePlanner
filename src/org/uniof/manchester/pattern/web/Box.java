@@ -1,7 +1,5 @@
 package org.uniof.manchester.pattern.web;
 
-import java.util.ArrayList;
-
 public class Box {
 	
 	private String boxTypeId;
@@ -10,20 +8,39 @@ public class Box {
 	private int height;
 	private int width;
 	private int depth;
+	private int sizeInSqMts;
 	
 	//16 or 18, 16 can be default
-	private double thickness;
+	private int thickness;
 	
 	//thickness of back side set to 80mm
-	private static double back_thickness = 0.8;
+	private double back_thickness = 0.8;
 	
 	private String colour;
 	
 	//number of shelves (default 0)
 	private int num_shelves;
 	
-	//table for "extra" components
-	private ArrayList<String> extras;
+	public Box(String boxTypeId, int height, int width, int depth, int sizeInSqMts, int thickness, String colour,
+			int num_shelves) {
+		super();
+		this.boxTypeId = boxTypeId;
+		this.height = height;
+		this.width = width;
+		this.depth = depth;
+		this.sizeInSqMts = sizeInSqMts;
+		this.thickness = thickness;
+		this.colour = colour;
+		this.num_shelves = num_shelves;
+	}
+
+	public int getSizeInSqMts() {
+		return sizeInSqMts;
+	}
+
+	public void setSizeInSqMts(int sizeInSqMts) {
+		this.sizeInSqMts = sizeInSqMts;
+	}
 
 	public String getBoxTypeId() {
 		return boxTypeId;
@@ -57,15 +74,15 @@ public class Box {
 		this.depth = depth;
 	}
 
-	public double getThickness() {
+	public int getThickness() {
 		return thickness;
 	}
 
-	public void setThickness(double thickness) {
+	public void setThickness(int thickness) {
 		this.thickness = thickness;
 	}
 
-	public static double getBack_thickness() {
+	public double getBack_thickness() {
 		return back_thickness;
 	}
 
@@ -89,14 +106,5 @@ public class Box {
 		this.num_shelves = num_shelves;
 	}
 
-	public ArrayList<String> getExtras() {
-		return extras;
-	}
-
-	public void setExtras(ArrayList<String> extras) {
-		this.extras = extras;
-	}
-	
-	
 
 }
