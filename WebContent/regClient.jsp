@@ -26,14 +26,7 @@
               <legend>Furniture App v1.0</legend>
               <div class="panel panel-default">
                 <div class="panel-body">
-                    Order for new User
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="textinput">OrderID</label>
-                <div class="col-sm-10">
-                  <input type="text" placeholder="#31234" class="form-control" disabled="disabled" >
+                    Order for new Client
                 </div>
               </div>
               
