@@ -510,7 +510,7 @@ public ArrayList<Client> getClientsByName(Connection conn, String clientName, bo
 
 	try {
 	
-		cs = conn.prepareCall("{call ss(?)}");
+		cs = conn.prepareCall("{call sp_get_clients_by_name(?)}");
 		cs.setString(1, clientName);
 		rs = cs.executeQuery();
 		
