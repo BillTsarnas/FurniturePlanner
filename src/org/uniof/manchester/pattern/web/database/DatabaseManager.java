@@ -1,9 +1,11 @@
 package org.uniof.manchester.pattern.web.database;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
@@ -500,7 +502,42 @@ try {
 }
 }
 
+public ArrayList<Client> getClientsByName(Connection conn, String clientName, boolean complete) throws SQLException {
+	
+	ArrayList<Client> clients = new ArrayList<Client>();;
+	ResultSet rs = null;
+	CallableStatement cs = null;
 
+	try {
+	
+		cs = conn.prepareCall("{call ss(?)}");
+		cs.setString(1, clientName);
+		rs = cs.executeQuery();
+		
+		while(rs.next()){
+			int clientId = rs.getInt("clientid");
+			String name = rs.getString("name");
+			String surname = rs.getString("surname");
+			String mphone = rs.getString("mphone");
+			String hphone = rs.getString("hphone");
+			String email = rs.getString("email");
+			String address = rs.getString("address");
+			
+			Client cliente = new Client(clientId, name, surname, mphone, hphone, email,address); 
+			clients.add(cliente);
+		}
+		
+		return clients;
+
+	} finally {
+		try {
+			rs.close();
+		} catch (Exception e) {}
+		try {
+			cs.close();
+		} catch (Exception e) {}
+	}
+}
 
 
 }
