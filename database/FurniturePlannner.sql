@@ -36,7 +36,7 @@ insert into CLIENTS (name,surname,mphone,hphone, email, address) VALUES
 ('Ruben 11','Padilla Robles','55185211806','555435685411','rubpad@gmail.com','mar marmara 377 int 301'   );
 
 
-DROP TABLE ORDERS;
+DROP TABLE ORDERS IF EXISTS;
 
 CREATE TABLE ORDERS 
 (

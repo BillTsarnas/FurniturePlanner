@@ -31,20 +31,25 @@
 </head>
 
 
-    <div class="productboxOne">
-        <div class="producttitle">Register new Client</div>
+    <div class="productboxOne" style="width:230px; heigh:70px">
+        <div class="producttitle"></div>
         <div class="productprice">
           <div class="pull-right">
-            <button type="button" class="btn btn-success btn-sm" onclick="location.href='http://localhost:8080/FurniturePlanner/regClient.jsp'">New</button>
+            <button type="button" class="btn btn-success btn-sm" onclick="location.href='http://localhost:8080/FurniturePlanner/regClient.jsp'" style="heigh:100px">
+            <b>Register new Order for new Client</b>
+            </button>
           </div>
         </div>
     </div>
-    <div class="productboxTwo">
-        <div class="producttitle">Register new Order</div>
+    <div class="productboxTwo" style="width:260px; heigh:70px">
+        <div class="producttitle"></div>
         <div class="productprice">
           <div class="pull-right">
+          <!--button type="button" class="btn btn-success btn-sm" onclick="location.href='http://localhost:8080/FurniturePlanner/.jsp'" style="heigh:100px">
+            <b>Register new Order for an existing Client</b>
+            </button-->
               <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#basicModal">
-                 New
+                 <b>Register new Order for an existing Client</b>
               </a>
 
 			  <div class="modal fade" id="basicModal" tabindex="-1" role="dialog"
@@ -52,24 +57,25 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title" id="myModalLabel">Available Clients</h4>
+							<h4 class="modal-title" id="myModalLabel">Search Client by Name</h4>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">×</span>
 							</button>
 						</div>
+						<form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/SearchClient">
 						<div class="modal-body">
 							<div class="searchModal">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Search..."
-										id="searchClient"> <span class="input-group-btn">
-										<button class="btn btn-default" type="button"
-											data-toggle="modal" data-target="#searchClientModal">Go!</button>
+										id="searchClient" name="searchName"> <span class="input-group-btn">
+										<!-- button class="btn btn-default" type="button"
+											data-toggle="modal" data-target="#searchClientModal">Go!</button-->
 									</span>
 								</div>
 							</div>
 
-							<%
+							<!-- %
 							    String name = "Costas";
 							    Client client = new Client(0,  "test",  "test",  "test",  "test",  "test",
 									"test");
@@ -77,31 +83,32 @@
 							    //String name = client.getName();
 							    
 								if ( name == null) {
-							%>
+							%-->
 
-                            <p>The client: <%= name %> is not registered yet, please go back and select 
-                            <b>Register new Client</b></p>
+                            <!--p>The client: <!--%= name %> is not registered yet, please go back and select 
+                            <b>Register new Client</b></p-->
 
 
-							<%
+							<!--%
 								} else {
-							%>
+							%-->
 							
-							<div class="radio disabled">
-								<label><input type="radio" name="optradio" disabled><%= name %>
+							<!--div class="radio disabled">
+								<label><input type="radio" name="optradio" disabled><!--%= name %>
 								</label>
-							</div>
+							</div-->
 														
-							<%
+							<!--%
 								}
-							%>
+							%-->
 
 						</div>
 						<div class="modal-footer">
 						   <button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-						   <button type="button" class="btn btn-success">Next</button>
+								data-dismiss="modal">Cancel</button>
+						   <button type="submit" class="btn btn-success">Next</button>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
