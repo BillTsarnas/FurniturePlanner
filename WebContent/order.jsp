@@ -28,7 +28,7 @@
 
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h2><b>Order Details for <% out.print(request.getParameter("firstName")); %></b></h2></div>
+                    <div class="col-sm-8"><h2><b>Order Details for <% out.print(request.getParameter("firstName")); %>: ${userId}</b></h2></div>
                     <div class="col-sm-4">
                         <button type="button" class="btn btn-primary add-new"><i class="fa fa-plus"></i> Add new Furniture</button>
                     </div>
@@ -88,7 +88,9 @@
 	                    </tr>  
 	                </tbody>
 	             </table>
-	
+				 
+				 <input type="hidden" name = "clientId" value="${userId}">
+				 
 	             <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
 	             <button type="submit" class="btn btn-success">Save</button>
              </form>

@@ -27,45 +27,47 @@
                     <div class="col-sm-6"><h2><b>Kitchen Details</b></h2></div>
                 </div>
             </div>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Box</th>
-                        <th>Height</th>
-                        <th>Weight</th>
-                        <th>Length</th>
-                        <th>Depth</th>
-                        <th>Melimine colour</th>
-                        <th>Door material</th>
-                        <th>Door colour</th>  
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" class="form-control" id="box"></td>
-                        <td><input class="form-control" type="text" id="height"></td>
-                        <td><input class="form-control" type="text" id="weight"></td>
-                        <td><input class="form-control" type="text" id="lenght"></td>
-                        <td><input class="form-control" type="text" id="depth"></td>
-                        <td><input type="text" class="form-control" id="melMat"></td>
-
-                        <td>  
-                          <select class="form-control" id="doorColour" data-width="100%">
-                            <option selected>Choose colour</option>
-                            <option id="active">Red</option>
-                            <option id="postponed">Postponed</option>
-                            <option id="inactive">Inactive</option>
-                            <option id="cancelled">Cancelled</option>
-                          </select>
-                        </td>
-                        <td><input type="text" class="form-control" id="melColour"></td>
-    
-                    </tr>  
-                </tbody>
-        </table>
-
-        <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/order.jsp'">Cancel</button>
-        <button type="button" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/order.jsp'">Save</button>
+            <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterKitchen">
+	            <table class="table table-bordered">
+	                <thead>
+	                    <tr>
+	                        <th>Box</th>
+	                        <th>Height</th>
+	                        <th>Weight</th>
+	                        <th>Length</th>
+	                        <th>Depth</th>
+	                        <th>Melimine colour</th>
+	                        <th>Door material</th>
+	                        <th>Door colour</th>  
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr>
+	                        <td><input type="text" class="form-control" id="box"></td>
+	                        <td><input class="form-control" type="text" id="height"></td>
+	                        <td><input class="form-control" type="text" id="weight"></td>
+	                        <td><input class="form-control" type="text" id="lenght"></td>
+	                        <td><input class="form-control" type="text" id="depth"></td>
+	                        <td><input type="text" class="form-control" id="melMat"></td>
+	
+	                        <td>  
+	                          <select class="form-control" id="doorColour" data-width="100%">
+	                            <option selected>Choose colour</option>
+	                            <option id="active">Red</option>
+	                            <option id="postponed">Postponed</option>
+	                            <option id="inactive">Inactive</option>
+	                            <option id="cancelled">Cancelled</option>
+	                          </select>
+	                        </td>
+	                        <td><input type="text" class="form-control" id="melColour"></td>
+	    
+	                    </tr>  
+	                </tbody>
+	        </table>
+	
+	        <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/order.jsp'">Cancel</button>
+	        <button type="submit" class="btn btn-success">Save</button>
+        </form>
         
         </div>
     </div> 

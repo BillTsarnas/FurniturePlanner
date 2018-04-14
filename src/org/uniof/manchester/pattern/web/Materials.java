@@ -4,14 +4,14 @@ public class Materials {
 	
 	private int materialsId;
 	private String name;
-	private String coluor;
+	private String colour;
 	private float cost;
 	
 	public Materials(int materialsId, String name, String colour, float cost) {
 		super();
 		this.materialsId = materialsId;
 		this.name = name;
-		this.coluor = colour;
+		this.colour = colour;
 		this.cost = cost;
 	}
 
@@ -32,11 +32,11 @@ public class Materials {
 	}
 
 	public String getColor() {
-		return coluor;
+		return colour;
 	}
 
 	public void setColor(String color) {
-		this.coluor = color;
+		this.colour = color;
 	}
 
 	public float getCost() {

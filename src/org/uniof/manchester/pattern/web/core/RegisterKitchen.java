@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,54 +13,49 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
-import org.uniof.manchester.pattern.web.Client;
+import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Order;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
 /**
- * Servlet implementation class RegisterOrder
+ * Servlet implementation class RegisterKitchen
  */
-@WebServlet("/RegisterOrder")
-public class RegisterOrder extends HttpServlet {
+@WebServlet("/RegisterKitchen")
+public class RegisterKitchen extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
 	private static Logger LOG = Logger.getLogger(RegisterClient.class);
-       
+    
 	@Resource(name="jdbc/furniture_planner")    
 	private DataSource dataSource;
-	
-    public RegisterOrder() {
+       
+    
+    public RegisterKitchen() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		Connection conn = null;
+Connection conn = null;
 		
 		try {
 				conn  = getConnection();	
 				DatabaseManager dbManager = new DatabaseManager(); 
 				
-				//get the client's ID
-				String clientId = (String) request.getParameter("clientId");
+				//get the Order's ID
+				//String clientId = (String) request.getParameter("clientId");
 				
-				//create new Order and save it to the database
-				//stub order
-				Order order = new Order(); order.setClientId(Integer.valueOf(clientId));
-				dbManager.setOrder(order, false, conn);
+				//create new Furniture and save it to the database
+				Furniture furn = new Furniture();
+				//dbManager.setFurniture(furn, conn);
 				
 				//redirect to the order page
 				//RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");
@@ -87,7 +81,6 @@ public class RegisterOrder extends HttpServlet {
 				throw new ServletException(e.getMessage(), e);
 			}
 	   }
-		
 		
 	}
 	

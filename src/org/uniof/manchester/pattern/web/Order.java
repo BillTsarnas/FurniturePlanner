@@ -23,6 +23,17 @@ public class Order {
 		this.name = name;
 	}
 	
+	//The no - argument constructor creates stub/test objects
+	public Order() {
+		this.orderID = 0;
+		this.furnitures = null;
+		this.clientId = 1;
+		this.status = "1";
+		this.installments = null;
+		this.totalcost = 500;
+		this.name = "An order";
+	}
+	
 	public int getOrderID() {
 		return orderID;
 	}

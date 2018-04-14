@@ -87,7 +87,9 @@ public class RegisterClient extends HttpServlet {
 				
 				int userId = dbManager.setClient(client, conn);
 				System.out.println("Client '"+ userId +"' saved");
-				request.setAttribute("userId",firstName);
+				
+				//get the newclient's ID?
+				request.setAttribute("userId",userId);
 				
 				//redirect to the order page
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");

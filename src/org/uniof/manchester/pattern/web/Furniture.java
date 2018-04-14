@@ -24,6 +24,16 @@ public class Furniture {
 		this.extraparts = extraparts;
 		this.materials = materials;
 	}
+	
+	public Furniture() {
+		super();
+		this.furnitureId = 0;
+		this.numextraParts = 0;
+		this.numOfCuts = 0;
+		this.boxes = null;
+		this.extraparts = null;
+		this.materials = null;
+	}
 
 
 	public int getFurnitureId() {
