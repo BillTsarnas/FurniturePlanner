@@ -87,3 +87,11 @@ table.table .form-control.error {
 table.table td .add {
     display: none;
 }
+
+/*.statusID {
+    position: absolute;
+    left: 40px;
+    top: 20px;
+    width: 100px;
+    margin: auto;
+}*/
