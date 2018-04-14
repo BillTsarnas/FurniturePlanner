@@ -64,7 +64,7 @@ public class RegisterClient extends HttpServlet {
 		String phone = (String) request.getParameter("phone");
 		String mphone = (String) request.getParameter("mphone");
 		String email = (String) request.getParameter("email");
-		System.out.println(firstName);
+		/*System.out.println(firstName);
 		System.out.println(lastName);
 		System.out.println(address);
 		System.out.println(city);
@@ -72,7 +72,7 @@ public class RegisterClient extends HttpServlet {
 		System.out.println(country);
 		System.out.println(phone);
 		System.out.println(mphone);
-		System.out.println(email);
+		System.out.println(email);*/
 		
 		Connection conn = null;
 		
@@ -83,7 +83,11 @@ public class RegisterClient extends HttpServlet {
 				Client client = new Client(0,  firstName,  lastName,  mphone,  phone,  email,
 						address+", "+city+", "+postCode+", "+country);
 				
-				dbManager.setClient(client, conn);
+				//dbManager.setClient(client, conn);
+				
+				int userId = dbManager.setClient(client, conn);
+				System.out.println("Client '"+ userId +"' saved");
+				request.setAttribute("userId",firstName);
 				
 				//redirect to the order page
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");

@@ -26,55 +26,56 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h2><b>Order Details</b></h2></div>
+                    <div class="col-sm-8"><h2><b>Order Details for <% out.print(request.getParameter("firstName")); %></b></h2></div>
                     <div class="col-sm-4">
                         <button type="button" class="btn btn-primary add-new"><i class="fa fa-plus"></i> Add new Furniture</button>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th id="kind">Kind of Furniture</th>
-                        <th id="furnName">Furniture Name</th>
-                        <th id="status">Status</th>
-                        <th id="productId">ProductID</th>
-                       
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>  
-                          <select class="form-control" id="selector" data-width="100%">
-                            <option >Choose furniture...</option>
-                            <option id="kitchen">Kitchen</option>
-                            <option id="wardrobe">Wardrobe</option>
-                            <option id="door">Door</option>
-                            <option id="other">Other furniture</option>
-                          </select>
-                        </td>
-                        <td><input type="text" class="form-control" id="furnitureName"></td>
-                        <td>  
-                          <select class="form-control" id="status" data-width="100%">
-                            <option selected>Choose status</option>
-                            <option id="active">Active</option>
-                            <option id="postponed">Postponed</option>
-                            <option id="inactive">Inactive</option>
-                            <option id="cancelled">Cancelled</option>
-                          </select>
-                        </td>
-                        <td><input type="text" class="form-control" id="productid"></td>
-                        <td>
-                            <a class="edit" title="Edit" data-toggle="tooltip" onclick="window.location.href = 'http://localhost:8080/FurniturePlanner/' + document.getElementById('selector').value;"><i class="material-icons">&#xE254;</i></a>
-                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                        </td>
-                    </tr>  
-                </tbody>
-        </table>
-
-        <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/regClient.jsp'">Cancel</button>
-        <button type="button" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/tofillit.jsp'">Save</button>
-        
+            <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterOrder">
+	            <table class="table table-bordered">
+	                <thead>
+	                    <tr>
+	                        <th id="kind">Kind of Furniture</th>
+	                        <th id="furnName">Furniture Name</th>
+	                        <th id="status">Status</th>
+	                        <th id="productId">ProductID</th>
+	                       
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr>
+	                        <td>  
+	                          <select class="form-control" id="selector" data-width="100%">
+	                            <option >Choose furniture...</option>
+	                            <option id="kitchen">Kitchen</option>
+	                            <option id="wardrobe">Wardrobe</option>
+	                            <option id="door">Door</option>
+	                            <option id="other">Other furniture</option>
+	                          </select>
+	                        </td>
+	                        <td><input type="text" class="form-control" id="furnitureName"></td>
+	                        <td>  
+	                          <select class="form-control" id="status" data-width="100%">
+	                            <option selected>Choose status</option>
+	                            <option id="active">Active</option>
+	                            <option id="postponed">Postponed</option>
+	                            <option id="inactive">Inactive</option>
+	                            <option id="cancelled">Cancelled</option>
+	                          </select>
+	                        </td>
+	                        <td><input type="text" class="form-control" id="productid"></td>
+	                        <td>
+	                            <a class="edit" title="Edit" data-toggle="tooltip" onclick="window.location.href = 'http://localhost:8080/FurniturePlanner/' + document.getElementById('selector').value;"><i class="material-icons">&#xE254;</i></a>
+	                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+	                        </td>
+	                    </tr>  
+	                </tbody>
+	        </table>
+	
+	        <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/regClient.jsp'">Cancel</button>
+	        <button type="submit" class="btn btn-success">Save</button>
+        </form>
         </div>
     </div> 
 
