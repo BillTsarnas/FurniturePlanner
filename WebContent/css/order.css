@@ -88,10 +88,9 @@ table.table td .add {
     display: none;
 }
 
-/*.statusID {
+#space {
+    margin: 70px;
     position: absolute;
-    left: 40px;
-    top: 20px;
-    width: 100px;
-    margin: auto;
-}*/
+    left: 650px;
+    top: 50px;
+}
