@@ -115,7 +115,7 @@ DROP TABLE IF EXISTS FURNITURE_EXTRAPARTS;
 
 CREATE TABLE FURNITURE_EXTRAPARTS 
 (
-    userid                  int NOT NULL AUTO_INCREMENT,
+    extrapartid                  int NOT NULL AUTO_INCREMENT,
     furnitureid             int,
     PRIMARY KEY(userid,furnitureid)
 );
