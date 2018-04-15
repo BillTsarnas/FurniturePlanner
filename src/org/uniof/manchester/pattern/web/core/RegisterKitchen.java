@@ -3,6 +3,7 @@ package org.uniof.manchester.pattern.web.core;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -13,7 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+import org.uniof.manchester.pattern.web.Box;
+import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
+import org.uniof.manchester.pattern.web.Materials;
 import org.uniof.manchester.pattern.web.Order;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
@@ -44,18 +48,39 @@ public class RegisterKitchen extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-Connection conn = null;
+		Connection conn = null;
+		
+		//a list of Boxes should be received from the jsp. The code below fetches data for a single box.
+		String box_name = (String) request.getParameter("box_name");
+		Integer box_height = Integer.valueOf(request.getParameter("box_height"));
+		Integer box_width = Integer.valueOf(request.getParameter("box_width"));
+		Integer box_depth = Integer.valueOf(request.getParameter("box_depth"));
+		Integer box_num_shelves = Integer.valueOf(request.getParameter("box_num_shelves"));
+		String box_colour = (String) request.getParameter("box_colour");
+		String door_colour = (String) request.getParameter("door_colour");
 		
 		try {
 				conn  = getConnection();	
 				DatabaseManager dbManager = new DatabaseManager(); 
 				
-				//get the Order's ID
-				//String clientId = (String) request.getParameter("clientId");
+				//Add a new temporary material. A set of materials should be stored in the database
+				ArrayList<Materials> mats = new ArrayList<Materials>();
+				Materials mat = new Materials(0,"melamine", box_colour, 5);
+				mats.add(mat);
+				
+				//Add a new temporary extra part. A set of extra parts should be stored in the database
+				ArrayList<ExtraParts> exts = new ArrayList<ExtraParts>();
+				ExtraParts ext = new ExtraParts(0,"wheel",1f);
+				exts.add(ext);
+				
+				//Create a new Box with default thickness 16
+				ArrayList<Box> boxes = new ArrayList<Box>();
+				Box box = new Box(box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves);
+				boxes.add(box);
 				
 				//create new Furniture and save it to the database
-				Furniture furn = new Furniture();
-				//dbManager.setFurniture(furn, conn);
+				Furniture furn = new Furniture(0,1,0,boxes,exts,mats);
+				dbManager.setFurniture(furn, conn);
 				
 				//redirect to the order page
 				//RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");

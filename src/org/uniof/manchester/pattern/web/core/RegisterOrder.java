@@ -58,9 +58,20 @@ public class RegisterOrder extends HttpServlet {
 				//get the client's ID
 				String clientId = (String) request.getParameter("clientId");
 				
+				//get Order's name
+				String order_name = (String) request.getParameter("order_name");
+				
+				//get Order's status: 0 for Active, 1 for Inactive
+				String status_code ="-1";
+				String order_status = (String) request.getParameter("order_status");
+				if (order_status.equals("Active")) status_code = "0";
+				else if (order_status.equals("Inactive")) status_code = "1";
+				
 				//create new Order and save it to the database
 				//stub order
-				Order order = new Order(); order.setClientId(Integer.valueOf(clientId));
+				//Order order = new Order(); order.setClientId(Integer.valueOf(clientId));
+				
+				Order order = new Order(0, null, Integer.valueOf(clientId), status_code, null, 0, order_name );
 				dbManager.setOrder(order, false, conn);
 				
 				//redirect to the order page

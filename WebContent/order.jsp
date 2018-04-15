@@ -47,11 +47,11 @@
 	                        <td width="30%"><b><p>Select status:</p></b></td>
 	                    </tr> 
 	                    <tr>
-	                    	<td width="50%" ><input type="text" class="form-control" id="name_order"></td>
+	                    	<td width="50%" ><input type="text" class="form-control" id="name_order" name="order_name"></td>
 	                        <td width="50%">  
-	                          <select class="form-control" id="sel_status data-width="100%">
+	                          <select class="form-control" id="sel_status data-width="100%" name="order_status">
 	                            <option >...</option>
-	                            <option id="active">Activate</option>
+	                            <option id="active">Active</option>
 	                            <option id="inactive">Inactive</option>
 	                          </select>
 	                        </td>

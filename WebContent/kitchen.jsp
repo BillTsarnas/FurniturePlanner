@@ -33,33 +33,22 @@
 	                    <tr>
 	                        <th>Box</th>
 	                        <th>Height</th>
-	                        <th>Weight</th>
-	                        <th>Length</th>
+	                        <th>Width</th>
 	                        <th>Depth</th>
+	                        <th>Number of shelves</th>
 	                        <th>Melimine colour</th>
-	                        <th>Door material</th>
 	                        <th>Door colour</th>  
 	                    </tr>
 	                </thead>
 	                <tbody>
 	                    <tr>
-	                        <td><input type="text" class="form-control" id="box"></td>
-	                        <td><input class="form-control" type="text" id="height"></td>
-	                        <td><input class="form-control" type="text" id="weight"></td>
-	                        <td><input class="form-control" type="text" id="lenght"></td>
-	                        <td><input class="form-control" type="text" id="depth"></td>
-	                        <td><input type="text" class="form-control" id="melMat"></td>
-	
-	                        <td>  
-	                          <select class="form-control" id="doorColour" data-width="100%">
-	                            <option selected>Choose colour</option>
-	                            <option id="active">Red</option>
-	                            <option id="postponed">Postponed</option>
-	                            <option id="inactive">Inactive</option>
-	                            <option id="cancelled">Cancelled</option>
-	                          </select>
-	                        </td>
-	                        <td><input type="text" class="form-control" id="melColour"></td>
+	                        <td><input type="text" class="form-control" id="box" name="box_name"></td>
+	                        <td><input class="form-control" type="text" id="height" name="box_height"></td>
+	                        <td><input class="form-control" type="text" id="width" name="box_width"></td>
+	                        <td><input class="form-control" type="text" id="depth" name="box_depth"></td>
+	                        <td><input class="form-control" type="text" id="depth" name="box_num_shelves" value="0"></td>
+	                        <td><input type="text" class="form-control" id="melMat" name="box_colour"></td>
+	                        <td><input type="text" class="form-control" id="doorColour" name="door_colour"></td>
 	    
 	                    </tr>  
 	                </tbody>

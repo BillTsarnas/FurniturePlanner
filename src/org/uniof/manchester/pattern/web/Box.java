@@ -21,14 +21,14 @@ public class Box {
 	//number of shelves (default 0)
 	private int num_shelves;
 	
-	public Box(String boxTypeId, int height, int width, int depth, int sizeInSqMts, int thickness, String colour,
+	public Box(String boxTypeId, int height, int width, int depth, int thickness, String colour,
 			int num_shelves) {
 		super();
 		this.boxTypeId = boxTypeId;
 		this.height = height;
 		this.width = width;
 		this.depth = depth;
-		this.sizeInSqMts = sizeInSqMts;
+		this.sizeInSqMts = height*width*depth;
 		this.thickness = thickness;
 		this.colour = colour;
 		this.num_shelves = num_shelves;
