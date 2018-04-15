@@ -35,24 +35,30 @@
                     <!-- div class="labelAvail"><h2><b>Client:</b> Nikos Oikonomou</h2></div-->
                 </div>
             </div>
+            <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterOrder">
             <table class="table table-bordered">
                 <tbody>
-                <% 
+                <!--% 
                     ArrayList<String> list = (ArrayList<String>) request.getAttribute("nameList");
                 	Iterator<String> crunchifyIterator = list.iterator();
                 	while (crunchifyIterator.hasNext()) {
+                %-->
+                <% 
+                    ArrayList<Client> list = (ArrayList<Client>) request.getAttribute("clientList");
+                	Iterator<Client> crunchifyIterator = list.iterator();
+                	while (crunchifyIterator.hasNext()) {
+                		Client curr = crunchifyIterator.next();
+                	
                 %>
                     <tr>
                         <td width="90%">
-                            <label class="radio"><%out.print(crunchifyIterator.next()); %>
+                            <label class="radio"><%out.print(curr.getName()+" "+curr.getSurname()); %>
                                 <input type="radio" checked="checked" name="is_company">
                                 <span class="checkround"></span>
                             </label>
                         </td> 
-                        <!--td width="10%">
-                            <a class="edit" title="Edit" data-toggle="tooltip" onclick="window.location.href = 'http://localhost:8080/FurniturePlanner/order.jsp'"><i class="material-icons">&#xE254;</i></a>
-                        </td-->
                     </tr> 
+					<input type="hidden" name = "clientId" value="<%out.print(curr.getClientId());%>" />
                     <%} %>
                   
                 </tbody>
@@ -60,7 +66,7 @@
 
             <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Back</button>
             <button type="button" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/order.jsp'">Save</button>
-
+			</form>
         </div>
     </div> 
 

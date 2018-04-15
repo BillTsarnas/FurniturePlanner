@@ -65,11 +65,13 @@ public class SearchClient extends HttpServlet {
 				Iterator<Client> crunchifyIterator = clientList.iterator();
 				ArrayList<String> nameList = new ArrayList<String>();
 				while (crunchifyIterator.hasNext()) {
-					System.out.println(crunchifyIterator.next().getName());
-					nameList.add(crunchifyIterator.next().getName()+" "+crunchifyIterator.next().getSurname());
+					Client curr = crunchifyIterator.next();
+					System.out.println(curr.getName()+" "+curr.getSurname());
+					nameList.add(curr.getName()+" "+curr.getSurname());
 					
 				}
 				request.setAttribute("nameList", nameList);
+				request.setAttribute("clientList", clientList);
 				//redirect to the order page
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/printClients.jsp");
 				requestDispatcher.forward(request, response);
