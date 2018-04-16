@@ -18,7 +18,6 @@ import org.uniof.manchester.pattern.web.Box;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Materials;
-import org.uniof.manchester.pattern.web.Order;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
 /**
@@ -57,7 +56,6 @@ public class RegisterKitchen extends HttpServlet {
 		Integer box_depth = Integer.valueOf(request.getParameter("box_depth"));
 		Integer box_num_shelves = Integer.valueOf(request.getParameter("box_num_shelves"));
 		String box_colour = (String) request.getParameter("box_colour");
-		String door_colour = (String) request.getParameter("door_colour");
 		
 		try {
 				conn  = getConnection();	

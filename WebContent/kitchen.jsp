@@ -34,8 +34,8 @@
                     </div>
                 </div>
             </div>
-            <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterOrder">
-                
+            <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterKitchen">
+                <input type="hidden" id = "num_boxes" name = "num_boxes" value="1">
                 <table id="table1" class="table table-bordered">
                     <thead>
                             <tr>
@@ -50,13 +50,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><input type="text" class="form-control" id="box" name="box_name"></td>
-                            <td><input class="form-control" type="text" id="height" name="box_height"></td>
-                            <td><input class="form-control" type="text" id="width" name="box_width"></td>
-                            <td><input class="form-control" type="text" id="depth" name="box_depth"></td>
-                            <td><input class="form-control" type="text" id="depth" name="box_num_shelves" value="0"></td>
-                            <td><input type="text" class="form-control" id="melMat" name="box_colour"></td>
-                            <td><input type="text" class="form-control" id="doorColour" name="door_colour"></td>
+                            <td><input type="text" class="form-control" id="box" name="box_name1"></td>
+                            <td><input class="form-control" type="text" id="height" name="box_height1"></td>
+                            <td><input class="form-control" type="text" id="width" name="box_width1"></td>
+                            <td><input class="form-control" type="text" id="depth" name="box_depth1"></td>
+                            <td><input class="form-control" type="text" id="depth" name="box_num_shelves1" value="0"></td>
+                            <td><input type="text" class="form-control" id="melMat" name="box_colour1"></td>
+                            <td><input type="text" class="form-control" id="doorColour" name="door_colour1"></td>
                             <td width="20%">
                                 <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                             </td>

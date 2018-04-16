@@ -462,7 +462,7 @@ public  void setFurnitureBox(int furnitureId, int boxId, int sizeinsqmts, Connec
 	PreparedStatement ps = null;
 	
 try {
-		String query ="INSERT INTO BOXES_FURNITURE (furnitureid , boxid, sizqinsqmts) VALUES (?,?,?)";
+		String query ="INSERT INTO BOXES_FURNITURE (furnitureid , boxid, sizeinsqmts) VALUES (?,?,?)";
 		ps = conn.prepareStatement(query);
 		ps.setInt(1, furnitureId);
 		ps.setInt(2, boxId);
