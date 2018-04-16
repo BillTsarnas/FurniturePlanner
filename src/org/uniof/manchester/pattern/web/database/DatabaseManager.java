@@ -539,5 +539,36 @@ public ArrayList<Client> getClientsByName(Connection conn, String clientName, bo
 	}
 }
 
+public int getHowManyOrdersrByClientId(Connection conn, int clientId) throws SQLException {
+	
+	int orders = 0;
+	ResultSet rs = null;
+	PreparedStatement ps = null;
+
+	try {
+	
+		String query =null;
+		query = "select count(orderid) orders from ORDERS where clientid=?";
+		ps = conn.prepareStatement(query);
+		ps.setInt(1, clientId);
+		rs = ps.executeQuery();
+		
+		while(rs.next()){
+			
+			orders = rs.getInt("orders");
+		}
+		
+		return orders;
+
+	} finally {
+		try {
+			rs.close();
+		} catch (Exception e) {}
+		try {
+			ps.close();
+		} catch (Exception e) {}
+	}
+}
+
 
 }
