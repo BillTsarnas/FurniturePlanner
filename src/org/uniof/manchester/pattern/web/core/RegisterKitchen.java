@@ -49,21 +49,13 @@ public class RegisterKitchen extends HttpServlet {
 		
 		Connection conn = null;
 		
-		//a list of Boxes should be received from the jsp. The code below fetches data for a single box.
-		String box_name = (String) request.getParameter("box_name");
-		Integer box_height = Integer.valueOf(request.getParameter("box_height"));
-		Integer box_width = Integer.valueOf(request.getParameter("box_width"));
-		Integer box_depth = Integer.valueOf(request.getParameter("box_depth"));
-		Integer box_num_shelves = Integer.valueOf(request.getParameter("box_num_shelves"));
-		String box_colour = (String) request.getParameter("box_colour");
-		
 		try {
 				conn  = getConnection();	
 				DatabaseManager dbManager = new DatabaseManager(); 
 				
 				//Add a new temporary material. A set of materials should be stored in the database
 				ArrayList<Materials> mats = new ArrayList<Materials>();
-				Materials mat = new Materials(0,"melamine", box_colour, 5);
+				Materials mat = new Materials(0,"melamine", "black", 5);
 				mats.add(mat);
 				
 				//Add a new temporary extra part. A set of extra parts should be stored in the database
@@ -71,10 +63,25 @@ public class RegisterKitchen extends HttpServlet {
 				ExtraParts ext = new ExtraParts(0,"wheel",1f);
 				exts.add(ext);
 				
-				//Create a new Box with default thickness 16
+				//firstly get the number of boxes
+				Integer num_boxes = Integer.valueOf(request.getParameter("num_boxes"));
+				
+				//create a list of Boxes
 				ArrayList<Box> boxes = new ArrayList<Box>();
-				Box box = new Box(box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves);
-				boxes.add(box);
+				
+				for(int i=1; i<=num_boxes; i++) {
+					
+					//Create a new Box with default thickness 16
+					String box_name = (String) request.getParameter("box_name"+i);
+					Integer box_height = Integer.valueOf(request.getParameter("box_height"+i));
+					Integer box_width = Integer.valueOf(request.getParameter("box_width"+i));
+					Integer box_depth = Integer.valueOf(request.getParameter("box_depth"+i));
+					Integer box_num_shelves = Integer.valueOf(request.getParameter("box_num_shelves"+i));
+					String box_colour = (String) request.getParameter("box_colour"+i);
+					
+					Box box = new Box(box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves);
+					boxes.add(box);
+				}
 				
 				//create new Furniture and save it to the database
 				Furniture furn = new Furniture(0,1,0,boxes,exts,mats);
