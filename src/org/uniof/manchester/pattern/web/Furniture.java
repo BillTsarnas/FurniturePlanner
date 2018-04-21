@@ -14,12 +14,12 @@ public class Furniture {
 	private ArrayList<Materials> materials;
 	
 	
-	public Furniture(int furnitureId, int numextraParts, int numOfCuts, ArrayList<Box> boxes,
+	public Furniture(int furnitureId, ArrayList<Box> boxes,
 			ArrayList<ExtraParts> extraparts, ArrayList<Materials> materials) {
 		super();
 		this.furnitureId = furnitureId;
-		this.numextraParts = numextraParts;
-		this.numOfCuts = numOfCuts;
+		this.numextraParts = extraparts.size();
+		this.numOfCuts = 0; //TODO: to be changed
 		this.boxes = boxes;
 		this.extraparts = extraparts;
 		this.materials = materials;
@@ -27,7 +27,7 @@ public class Furniture {
 	
 	public Furniture() {
 		super();
-		this.furnitureId = 0;
+		this.furnitureId = -1;
 		this.numextraParts = 0;
 		this.numOfCuts = 0;
 		this.boxes = null;

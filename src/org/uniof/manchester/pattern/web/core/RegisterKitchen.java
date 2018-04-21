@@ -84,7 +84,7 @@ public class RegisterKitchen extends HttpServlet {
 				}
 				
 				//create new Furniture and save it to the database
-				Furniture furn = new Furniture(0,1,0,boxes,exts,mats);
+				Furniture furn = new Furniture(0, boxes,exts,mats);
 				dbManager.setFurniture(furn, conn);
 				
 				//redirect to the order page
