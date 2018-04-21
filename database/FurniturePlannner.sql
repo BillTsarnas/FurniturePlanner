@@ -36,7 +36,6 @@ insert into CLIENTS (name,surname,mphone,hphone, email, address) VALUES
 ('Ruben 11','Padilla Robles','55185211806','555435685411','rubpad@gmail.com','mar marmara 377 int 301'   );
 
 
-DROP TABLE IF EXISTS ORDERS;
 
 CREATE TABLE ORDERS 
 (
@@ -50,7 +49,6 @@ CREATE TABLE ORDERS
 );
 
 
-DROP TABLE IF EXISTS ORDER_INSTALLMENTS;
 
 CREATE TABLE ORDER_INSTALLMENTS 
 (
@@ -60,7 +58,6 @@ CREATE TABLE ORDER_INSTALLMENTS
     PRIMARY KEY(orderid, installmentid)
 );
 
-DROP TABLE IF EXISTS INSTALLMENTS;
 
 CREATE TABLE INSTALLMENTS 
 (
@@ -69,7 +66,6 @@ CREATE TABLE INSTALLMENTS
     PRIMARY KEY(installmentid)
 );
 
-DROP TABLE IF EXISTS ORDER_FURNITURE;
 
 CREATE TABLE ORDER_FURNITURE 
 (
@@ -79,7 +75,6 @@ CREATE TABLE ORDER_FURNITURE
     PRIMARY KEY(orderid, furnitureid)
 );
 
-DROP TABLE IF EXISTS FURNITURE;
 
 CREATE TABLE FURNITURE 
 (
@@ -90,7 +85,6 @@ CREATE TABLE FURNITURE
     PRIMARY KEY(furnitureId)
 );
 
-DROP TABLE IF EXISTS FURNITURE_MATERIAL;
 
 CREATE TABLE FURNITURE_MATERIAL 
 (
@@ -100,27 +94,39 @@ CREATE TABLE FURNITURE_MATERIAL
     PRIMARY KEY(furnitureId,materialid)
 );
 
-DROP TABLE IF EXISTS MATERIAL_CATALOGUE;
 
 CREATE TABLE MATERIAL_CATALOGUE 
 (
     materialid              int NOT NULL AUTO_INCREMENT,
     name  					varchar(255),
     cost                 	varchar(255),
-    colour 				    float,
+    colour 				    varchar(255),
     PRIMARY KEY(materialid)
 );
 
-DROP TABLE IF EXISTS FURNITURE_EXTRAPARTS;
+INSERT INTO MATERIAL_CATALOGUE(name,cost,colour) VALUES
+('melamine','50','black'),
+('oak','200','brown'),
+('maple', '250','dark');
+
 
 CREATE TABLE FURNITURE_EXTRAPARTS 
 (
-    extrapartid                  int NOT NULL AUTO_INCREMENT,
+    extrapartid                  int NOT NULL,
     furnitureid             int,
-    PRIMARY KEY(userid,furnitureid)
+    PRIMARY KEY(extrapartid,furnitureid)
 );
 
-DROP TABLE IF EXISTS EXTRAPARTS_CATALOGUE;
+INSERT INTO FURNITURE_EXTRAPARTS(extrapartid,furnitureid) VALUES
+('1','0'),
+('1','1'),
+('2','1'),
+('3','0'),
+('4','0'),
+('5','0'),
+('6','0'),
+('7','1');
+
 
 CREATE TABLE EXTRAPARTS_CATALOGUE 
 (
@@ -130,7 +136,16 @@ CREATE TABLE EXTRAPARTS_CATALOGUE
     PRIMARY KEY(extraPartsid)
 );
 
-DROP TABLE IF EXISTS BOXES_FURNITURE;
+
+INSERT INTO EXTRAPARTS_CATALOGUE(name,cost) VALUES
+('Rail', '5'),
+('Handle', '1'),
+('Wheel_small','2'),
+('Dish Case','3'),
+('Cutlery Case','2'),
+('Trash Can','4'),
+('Wardrobe bar','2');
+
 
 CREATE TABLE BOXES_FURNITURE 
 (
@@ -140,7 +155,6 @@ CREATE TABLE BOXES_FURNITURE
     PRIMARY KEY(furnitureid,boxid)
 );
 
-DROP TABLE IF EXISTS BOX;
 
 CREATE TABLE BOX
 (
