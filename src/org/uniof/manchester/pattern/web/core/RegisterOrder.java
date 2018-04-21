@@ -59,11 +59,13 @@ public class RegisterOrder extends HttpServlet {
 				//get Order's name
 				String order_name = (String) request.getParameter("order_name");
 				
-				//get Order's status: 0 for Active, 1 for Inactive
+				//get Order's status: 0 for Active, 1 for offer, 2 for on progress, 3 for declined
 				String status_code ="-1";
 				String order_status = (String) request.getParameter("order_status");
 				if (order_status.equals("Active")) status_code = "0";
-				else if (order_status.equals("Inactive")) status_code = "1";
+				else if (order_status.equals("Offer")) status_code = "1";
+				else if (order_status.equals("On Progress")) status_code = "2";
+				else if (order_status.equals("Declined")) status_code = "3";
 				
 				//create new Order and save it to the database
 				//stub order
