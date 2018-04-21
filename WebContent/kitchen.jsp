@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-sm-8"><h2><b>Kitchen Details for </b></h2></div>
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-primary add-new"><i class="fa fa-plus"></i> Add new Furniture</button>
+                        <button type="button" class="btn btn-primary add-new"><i class="fa fa-plus"></i> Add new box</button>
                     </div>
                 </div>
             </div>
@@ -66,8 +66,8 @@
                  
                  <input type="hidden" name = "clientId" value="${userId}">
                  
-                 <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
-                 <button type="submit" class="btn btn-success">Save</button>
+                 <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/order.jsp'">Cancel</button>
+                 <button type="submit" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/order.jsp'">Save</button>
              </form>
         </div>
     </div> 
