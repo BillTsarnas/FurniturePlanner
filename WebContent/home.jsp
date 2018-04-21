@@ -118,9 +118,9 @@
 
 
     <div class="searchOne">
-        <h3>Search for Client</h3>
+        <h3>Preview details of the client</h3>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search..." id="searchClient">
+          <input type="text" class="form-control" placeholder="Insert clients name.." id="searchClient">
           <span class="input-group-btn">
             <button class="btn btn-default" type="button" data-toggle="modal" data-target="#searchClientModal">Go!</button>
           </span>
@@ -128,9 +128,9 @@
     </div>
 
     <div class="searchTwo">
-        <h3>Search for Order</h3>
+        <h3>Preview details of the order</h3>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search..." id="searchOrder">
+          <input type="text" class="form-control" placeholder="Insert order name.." id="searchOrder">
           <span class="input-group-btn">
             <button class="btn btn-default" type="button" onclick="location.href='http://localhost:8080/FurniturePlanner/searchOrder.jsp'">Go!</button>
           </span>

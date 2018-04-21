@@ -35,7 +35,7 @@
                     <!-- div class="labelAvail"><h2><b>Client:</b> Nikos Oikonomou</h2></div-->
                 </div>
             </div>
-            <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/ForwardClient">
+            <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterOrder">
             <table class="table table-bordered">
                 <tbody>
                 <!--% 
@@ -53,19 +53,19 @@
                     <tr>
                         <td width="90%">
                             <label class="radio"><%out.print(curr.getName()+" "+curr.getSurname()); %>
-                                <input type="radio" checked="checked" name="clientIdName" value="<%out.print(curr.getClientId());%>,<%out.print(curr.getName()+" "+curr.getSurname());%>">
+                                <input type="radio" checked="checked" name="is_company">
                                 <span class="checkround"></span>
                             </label>
                         </td> 
                     </tr> 
-					
+					<input type="hidden" name = "clientId" value="<%out.print(curr.getClientId());%>" />
                     <%} %>
-                  <!-- input type="hidden" name = "clientId" value="" /-->
+                  
                 </tbody>
             </table>
 
             <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Back</button>
-            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/order.jsp'">Save</button>
 			</form>
         </div>
     </div> 
