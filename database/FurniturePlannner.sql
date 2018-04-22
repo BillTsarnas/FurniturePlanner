@@ -112,20 +112,10 @@ INSERT INTO MATERIAL_CATALOGUE(name,cost,colour) VALUES
 
 CREATE TABLE FURNITURE_EXTRAPARTS 
 (
-    extrapartid                  int NOT NULL,
-    furnitureid             int,
+    extrapartid             int NOT NULL,
+    furnitureid             int NOT NULL,
     PRIMARY KEY(extrapartid,furnitureid)
 );
-
-INSERT INTO FURNITURE_EXTRAPARTS(extrapartid,furnitureid) VALUES
-('1','0'),
-('1','1'),
-('2','1'),
-('3','0'),
-('4','0'),
-('5','0'),
-('6','0'),
-('7','1');
 
 
 CREATE TABLE EXTRAPARTS_CATALOGUE 
@@ -133,39 +123,56 @@ CREATE TABLE EXTRAPARTS_CATALOGUE
     extraPartsid            int NOT NULL AUTO_INCREMENT,
     name 				    varchar(255),
     cost                 	varchar(255),
+    type                    char(1),
     PRIMARY KEY(extraPartsid)
 );
 
 
 INSERT INTO EXTRAPARTS_CATALOGUE(name,cost) VALUES
-('Rail', '5'),
-('Handle', '1'),
-('Wheel_small','2'),
-('Dish Case','3'),
-('Cutlery Case','2'),
-('Trash Can','4'),
-('Wardrobe bar','2');
+('Rail', '5', 'W'),
+('Handle', '1', 'K'),
+('Wheel_small','2', 'W'),
+('Dish Case','3', 'K'),
+('Cutlery Case','2', 'W'),
+('Trash Can','4', 'K'),
+('Wardrobe bar','2', 'W');
 
 
 CREATE TABLE BOXES_FURNITURE 
 (
-    furnitureid             int NOT NULL AUTO_INCREMENT,
+    furnitureid             int NOT NULL,
     boxid 				    int NOT NULL,
     sizeinsqmts             int,
     PRIMARY KEY(furnitureid,boxid)
 );
 
 
-CREATE TABLE BOX
+CREATE TABLE BOX_PROPERTIES
 (
-    boxId             		int NOT NULL AUTO_INCREMENT,
+    boxId             		int NOT NULL,
     height 				    int NOT NULL,
     width                   int NOT NULL,
     depth                   int,
     thickness               int,
-    back_thickness          double,
+    back_thickness          double,a
     colour                  varchar(255),
     num_shelves             int,
     PRIMARY KEY(boxId)
 );
+
+
+CREATE TABLE BOXES_CATALOGUE 
+(
+    boxid                   int NOT NULL AUTO_INCREMENT,
+    name 				    varchar(255),
+    type                 	char(1),
+    PRIMARY KEY(boxid)
+);
+
+INSERT INTO BOXES_CATALOGUE(name,type) VALUES
+('HOOKING BAR', 'W',),
+('SELF', 'K'),
+('4 DRAWERS','K'),
+('3 DRAWERS','K'),
+('LONG BOX','W');
 
