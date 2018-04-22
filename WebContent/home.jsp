@@ -116,26 +116,31 @@
         </div>
     </div>
 
-
+    <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/SearchClient">
     <div class="searchOne">
         <h3>Preview details of the client</h3>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Insert clients name.." id="searchClient">
+          <input type="text" class="form-control" placeholder="Insert clients name.." id="searchClient" name="searchName">
+          <input type="hidden" name = "hid_cln_val" value="1">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#searchClientModal">Go!</button>
+            <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#searchClientModal">Go!</button>
           </span>
         </div>
     </div>
+    </form>
 
+    <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/SearchOrder">
     <div class="searchTwo">
         <h3>Preview details of the order</h3>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Insert order name.." id="searchOrder">
+          <input type="text" class="form-control" placeholder="Insert order name.." id="searchOrder" name="searchName">
+          <input type="hidden" name = "hid_ord_val" value="2">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button" onclick="location.href='http://localhost:8080/FurniturePlanner/searchOrder.jsp'">Go!</button>
+            <button class="btn btn-default" type="submit" onclick="location.href='http://localhost:8080/FurniturePlanner/searchOrder.jsp'">Go!</button>
           </span>
         </div>
     </div>
+    </form>
 
 
 

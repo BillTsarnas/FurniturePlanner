@@ -31,7 +31,7 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h2><b>List of the Availble Clients under name "<% out.print(request.getParameter("searchName")); %>"</h2></div>
+                    <div class="col-sm-8"><h2><b>List of the Available Clients under name "<% out.print(request.getParameter("searchName")); %>"</h2></div>
                     <!-- div class="labelAvail"><h2><b>Client:</b> Nikos Oikonomou</h2></div-->
                 </div>
             </div>
@@ -60,10 +60,11 @@
                     </tr> 
 					
                     <%} %>
-                  <!-- input type="hidden" name = "clientId" value="" /-->
+                  
                 </tbody>
             </table>
-
+            
+            <input type="hidden" name = "hid_cln_flag" value="${cln_val}">
             <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Back</button>
             <button type="submit" class="btn btn-success">Save</button>
 			</form>
