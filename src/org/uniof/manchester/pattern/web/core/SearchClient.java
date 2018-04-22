@@ -54,6 +54,8 @@ public class SearchClient extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		String searchName = (String) request.getParameter("searchName");
+		String cln_val = (String) request.getParameter("hid_cln_val");
+
 		Connection conn = null;
 		
 		try {
@@ -72,6 +74,8 @@ public class SearchClient extends HttpServlet {
 				}
 				request.setAttribute("nameList", nameList);
 				request.setAttribute("clientList", clientList);
+				request.setAttribute("cln_val", cln_val);
+
 				//redirect to the order page
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/printClients.jsp");
 				requestDispatcher.forward(request, response);

@@ -21,7 +21,7 @@ public class ForwardClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	//private static Logger LOG = Logger.getLogger(RegisterClient.class);
-       
+ 
 	
 	@Resource(name="jdbc/furniture_planner")    
 	private DataSource dataSource;
@@ -49,14 +49,23 @@ public class ForwardClient extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		String IdName = (String) request.getParameter("clientIdName");
+		
+		String clnVal = (String) request.getParameter("hid_cln_flag");  
+		int cln = Integer.parseInt(clnVal);
+		
 		String[] parts = IdName.split(",");
 		String userId = parts[0]; 
 		//String firstName = request.setParameter("parts[1]");
 		request.setAttribute("firstName",parts[1]);
 		request.setAttribute("userId",userId);
 		
+		RequestDispatcher requestDispatcher;
 		//redirect to the order page
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");
+		if (cln == 1) {
+		    requestDispatcher = request.getRequestDispatcher("/previewClient.jsp");
+		}else {
+	        requestDispatcher = request.getRequestDispatcher("/order.jsp");
+		}
 		requestDispatcher.forward(request, response);
 		
 	}
