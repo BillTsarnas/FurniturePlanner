@@ -2,12 +2,12 @@ $(document).ready(function(){
 	
 	
     $('[data-toggle="tooltip"]').tooltip();
-    var actions = $("#table1 td:last-child").html();
+    var actions = $("#table"+this.id+" td:last-child").html();
     // Append table with add row
     
     
-    $(".add-new").click(function(){      
-        var index = $("#table1 tbody tr:last-child").index();
+    $(".tbutton").click(function(){      
+        var index = $("#table"+this.id+" tbody tr:last-child").index();
         var num_box = parseInt($('#num_boxes').val()) + 1;
         $('#num_boxes').val(num_box);
         console.log("Added a kitchen: Current number: " + num_box);
@@ -19,11 +19,11 @@ $(document).ready(function(){
             '<td><input class="form-control" type="text" id="depth" name="box_num_shelves'+num_box+'" value="0"></td>' +
             '<td><input type="text" class="form-control" id="melMat" name="box_colour'+num_box+'"></td>' +
             '<td><input type="text" class="form-control" id="doorColour" name="door_colour'+num_box+'"></td>' +
-            '<td>' + actions + '</td>' +
+            '<td><a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>' +
             '</tr>';
            
-        $("#table1").append(row);     
-        $("#table1 tbody tr").eq(index + 1).find(" .add").toggle();
+        $("#table"+this.id).append(row);     
+        $("#table"+this.id+" tbody tr").eq(index + 1).find(" .add").toggle();
         $('[data-toggle="tooltip"]').tooltip();
     });
     
@@ -31,7 +31,7 @@ $(document).ready(function(){
     $(document).on("click", ".delete", function(){
     	
         $(this).parents("tr").remove();
-        $(".add-new").removeAttr("disabled");
+        $(".tbutton").removeAttr("disabled");
         
         var num_box = $('#num_boxes').val() - 1;
         $('#num_boxes').val(num_box);
