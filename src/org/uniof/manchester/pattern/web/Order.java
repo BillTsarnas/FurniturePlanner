@@ -8,11 +8,11 @@ public class Order {
     private ArrayList<Furniture> furnitures;
 	private ArrayList<Installment> installments;
 	private int clientId;
-	private String status;
+	private int status;
 	private String name;
 	private float totalcost;
 
-	public Order(int orderID, ArrayList<Furniture> furnitures, int  clientId, String status, ArrayList<Installment> installments,
+	public Order(int orderID, ArrayList<Furniture> furnitures, int  clientId, int status, ArrayList<Installment> installments,
 			float totalcost, String name) {
 		this.orderID = orderID;
 		this.furnitures = furnitures;
@@ -28,7 +28,7 @@ public class Order {
 		this.orderID = 0;
 		this.furnitures = null;
 		this.clientId = 1;
-		this.status = "1";
+		this.status = 1;
 		this.installments = null;
 		this.totalcost = 500;
 		this.name = "An order";
@@ -47,10 +47,10 @@ public class Order {
 		this.furnitures = furnitures;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

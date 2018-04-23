@@ -332,7 +332,7 @@ public Order getOrderUserById(Connection conn, int clientId, boolean complete) t
 				String name = rs.getString("name");
 				float totalcost = rs.getFloat("totalcost");
 				clientId = rs.getInt("clientId");
-				String status = rs.getString("status");
+				int status = rs.getInt("status");
 			
 				orden = new Order( orderId, null,clientId, status, null, totalcost,name);
 			
@@ -362,7 +362,7 @@ try {
 		ps.setString(1, orden.getName());
 		ps.setInt(2, orden.getClientId());
 		ps.setFloat(3, orden.getTotalcost());
-		ps.setString(4, orden.getStatus());
+		ps.setInt(4, orden.getStatus());
 	
 	ps.executeUpdate();
 	
@@ -559,6 +559,92 @@ public int getHowManyOrdersrByClientId(Connection conn, int clientId) throws SQL
 		}
 		
 		return orders;
+
+	} finally {
+		try {
+			rs.close();
+		} catch (Exception e) {}
+		try {
+			ps.close();
+		} catch (Exception e) {}
+	}
+}
+
+public ArrayList<Order> getOrdersByName(Connection conn, String orderName, boolean complete) throws SQLException {
+	
+	ArrayList<Order> orders = new ArrayList<Order>();;
+	ResultSet rs = null;
+	CallableStatement cs = null;
+
+	try {
+	
+		cs = conn.prepareCall("{call sp_get_clients_by_name(?)}");
+		cs.setString(1, orderName );
+		rs = cs.executeQuery();
+		
+		while(rs.next()){
+			int orderId = rs.getInt("orderid");
+			int clientId = rs.getInt("clientid");
+			String name = rs.getString("name");
+			float totalcost = rs.getFloat("totalcost");
+			int status = rs.getInt("status");
+			
+			
+			
+			
+			
+			Order order = new Order(orderId, null, clientId, status, null, totalcost,name); 
+			orders.add(order);
+			
+			if(complete)
+			{
+				/*getFurniture*/
+				/*getinstallments*/
+			}	
+			
+		}
+		
+		return orders;
+
+	} finally {
+		try {
+			rs.close();
+		} catch (Exception e) {}
+		try {
+			cs.close();
+		} catch (Exception e) {}
+	}
+}
+
+public Furniture getFurnitureByOrderId(Connection conn, int orderId, boolean complete) throws SQLException {
+	
+	Furniture furniture = null;
+	ResultSet rs = null;
+	PreparedStatement ps = null;
+
+	try {
+	
+		String query =null;
+		query = "select furnitureId from ORDER_FURNITURE where orderid=?";
+		ps = conn.prepareStatement(query);
+		ps.setInt(1, orderId);
+		rs = ps.executeQuery();
+		
+		while(rs.next()){
+			
+			int furnitureId = rs.getInt("furnitureId");
+		
+			furniture = new Furniture( furnitureId, null, null, null);
+		
+			if(complete)
+			{
+				/*getBoxes*/
+				/*getExtraParts*/
+				/*getMaterials*/
+			}	
+		}
+		
+		return furniture;
 
 	} finally {
 		try {
