@@ -5,15 +5,23 @@ import java.util.ArrayList;
 public class Wardrobe extends Furniture {
 	
 	//wardrobe furniture id: 1
+	
+	private ArrayList<ExtraParts> ward_extraparts;
 
-	public Wardrobe(ArrayList<Box> boxes, ArrayList<ExtraParts> extraparts, ArrayList<Materials> materials) {
-		super(1, boxes, extraparts, materials);
-		// TODO Auto-generated constructor stub
+	public Wardrobe(String name, ArrayList<Box> boxes, ArrayList<ExtraParts> extraparts, ArrayList<Materials> materials) {
+		super(name, 1, boxes, materials);
 	}
 
 	public Wardrobe() {
-		// TODO Auto-generated constructor stub
 		super();
+	}
+
+	public ArrayList<ExtraParts> getWard_extraparts() {
+		return ward_extraparts;
+	}
+
+	public void setWard_extraparts(ArrayList<ExtraParts> ward_extraparts) {
+		this.ward_extraparts = ward_extraparts;
 	}
 	
 	

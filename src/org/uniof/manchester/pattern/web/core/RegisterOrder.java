@@ -72,7 +72,7 @@ public class RegisterOrder extends HttpServlet {
 				//Order order = new Order(); order.setClientId(Integer.valueOf(clientId));
 				
 				Order order = new Order(0, null, Integer.valueOf(clientId), status_code, null, 0, order_name );
-				dbManager.setOrder(order, false, conn);
+				//dbManager.setOrder(order, false, conn);
 				
 				//redirect to the order page
 				//RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");

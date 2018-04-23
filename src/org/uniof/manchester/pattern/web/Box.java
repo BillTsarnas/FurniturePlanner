@@ -1,37 +1,71 @@
 package org.uniof.manchester.pattern.web;
 
+import java.util.ArrayList;
+//import java.util.Iterator;
+
+
 public class Box {
 	
 	private String boxTypeId;
+	
+	//does not need to be inserted into DB, only for calculations
+	private ArrayList<Piece> pieces;
 	
 	//unit: CM
 	private int height;
 	private int width;
 	private int depth;
-	private int sizeInSqMts;
+	private int sizeInSqMts; //total surface size for all the sides combined
+	//TODO: Not reliable for cost calculation
 	
 	//16 or 18, 16 can be default
-	private int thickness;
+	private double thickness = 0.16;
 	
-	//thickness of back side set to 80mm
-	private double back_thickness = 0.8;
+	//thickness of back side set to 8mm
+	private double back_thickness = 0.08;
 	
 	private String colour;
 	
-	//number of shelves (default 0)
-	private int num_shelves;
+	private boolean hasDoor;
 	
-	public Box(String boxTypeId, int height, int width, int depth, int thickness, String colour,
-			int num_shelves) {
+	private String door_colour;
+	
+	
+	public Box(String boxTypeId, int height, int width, int depth, int thickness, String colour) {
 		super();
+		
+		//------------------------------------------------------------------------------
 		this.boxTypeId = boxTypeId;
-		this.height = height;
-		this.width = width;
-		this.depth = depth;
-		this.sizeInSqMts = height*width*depth;
+		this.height = height; //y
+		this.width = width; //x
+		this.depth = depth; //z
+		this.sizeInSqMts = 0;
 		this.thickness = thickness;
 		this.colour = colour;
-		this.num_shelves = num_shelves;
+		
+		
+		//pieces creation
+		//ArrayList<Piece> pcs = new ArrayList<Piece>();
+		this.pieces = new ArrayList<Piece>();
+		
+		
+		Piece top = new Piece(depth, width-2*thickness, thickness, colour, false);
+		this.pieces.add(top);
+		Piece bottom = new Piece(depth, width-2*thickness, thickness, colour, false);
+		this.pieces.add(bottom);
+		
+		Piece side1 = new Piece(height, depth, thickness, colour, false);
+		this.pieces.add(side1);
+		Piece side2 = new Piece(height, depth, thickness, colour, false);
+		this.pieces.add(side2);
+		
+		//create back piece in list index 4
+		Piece back = new Piece(height, width, this.back_thickness, colour, false);
+		this.pieces.add(back);
+		
+		//-------------------------------------------------------------------------------
+		
+		
 	}
 
 	public int getSizeInSqMts() {
@@ -74,7 +108,7 @@ public class Box {
 		this.depth = depth;
 	}
 
-	public int getThickness() {
+	public double getThickness() {
 		return thickness;
 	}
 
@@ -98,13 +132,31 @@ public class Box {
 		this.colour = colour;
 	}
 
-	public int getNum_shelves() {
-		return num_shelves;
+	public boolean isHasDoor() {
+		return hasDoor;
 	}
 
-	public void setNum_shelves(int num_shelves) {
-		this.num_shelves = num_shelves;
+	public void setHasDoor(boolean hasDoor) {
+		this.hasDoor = hasDoor;
 	}
+
+	public String getDoor_colour() {
+		return door_colour;
+	}
+
+	public void setDoor_colour(String door_colour) {
+		this.door_colour = door_colour;
+	}
+
+	public ArrayList<Piece> getPieces() {
+		return pieces;
+	}
+
+	public void setPieces(ArrayList<Piece> pieces) {
+		this.pieces = pieces;
+	}
+	
+	
 
 
 }

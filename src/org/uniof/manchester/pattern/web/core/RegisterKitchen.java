@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Box;
+import org.uniof.manchester.pattern.web.BoxOneShelf;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Materials;
@@ -78,14 +79,14 @@ public class RegisterKitchen extends HttpServlet {
 					Integer box_depth = Integer.valueOf(request.getParameter("box_depth"+i));
 					Integer box_num_shelves = Integer.valueOf(request.getParameter("box_num_shelves"+i));
 					String box_colour = (String) request.getParameter("box_colour"+i);
+					Box box = new BoxOneShelf(box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves);
 					
-					Box box = new Box(box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves);
-					boxes.add(box);
+					//boxes.add(box);
 				}
 				
 				//create new Furniture and save it to the database
-				Furniture furn = new Furniture(0, boxes,exts,mats);
-				dbManager.setFurniture(furn, conn);
+				//Furniture furn = new Furniture(0, boxes,exts,mats);
+				//dbManager.setFurniture(furn, conn);
 				
 				//redirect to the order page
 				//RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");
