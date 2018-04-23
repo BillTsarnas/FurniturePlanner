@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Box {
 	
-	private String boxTypeId;
-	
+	private String name;
+	private int boxId;
 	//does not need to be inserted into DB, only for calculations
 	private ArrayList<Piece> pieces;
 	
@@ -31,11 +31,11 @@ public class Box {
 	private String door_colour;
 	
 	
-	public Box(String boxTypeId, int height, int width, int depth, int thickness, String colour) {
+	public Box(int boxId,String boxTypeId, int height, int width, int depth, int thickness, String colour) {
 		super();
 		
 		//------------------------------------------------------------------------------
-		this.boxTypeId = boxTypeId;
+		this.name = boxTypeId;
 		this.height = height; //y
 		this.width = width; //x
 		this.depth = depth; //z
@@ -67,6 +67,21 @@ public class Box {
 		
 		
 	}
+	
+	
+	public int getBoxId() {
+		return boxId;
+	}
+
+
+
+
+	public void setBoxId(int boxId) {
+		this.boxId = boxId;
+	}
+
+
+
 
 	public int getSizeInSqMts() {
 		return sizeInSqMts;
@@ -76,12 +91,12 @@ public class Box {
 		this.sizeInSqMts = sizeInSqMts;
 	}
 
-	public String getBoxTypeId() {
-		return boxTypeId;
+	public String getName() {
+		return name;
 	}
 
-	public void setBoxTypeId(String boxTypeId) {
-		this.boxTypeId = boxTypeId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getHeight() {

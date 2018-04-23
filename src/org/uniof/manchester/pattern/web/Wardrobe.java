@@ -9,7 +9,7 @@ public class Wardrobe extends Furniture {
 	private ArrayList<ExtraParts> ward_extraparts;
 
 	public Wardrobe(String name, ArrayList<Box> boxes, ArrayList<ExtraParts> extraparts, ArrayList<Materials> materials) {
-		super(name, 1, boxes, materials);
+		super(name, 1, 0, boxes);
 	}
 
 	public Wardrobe() {

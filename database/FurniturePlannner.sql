@@ -42,18 +42,17 @@ CREATE TABLE ORDERS
     orderid                  int NOT NULL AUTO_INCREMENT,
     name                     varchar(255),  
     clientid	 			 int,
-    installmentid            int,
     totalcost                float,
 	status                   int,
     PRIMARY KEY(orderId)
 );
 
-insert into ORDERS (name, clientid,installmentid,totalcost, status) VALUES
-('Order 1',1,1,1.00,1),
-('Order 2',2,1,2.00,1),
-('Order 3',3,1,3.00,1),
-('Order 4',4,1,4.00,1),
-('Order 5',5,1,5.00,1);
+insert into ORDERS (name, clientid,totalcost, status) VALUES
+('Order 1',1,1.00,1),
+('Order 2',2,2.00,1),
+('Order 3',3,3.00,1),
+('Order 4',4,4.00,1),
+('Order 5',5,5.00,1);
 
 
 

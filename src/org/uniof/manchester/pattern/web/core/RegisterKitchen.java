@@ -79,7 +79,9 @@ public class RegisterKitchen extends HttpServlet {
 					Integer box_depth = Integer.valueOf(request.getParameter("box_depth"+i));
 					Integer box_num_shelves = Integer.valueOf(request.getParameter("box_num_shelves"+i));
 					String box_colour = (String) request.getParameter("box_colour"+i);
-					Box box = new BoxOneShelf(box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves);
+					
+					
+					Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves);
 					
 					//boxes.add(box);
 				}

@@ -6,23 +6,19 @@ public class Furniture {
 
 	private String name;
 	
-	//0 for kitchen, 1 for wardrobe
 	private int furnitureId;
 	
 	private int numOfCuts;
 	
 	private ArrayList<Box> boxes;
-	//private ArrayList<ExtraParts> extraparts;
-	//private ArrayList<Materials> materials;
 	
 	
-	public Furniture(String name, int furnitureId, ArrayList<Box> boxes,ArrayList<Materials> materials) {
+	public Furniture(String name, int furnitureId, int numOfCuts, ArrayList<Box> boxes) {
 		super();
 		this.name = name;
 		this.furnitureId = furnitureId;
-		this.numOfCuts = 0; //TODO: to be changed
+		this.numOfCuts = numOfCuts; //TODO: to be changed
 		this.boxes = boxes;
-		//this.materials = materials;
 	}
 	
 	public Furniture() {
@@ -31,7 +27,6 @@ public class Furniture {
 		this.furnitureId = -1;
 		this.numOfCuts = 0;
 		this.boxes = null;
-		//this.materials = null;
 	}
 	
 	
@@ -72,14 +67,5 @@ public class Furniture {
 		this.boxes = boxes;
 	}
 
-
-	/*public ArrayList<Materials> getMaterials() {
-		return materials;
-	}
-
-
-	public void setMaterials(ArrayList<Materials> materials) {
-		this.materials = materials;
-	}*/
 	
 }

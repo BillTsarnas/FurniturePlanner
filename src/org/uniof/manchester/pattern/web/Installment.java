@@ -7,6 +7,14 @@ public class Installment {
 	double amount;
 	
 	
+	public Installment(int installmentID, String paytype, double amount) {
+		super();
+		this.installmentID = installmentID;
+		this.paytype = paytype;
+		this.amount = amount;
+	}
+	
+	
 	public int getInstallmentID() {
 		return installmentID;
 	}

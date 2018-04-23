@@ -6,15 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Box;
 import org.uniof.manchester.pattern.web.Client;
-import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Installment;
-import org.uniof.manchester.pattern.web.Materials;
 import org.uniof.manchester.pattern.web.Order;
 
 
@@ -373,7 +370,7 @@ try {
 }
 }
 
-
+/*
 public  void setFurniture(Furniture furniture, Connection conn) throws SQLException {
 	
 	PreparedStatement ps = null;
@@ -418,7 +415,7 @@ try {
 		ps.close();
 	} catch (Exception e) {}
 }
-}
+}*/
 
 
 public  void setFurnitureExtraPart(int furnitureId, int extraPartId, Connection conn) throws SQLException {
@@ -477,10 +474,56 @@ try {
 }
 
 
-
+/*
 public  void setBox(Box box, Connection conn) throws SQLException {
 	
 	PreparedStatement ps = null;
+	
+	/*	private String boxTypeId;
+	
+	private ArrayList<Piece> pieces;
+	
+	//unit: CM
+	private int height;
+	private int width;
+	private int depth;
+	private int sizeInSqMts; //total surface size for all the sides combined
+	private double thickness = 0.16;
+	private double back_thickness = 0.08;
+	private String colour;
+	private boolean hasDoor;
+	private String door_colour;
+	
+	CREATE TABLE BOX_PROPERTIES
+(
+    boxId             		int NOT NULL,
+    height 				    int NOT NULL,
+    width                   int NOT NULL,
+    depth                   int,
+    thickness               int,
+    back_thickness          double,
+    colour                  varchar(255),
+    num_shelves             int
+);
+
+
+INSERT INTO BOX_PROPERTIES(boxId,height,width,depth,thickness,back_thickness,colour,num_shelves) VALUES
+(1,3, 5, 4, 1,3,'Red',2),
+(1,2, 4, 4, 1,3,'Blue',2),
+(1,3, 5, 4, 1,3,'Purple',2),
+(2,1, 5, 4, 1,3,'Green',2),
+(2,2, 1, 4, 1,3,'Red',2),
+(2,3, 6, 4, 1,3,'Black',2),
+(3,1, 16, 4, 1,3,'Red',2),
+(3,2, 18, 4, 1,3,'Green',2),
+(4,1, 24, 4, 1,3,'Purple',2),
+(4,2, 12, 4, 1,3,'Red',2),
+(5,1, 16, 4, 1,3,'Orange',2),
+(5,2, 17, 4, 1,3,'Green',2),
+(5,5, 19, 4, 1,3,'Black',2);
+	
+	
+	
 	
 try {
 		String query ="INSERT INTO BOX (thickness, back_thickness, colour, num_shelves,height,width,depth) VALUES (?,?,?,?,?,?,?)";
@@ -500,7 +543,7 @@ try {
 		ps.close();
 	} catch (Exception e) {}
 }
-}
+}*/
 
 public ArrayList<Client> getClientsByName(Connection conn, String clientName, boolean complete) throws SQLException {
 	
@@ -572,13 +615,13 @@ public int getHowManyOrdersrByClientId(Connection conn, int clientId) throws SQL
 
 public ArrayList<Order> getOrdersByName(Connection conn, String orderName, boolean complete) throws SQLException {
 	
-	ArrayList<Order> orders = new ArrayList<Order>();;
+	ArrayList<Order> orders = new ArrayList<Order>();
 	ResultSet rs = null;
 	CallableStatement cs = null;
 
 	try {
 	
-		cs = conn.prepareCall("{call sp_get_clients_by_name(?)}");
+		cs = conn.prepareCall("{call sp_get_orders_by_name(?)}");
 		cs.setString(1, orderName );
 		rs = cs.executeQuery();
 		
@@ -590,18 +633,20 @@ public ArrayList<Order> getOrdersByName(Connection conn, String orderName, boole
 			int status = rs.getInt("status");
 			
 			
-			
-			
-			
 			Order order = new Order(orderId, null, clientId, status, null, totalcost,name); 
-			orders.add(order);
-			
+					
 			if(complete)
 			{
-				/*getFurniture*/
-				/*getinstallments*/
-			}	
-			
+				
+				ArrayList<Furniture> furnitures = getFurnituresByOrderId(conn, orderId, complete);
+				order.setFurnitures(furnitures);
+				
+				ArrayList<Installment> installments = getInstallmentsByOrderId(conn, orderId);
+				order.setInstallments(installments);
+				
+			}
+			orders.add(order);
+
 		}
 		
 		return orders;
@@ -616,16 +661,61 @@ public ArrayList<Order> getOrdersByName(Connection conn, String orderName, boole
 	}
 }
 
-public Furniture getFurnitureByOrderId(Connection conn, int orderId, boolean complete) throws SQLException {
+public ArrayList<Installment> getInstallmentsByOrderId(Connection conn, int orderId) throws SQLException {
 	
-	Furniture furniture = null;
+	ArrayList<Installment> installments = new  ArrayList<Installment>();
 	ResultSet rs = null;
 	PreparedStatement ps = null;
 
 	try {
 	
-		String query =null;
-		query = "select furnitureId from ORDER_FURNITURE where orderid=?";
+		String query = 	" select i.installmentid," + 
+						"        t.paytype, " + 
+						"       i.amount " + 
+						"from INSTALLMENTS i,  " + 
+						"(select distinct io.installmentid installmentid, paytype from ORDER_INSTALLMENTS io where io.orderid=1) t " + 
+						"where i.installmentid = t.furnitureId";
+		
+		ps = conn.prepareStatement(query);
+		ps.setInt(1, orderId);
+		rs = ps.executeQuery();
+		
+		while(rs.next()){
+			
+			int installmentId = rs.getInt("installmentID");
+			String paytype = rs.getString("paytype");
+			double amount = rs.getDouble("amount");
+			
+			Installment installment = new Installment(installmentId, paytype, amount);
+			installments.add(installment);
+		}
+		
+		return installments;
+
+	} finally {
+		try {
+			rs.close();
+		} catch (Exception e) {}
+		try {
+			ps.close();
+		} catch (Exception e) {}
+	}
+}
+
+public ArrayList<Furniture> getFurnituresByOrderId(Connection conn, int orderId, boolean complete) throws SQLException {
+	
+	ArrayList<Furniture> furnitures = new  ArrayList<Furniture>();
+	ResultSet rs = null;
+	PreparedStatement ps = null;
+
+	try {
+	
+		String query = "select f.furnitureid," + 
+					   "       f.name," + 
+					   "       f.numofcuts" + 
+					   "from FURNITURE f," + 
+					   "(select distinct of.furnitureId furnitureId from ORDER_FURNITURE of where of.orderid=?) t" + 
+					   "where f.furnitureId = t.furnitureId";
 		ps = conn.prepareStatement(query);
 		ps.setInt(1, orderId);
 		rs = ps.executeQuery();
@@ -633,18 +723,72 @@ public Furniture getFurnitureByOrderId(Connection conn, int orderId, boolean com
 		while(rs.next()){
 			
 			int furnitureId = rs.getInt("furnitureId");
-		
-			furniture = new Furniture( furnitureId, null, null, null);
-		
+			String name = rs.getString("name");
+			int numOfCuts = rs.getInt("numofcuts");
+			
+			Furniture furniture = new Furniture(name, furnitureId, numOfCuts , null);
+	
 			if(complete)
 			{
-				/*getBoxes*/
-				/*getExtraParts*/
-				/*getMaterials*/
+				ArrayList<Box> boxes = getBoxesByFurnitureId(conn,furnitureId);
+				furniture.setBoxes(boxes);
 			}	
+			
+			furnitures.add(furniture);
 		}
 		
-		return furniture;
+		return furnitures;
+
+	} finally {
+		try {
+			rs.close();
+		} catch (Exception e) {}
+		try {
+			ps.close();
+		} catch (Exception e) {}
+	}
+}
+
+public ArrayList<Box> getBoxesByFurnitureId(Connection conn, int furnitureId) throws SQLException {
+	
+	ArrayList<Box> boxes = new  ArrayList<Box>();
+	ResultSet rs = null;
+	PreparedStatement ps = null;
+
+	try {
+	
+		String query = "select bc.boxid," + 
+						"       bc.name," + 
+						"       bp.height," + 
+						"       bp.width," + 
+						"       bp.depth," + 
+						"       bp.thickness," + 
+						"       bp.colour" + 
+						"from BOXES_CATALOGUE bc, " + 
+						"	 BOX_PROPERTIES bp," + 
+						"     (select distinct bf.boxId boxId from BOXES_FURNITURE bf where bf.furnitureId=1) t " + 
+						"where bc.boxId = t.boxId" + 
+						"and bc.boxid = bp.boxid";
+		
+		ps = conn.prepareStatement(query);
+		ps.setInt(1, furnitureId);
+		rs = ps.executeQuery();
+		
+		while(rs.next()){
+			
+			int boxId = rs.getInt("boxid");
+			String name = rs.getString("name");
+			int height = rs.getInt("height");
+			int width = rs.getInt("width");
+			int depth = rs.getInt("depth");
+			int thickness = rs.getInt("thickness");
+			String colour = rs.getString("colour");
+			
+			Box box = new Box(boxId,name,  height, width , depth, thickness,colour);
+			boxes.add(box);
+		}
+		
+		return boxes;
 
 	} finally {
 		try {

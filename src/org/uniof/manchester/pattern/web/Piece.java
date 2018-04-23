@@ -2,14 +2,12 @@ package org.uniof.manchester.pattern.web;
 
 public class Piece {
 
+	int pieceId;
 	int height;
 	int width;
 	private double thickness;
-	
 	String colour;
 	boolean isDoor;
-	
-	
 	
 	public Piece(int height, int width, double thickness, String colour, boolean isDoor) {
 		super();
@@ -20,6 +18,19 @@ public class Piece {
 		this.isDoor = isDoor;
 	}
 	
+	
+	public int getPieceId() {
+		return pieceId;
+	}
+
+	public void setPieceId(int pieceId) {
+		this.pieceId = pieceId;
+	}
+
+	public void setDoor(boolean isDoor) {
+		this.isDoor = isDoor;
+	}
+
 	public int getHeight() {
 		return height;
 	}

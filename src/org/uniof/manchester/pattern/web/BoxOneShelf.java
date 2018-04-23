@@ -7,10 +7,10 @@ public class BoxOneShelf extends Box {
 
 	private int num_shelves;
 
-	public BoxOneShelf(String boxTypeId, int height, int width, int depth, int thickness, String colour,
+	public BoxOneShelf(int boxId, String boxTypeId, int height, int width, int depth, int thickness, String colour,
 			int num_shelves) {
 		
-		super(boxTypeId, height, width, depth, thickness, colour);
+		super(boxId ,boxTypeId, height, width, depth, thickness, colour);
 		this.setNum_shelves(num_shelves);
 		
 		//create door for box in list index 5

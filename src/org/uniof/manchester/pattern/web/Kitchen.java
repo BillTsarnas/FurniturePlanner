@@ -11,7 +11,7 @@ public class Kitchen extends Furniture {
 	
 	public Kitchen(String name, ArrayList<Box> boxes,
 			ArrayList<ExtraParts> extraparts, ArrayList<Materials> materials) {
-		super(name, 0, boxes, materials);
+		super(name, 0,0, boxes);
 	}
 
 	public Kitchen() {
