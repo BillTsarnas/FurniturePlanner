@@ -48,21 +48,36 @@
                                 <th>Height</th>
                                 <th>Width</th>
                                 <th>Depth</th>
-                                <th>Number of shelves</th>
-                                <th>Melimine colour</th>
+                                <th>Thickness</th>
+                                <th>Melamine colour</th>
                                 <th>Door colour</th>  
                             </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><input type="text" class="form-control" id="box" name="box_name1"></td>
-                            <td><input class="form-control" type="text" id="height" name="box_height1"></td>
-                            <td><input class="form-control" type="text" id="width" name="box_width1"></td>
-                            <td><input class="form-control" type="text" id="depth" name="box_depth1"></td>
-                            <td><input class="form-control" type="text" id="depth" name="box_num_shelves1" value="0"></td>
-                            <td><input type="text" class="form-control" id="melMat" name="box_colour1"></td>
-                            <td><input type="text" class="form-control" id="doorColour" name="door_colour1"></td>
                             <td width="20%">
+                               <select class="form-control" id="sel_box" name="sel_box" >
+	                               <option >Select...</option>
+	                               <option id="box_sh">Box with shelves</option>
+	                               <option id="box_sh3">Box 3 drawers</option>
+	                               <option id="box_sh4">Box 4 drawers</option>
+	                           </select>
+                            </td>
+                            <td width="10%"><input class="form-control" type="text" id="height" name="box_height"></td>
+                            <td width="10%"><input class="form-control" type="text" id="width" name="box_width"></td>
+                            <td width="10%"><input class="form-control" type="text" id="depth" name="box_depth"></td>
+                            <td width="10%"><input class="form-control" type="text" id="thik" name="thik" value="16"></td>
+                            <td width="20%"><input type="text" class="form-control" id="melMat" name="box_colour"></td>
+                            <td width="10%">
+                               <select class="form-control" id="sel_dcol1" name="sel_dcol" >
+	                               <option >Select...</option>
+	                               <option id="wood">Wood</option>
+	                               <option id="brown">Brown</option>
+	                               <option id="red">Red</option>
+	                               <option id="white">White</option>
+	                           </select>
+                            </td>
+                            <td width="10%">
                                 <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                             </td>
                         </tr>  
@@ -74,6 +89,8 @@
           <%
            } 
           %>
+      <button type="submit" class="btn btn-success" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/previewOrder.jsp'">Save</button>
+      <button type="button" class="btn btn-danger" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
 
 </div> 
 </body>

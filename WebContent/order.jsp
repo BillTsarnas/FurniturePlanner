@@ -78,8 +78,6 @@
 	                            <option >Choose furniture...</option>
 	                            <option id="kitchen">Kitchen</option>
 	                            <option id="wardrobe">Wardrobe</option>
-	                            <option id="door">Door</option>
-	                            <option id="other">Other furniture</option>
 	                          </select>
 	                        </td>
 	                        <td width="50%"><input type="text" class="form-control" id="furnitureName"></td>
