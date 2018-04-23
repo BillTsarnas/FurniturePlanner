@@ -93,7 +93,7 @@
 				 <input type="hidden" name = "clientId" value="${userId}">
 				 
 	             <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
-	             <button type="submit" class="btn btn-success">Save</button>
+	             <button type="submit" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/orderEditing.jsp'">Save</button>
              </form>
         </div>
     </div> 
