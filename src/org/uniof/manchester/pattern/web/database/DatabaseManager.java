@@ -46,9 +46,9 @@ public class DatabaseManager {
 				String mphone = rs.getString("mphone");
 				String hphone = rs.getString("hphone");
 				String email = rs.getString("email");
-				String adress = rs.getString("adress");
+				String address = rs.getString("address");
 				
-				user = new Client(Clientid,name,surname,mphone,hphone,email,adress);
+				user = new Client(Clientid,name,surname,mphone,hphone,email,address);
 			
 			}
 			

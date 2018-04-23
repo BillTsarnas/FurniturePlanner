@@ -82,9 +82,8 @@
 	                            <option id="other">Other furniture</option>
 	                          </select>
 	                        </td>
-	                        <td width="40%"><input type="text" class="form-control" id="furnitureName"></td>
-	                        <td width="20%">
-	                            <a class="edit" title="Edit" data-toggle="tooltip" onclick="window.location.href = 'http://localhost:8080/FurniturePlanner/kitchen.jsp'"><i class="material-icons">&#xE254;</i></a>
+	                        <td width="50%"><input type="text" class="form-control" id="furnitureName"></td>
+	                        <td width="10%">
 	                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
 	                        </td>
 	                    </tr>  
