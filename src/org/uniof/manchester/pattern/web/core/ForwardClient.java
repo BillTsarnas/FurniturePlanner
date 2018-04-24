@@ -79,7 +79,7 @@ public class ForwardClient extends HttpServlet {
 					AccessDatabaseManager dbManager = new DatabaseManager();
 				
 					//ArrayList<Client> clientList = dbManager.getClientsByName(conn, searchName, false);
-					Client client = dbManager.getUserById(conn, clientIdInt);
+					Client client = dbManager.getClientById(conn, clientIdInt);
 					request.setAttribute("client",client);
 					requestDispatcher = request.getRequestDispatcher("/previewClient.jsp");
 			}

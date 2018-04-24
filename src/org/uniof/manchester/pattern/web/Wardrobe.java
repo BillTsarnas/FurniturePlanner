@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 public class Wardrobe extends Furniture {
 	
-	//wardrobe furniture id: 1
 	
 	private ArrayList<ExtraParts> ward_extraparts;
 
-	public Wardrobe(String name, ArrayList<Box> boxes, ArrayList<ExtraParts> extraparts, ArrayList<Materials> materials) {
-		super(name, 1, 0, boxes);
+	public Wardrobe(String name, ArrayList<Box> boxes, ArrayList<ExtraParts> extraparts, ArrayList<Piece> pieces) {
+		super(name, 1, "W", boxes, pieces);
 	}
 
 	public Wardrobe() {

@@ -10,8 +10,8 @@ public class Kitchen extends Furniture {
 	//kitchen furniture id: 0
 	
 	public Kitchen(String name, ArrayList<Box> boxes,
-			ArrayList<ExtraParts> extraparts, ArrayList<Materials> materials) {
-		super(name, 0,0, boxes);
+			ArrayList<ExtraParts> extraparts, ArrayList<Piece> pieces) {
+		super(name, 0,"K",boxes,pieces);
 	}
 
 	public Kitchen() {

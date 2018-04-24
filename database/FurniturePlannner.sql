@@ -61,103 +61,108 @@ CREATE TABLE ORDER_INSTALLMENTS
 (
     orderid                  int,
     installmentid 		     int,
-    paytype                  varchar(255),
     PRIMARY KEY(orderid, installmentid)
 );
 
-insert into ORDER_INSTALLMENTS (orderid, installmentid,paytype) VALUES 
-(1,1,'Card'),
-(1,2,'Cash'),
-(1,3,'Card'),
-(1,4,'Card');
+insert into ORDER_INSTALLMENTS (orderid, installmentid) VALUES 
+(1,1),
+(1,2),
+(1,3),
+(1,4);
 
 CREATE TABLE INSTALLMENTS 
 (
     installmentid                  int NOT NULL AUTO_INCREMENT,
     amount                         float,
+    paytype                       varchar(255),
     PRIMARY KEY(installmentid)
 );
 
-insert into INSTALLMENTS (amount) VALUES
-(1.00),
-(2.00),
-(3.00),
-(4.00),
-(5.00);
+insert into INSTALLMENTS (amount,paytype) VALUES
+(1.00 ,'Card'),
+(2.00 , 'Cash'),
+(3.00 ,'Card'),
+(4.00 ,'Cash'),
+(5.00 ,'Card' );
 
 
 CREATE TABLE ORDER_FURNITURE 
 (
     orderid                  int NOT NULL,
     furnitureid 		     int NOT NULL,
-    type                     varchar(255),
     PRIMARY KEY(orderid, furnitureid)
 );
 
-insert into ORDER_FURNITURE (orderid, furnitureid,type) VALUES
-(1,1,'K'),
-(1,2,'K'),
-(1,3,'K'),
-(1,4,'K'),
-(1,5,'K');
+insert into ORDER_FURNITURE (orderid, furnitureid) VALUES
+(1,1),
+(1,2),
+(1,3),
+(1,4),
+(1,5);
 
 CREATE TABLE FURNITURE 
 (
     furnitureid              int NOT NULL AUTO_INCREMENT,
     name                     varchar(255),  
-    numOfExtraParts          int,
-    numOfCuts 				 int,
+    type                     char(1), 
     PRIMARY KEY(furnitureId)
 );
 
-insert into FURNITURE (name, numOfExtraParts,numOfCuts) VALUES
-('Kitchen 1',1,3),
-('Kitchen 2',2,4),
-('Wardrobe 1',3,5),
-('Wardrobe 2',4,2),
-('Wardrobe 3',5,1);
+insert into FURNITURE (name,type) VALUES
+('Kitchen 1','K'),
+('Kitchen 2','K'),
+('Wardrobe 1','W'),
+('Wardrobe 2','W'),
+('Wardrobe 3','W');
 
 
 
-CREATE TABLE FURNITURE_MATERIAL 
+CREATE TABLE PIECE_MATERIAL 
 (
-    furnitureid              int,
+    pieceid              int,
     materialid               int,  
   
-    PRIMARY KEY(furnitureId,materialid)
+    PRIMARY KEY(pieceid,materialid)
 );
 
-insert into FURNITURE_MATERIAL (furnitureid, materialid) VALUES
+insert into PIECE_MATERIAL (pieceid, materialid) VALUES
 (1,3),
 (2,1),
 (3,2),
 (4,3),
-(5,1);
-
+(5,3),
+(6,3),
+(7,3),
+(8,3),
+(9,3),
+(10,1),
+(11,1),
+(12,1),
+(13,1);
 
 CREATE TABLE MATERIAL_CATALOGUE 
 (
     materialid              int NOT NULL AUTO_INCREMENT,
     name  					varchar(255),
-    cost                 	varchar(255),
+    cost                 	float,
     colour 				    varchar(255),
     PRIMARY KEY(materialid)
 );
 
 INSERT INTO MATERIAL_CATALOGUE(name,cost,colour) VALUES
-('melamine','50','black'),
-('oak','200','brown'),
-('maple', '250','dark');
+('melamine',50.0,'black'),
+('oak',2000.0,'brown'),
+('maple', 250.0,'dark');
 
 
-CREATE TABLE FURNITURE_EXTRAPARTS 
+CREATE TABLE PIECE_EXTRAPARTS 
 (
-    furnitureid             int NOT NULL,
+    pieceid             int NOT NULL,
     extrapartid             int NOT NULL,
-    PRIMARY KEY(extrapartid,furnitureid)
+    PRIMARY KEY(extrapartid,pieceid)
 );
 
-insert into FURNITURE_EXTRAPARTS (furnitureid, extrapartid) VALUES
+insert into PIECE_EXTRAPARTS (pieceid, extrapartid) VALUES
 (1,3),
 (1,4),
 (1,5),
@@ -182,16 +187,37 @@ insert into FURNITURE_EXTRAPARTS (furnitureid, extrapartid) VALUES
 (5,2),
 (5,3),
 (5,4),
-(5,5);
-
+(5,5),
+(6,2),
+(6,3),
+(7,4),
+(7,5),
+(7,2),
+(7,1),
+(8,4),
+(8,5),
+(8,3),
+(9,5),
+(9,4),
+(9,1),
+(10,5),
+(10,4),
+(11,3),
+(11,5),
+(12,1),
+(12,4),
+(13,1),
+(13,2),
+(13,3),
+(13,4);
 
 CREATE TABLE EXTRAPARTS_CATALOGUE 
 (
-    extraPartsid            int NOT NULL AUTO_INCREMENT,
+    extrapartid            int NOT NULL AUTO_INCREMENT,
     name 				    varchar(255),
     cost                 	varchar(255),
     type                    char(1),
-    PRIMARY KEY(extraPartsid)
+    PRIMARY KEY(extrapartid)
 );
 
 
@@ -235,29 +261,27 @@ CREATE TABLE PIECES_PROPERTIES
     pieceid                 int NOT NULL AUTO_INCREMENT ,
     height 				    int NOT NULL,
     width                   int NOT NULL,
-    depth                   int,
     thickness               int,
-    back_thickness          double,
     colour                  varchar(255),
-    num_shelves             int,
+    isDoor                  boolean,
     PRIMARY KEY(pieceid)
 );
 
 
-INSERT INTO PIECES_PROPERTIES(height,width,depth,thickness,back_thickness,colour,num_shelves) VALUES
-(3, 5, 4, 1,3,'Red',2),
-(2, 4, 4, 1,3,'Blue',2),
-(3, 5, 4, 1,3,'Purple',2),
-(1, 5, 4, 1,3,'Green',2),
-(2, 1, 4, 1,3,'Red',2),
-(3, 6, 4, 1,3,'Black',2),
-(1, 16, 4, 1,3,'Red',2),
-(2, 18, 4, 1,3,'Green',2),
-(1, 24, 4, 1,3,'Purple',2),
-(2, 12, 4, 1,3,'Red',2),
-(1, 16, 4, 1,3,'Orange',2),
-(2, 17, 4, 1,3,'Green',2),
-(5, 19, 4, 1,3,'Black',2);
+INSERT INTO PIECES_PROPERTIES(height,width,thickness,colour,isDoor) VALUES
+(3, 5,  1,'Red',true),
+(2, 4,  1,'Blue',false),
+(3, 5,  1,'Purple',false),
+(1, 5, 1,'Green',false),
+(2, 1,  1,'Red',false),
+(3, 6,  1,'Black',false),
+(1, 16,  1,'Red',false),
+(2, 18,  1,'Green',false),
+(1, 24,  1,'Purple',false),
+(2, 12,  1,'Red',false),
+(1, 16,  1,'Orange',false),
+(2, 17,  1,'Green',false),
+(5, 19,  1,'Black',false);
 
 
 CREATE TABLE FURNITURE_BOXES 
@@ -268,29 +292,16 @@ CREATE TABLE FURNITURE_BOXES
 );
 
 insert into FURNITURE_BOXES (furnitureid, boxid) VALUES
+(1,1),
+(1,2),
 (1,3),
-(1,4),
-(1,5),
-(1,6),
-(1,7),
 (2,1),
 (2,2),
 (2,3),
-(2,4),
-(2,5),
-(2,6),
-(2,7),
-(3,2),
-(3,3),
 (3,4),
 (3,5),
-(3,6),
+(4,4),
 (4,5),
-(4,6),
-(4,7),
-(5,1),
-(5,2),
-(5,3),
 (5,4),
 (5,5);
 

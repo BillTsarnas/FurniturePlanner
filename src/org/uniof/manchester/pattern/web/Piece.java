@@ -1,5 +1,7 @@
 package org.uniof.manchester.pattern.web;
 
+import java.util.ArrayList;
+
 public class Piece {
 
 	private int pieceId;
@@ -8,21 +10,33 @@ public class Piece {
 	private double thickness;
 	private String colour;
 	private boolean isDoor;
+	private Material material;
+	private ArrayList<ExtraParts> extras;
 	
-	private Materials material;
-	
-	
-	public Piece(int height, int width, double thickness, String colour, boolean isDoor, Materials material) {
+	public Piece(int pieceId, int height, int width, double thickness, String colour, boolean isDoor, Material material, ArrayList<ExtraParts> extras) {
 		super();
+		this.pieceId = pieceId;
 		this.height = height;
 		this.width = width;
 		this.thickness = thickness;
 		this.colour = colour;
 		this.isDoor = isDoor;
 		this.material = material;
+		this.extras = extras;
 	}
 	
-	
+	public ArrayList<ExtraParts> getExtras() {
+		return extras;
+	}
+
+	public void setExtras(ArrayList<ExtraParts> extras) {
+		this.extras = extras;
+	}
+
+	public void setThickness(double thickness) {
+		this.thickness = thickness;
+	}
+
 	public int getPieceId() {
 		return pieceId;
 	}
@@ -67,12 +81,12 @@ public class Piece {
 	}
 
 
-	public Materials getMaterial() {
+	public Material getMaterial() {
 		return material;
 	}
 
 
-	public void setMaterial(Materials material) {
+	public void setMaterial(Material material) {
 		this.material = material;
 	}
 	
