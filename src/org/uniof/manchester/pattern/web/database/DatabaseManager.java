@@ -1026,6 +1026,46 @@ public class DatabaseManager implements AccessDatabaseManager {
 			} catch (Exception e) {}
 		}
 	}
+	
+	public ArrayList<ExtraParts> getExtraPartsByType(Connection conn, String type) throws SQLException {
+
+		ArrayList<ExtraParts> extraparts = new  ArrayList<ExtraParts>();
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+
+		try {
+
+			String query = 	" select ec.extrapartid, " + 
+					"       ec.name," + 
+					"       ec.cost" + 
+					"from EXTRAPARTS_CATALOGUE ec " + 
+					"where ec.type = ?";
+
+			ps = conn.prepareStatement(query);
+			ps.setString(1, type);
+			rs = ps.executeQuery();
+
+			while(rs.next()){
+
+				int extraPartId = rs.getInt("pieceid");
+				String name = rs.getString("name");
+				float cost = rs.getFloat("cost");
+		
+				ExtraParts extrapart = new ExtraParts(extraPartId,name, cost,type);
+				extraparts.add(extrapart);
+			}
+
+			return extraparts;
+
+		} finally {
+			try {
+				rs.close();
+			} catch (Exception e) {}
+			try {
+				ps.close();
+			} catch (Exception e) {}
+		}
+	}
 
 
 }
