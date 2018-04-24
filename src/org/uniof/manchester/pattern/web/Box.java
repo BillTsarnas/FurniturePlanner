@@ -52,7 +52,7 @@ public class Box {
 		this.pieces = new ArrayList<Piece>();
 		
 		//this.extras = new ArrayList<ExtraParts>();
-		Materials melamine = new Materials("melamine", "wood", 1.5f);
+		/*Materials melamine = new Materials("melamine", "wood", 1.5f);
 		
 		Piece top = new Piece(depth, width-2*thickness, thickness, colour, false, melamine);
 		this.pieces.add(top);
@@ -66,12 +66,12 @@ public class Box {
 		
 		//create back piece in list index 4
 		Piece back = new Piece(height, width, this.back_thickness, colour, false, melamine);
-		this.pieces.add(back);
+		this.pieces.add(back);*/
 		
 		//-------------------------------------------------------------------------------
 		
 		//add the extras for the box
-		this.extras = extrasK;
+		//this.extras = extrasK;
 		
 		
 	}
@@ -194,6 +194,16 @@ public class Box {
 
 	public void setDoor_colour(String door_colour) {
 		this.door_colour = door_colour;
+	}
+
+
+	public double getBack_thickness() {
+		return back_thickness;
+	}
+
+
+	public void setBack_thickness(double back_thickness) {
+		this.back_thickness = back_thickness;
 	}
 	
 	

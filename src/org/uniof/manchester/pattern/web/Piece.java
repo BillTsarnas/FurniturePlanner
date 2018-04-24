@@ -9,10 +9,10 @@ public class Piece {
 	private String colour;
 	private boolean isDoor;
 	
-	private Materials material;
+	private Material material;
 	
 	
-	public Piece(double height, double width, double thickness, String colour, boolean isDoor, Materials material) {
+	public Piece(double height, double width, double thickness, String colour, boolean isDoor, Material material) {
 		super();
 		this.height = height;
 		this.width = width;
@@ -83,12 +83,12 @@ public class Piece {
 	}
 
 
-	public Materials getMaterial() {
+	public Material getMaterial() {
 		return material;
 	}
 
 
-	public void setMaterial(Materials material) {
+	public void setMaterial(Material material) {
 		this.material = material;
 	}
 	

@@ -19,7 +19,7 @@ import org.uniof.manchester.pattern.web.Box;
 import org.uniof.manchester.pattern.web.BoxOneShelf;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
-import org.uniof.manchester.pattern.web.Materials;
+import org.uniof.manchester.pattern.web.Material;
 import org.uniof.manchester.pattern.web.Piece;
 import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
@@ -59,8 +59,8 @@ public class RegisterKitchen extends HttpServlet {
 				AccessDatabaseManager dbManager = new DatabaseManager(); 
 				
 				//Add a new temporary material. A set of materials should be stored in the database
-				ArrayList<Materials> mats = new ArrayList<Materials>();
-				Materials mat = new Materials("melamine", "black", 5);
+				ArrayList<Material> mats = new ArrayList<Material>();
+				Material mat = new Material("melamine", "black", 5);
 				mats.add(mat);
 				
 				//Add a new temporary extra part. A set of extra parts should be stored in the database
@@ -94,9 +94,9 @@ public class RegisterKitchen extends HttpServlet {
 						extrasK.add(ext);
 					}
 					
-					Materials mater = new Materials("some_material", box_colour, 1.5f);
+					Material mater = new Material("some_material", box_colour, 1.5f);
 					
-					Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves,extrasK,mater);
+					Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour,extrasK,mater);
 					System.out.println(box.getName());
 					ArrayList<Piece> pcs = box.getPieces();
 					Iterator<Piece> crunchifyIterator = pcs.iterator();

@@ -9,12 +9,13 @@ public class BoxOneShelf extends Box {
 	private int num_shelves=1;
 
 	public BoxOneShelf(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
-			int num_shelves, ArrayList<ExtraParts> extrasK, Materials mat) {
+			ArrayList<ExtraParts> extrasK, Material mat) {
 		
+		//create side, bottom pieces and back piece
 		super(boxId ,boxTypeId, height, width, depth, thickness, colour, extrasK);
-		this.setNum_shelves(num_shelves);
-		
-		Materials melamine = new Materials("melamine", "wood", 1.5f);
+		this.setNum_shelves(1);
+		/*
+		Materials melamine = new Materials("melamine", "wood", 0.00075f);
 		
 		//create door for box in list index 5
 		//-1 is for the "air"
@@ -43,7 +44,7 @@ public class BoxOneShelf extends Box {
 		this.getExtras().add(extrasK.get(8));
 		this.getExtras().add(extrasK.get(8));
 		this.getExtras().add(extrasK.get(8));
-		this.getExtras().add(extrasK.get(9));
+		this.getExtras().add(extrasK.get(9));*/
 		/*this.getExtras().add(1);
 		this.getExtras().add(4);*/
 		

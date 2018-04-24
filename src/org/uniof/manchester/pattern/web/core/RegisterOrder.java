@@ -16,9 +16,10 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Box;
+import org.uniof.manchester.pattern.web.BoxFactory;
 import org.uniof.manchester.pattern.web.BoxOneShelf;
 import org.uniof.manchester.pattern.web.ExtraParts;
-import org.uniof.manchester.pattern.web.Materials;
+import org.uniof.manchester.pattern.web.Material;
 import org.uniof.manchester.pattern.web.Order;
 import org.uniof.manchester.pattern.web.Piece;
 import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
@@ -70,9 +71,13 @@ public class RegisterOrder extends HttpServlet {
 					extrasK.add(ext);
 				}
 				
-				Materials mater = new Materials("some_material", "skata", 1.5f);
+				Material mater = new Material("some_material", "skata", 1.5f);
 				
-				Box box = new BoxOneShelf(1,"test",72.0, 60.0, 40.0, 1.6, "skata", 1 ,extrasK,mater);
+				//create a new instance of the Helper creation class
+				BoxFactory factory = new BoxFactory();
+				
+				Box box = factory.createBoxOneShelf(1,"testbox",72.0, 60.0, 56.0, 1.6, "skata", extrasK,mater);
+				
 				System.out.println(box.getName());
 				ArrayList<Piece> pcs = box.getPieces();
 				Iterator<Piece> crunchifyIterator = pcs.iterator();
@@ -84,6 +89,7 @@ public class RegisterOrder extends HttpServlet {
             		System.out.println(curr.getThickness());
             		System.out.println("--end of piece--");
             	}
+            	System.out.println(pcs.size());
 				
 				//get the client's ID
 				String clientId = (String) request.getParameter("clientId");

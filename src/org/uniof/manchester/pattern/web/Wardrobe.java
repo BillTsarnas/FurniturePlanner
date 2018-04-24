@@ -8,7 +8,7 @@ public class Wardrobe extends Furniture {
 	
 	private ArrayList<ExtraParts> ward_extraparts;
 
-	public Wardrobe(String name, ArrayList<Box> boxes, ArrayList<ExtraParts> extraparts, ArrayList<Materials> materials) {
+	public Wardrobe(String name, ArrayList<Box> boxes, ArrayList<ExtraParts> extraparts, ArrayList<Material> material) {
 		super(name, 1, 0, boxes);
 	}
 
