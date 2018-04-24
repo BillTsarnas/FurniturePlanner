@@ -1,10 +1,13 @@
 package org.uniof.manchester.pattern.web;
 
-public class BoxFourDrawers  {
+import java.util.ArrayList;
 
-	//public BoxFourDrawers(int boxId, String boxTypeId, int height, int width, int depth, int thickness, String colour, ArrayList<ExtraParts> extrasK, Materials mat, String type) {
-		//super(boxId, boxTypeId, height, width, depth, thickness, colour, extrasK, type);
+public class BoxFourDrawers extends Box {
+
+	public BoxFourDrawers(int boxId, String boxTypeId, int height, int width, int depth, int thickness, String colour,
+			ArrayList<ExtraParts> extrasK, Materials mat) {
+		super(boxId, boxTypeId, height, width, depth, thickness, colour, extrasK);
 		// TODO Auto-generated constructor stub
-	//}
+	}
 
 }

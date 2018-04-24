@@ -19,7 +19,7 @@ import org.uniof.manchester.pattern.web.Box;
 import org.uniof.manchester.pattern.web.BoxOneShelf;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
-import org.uniof.manchester.pattern.web.Material;
+import org.uniof.manchester.pattern.web.Materials;
 import org.uniof.manchester.pattern.web.Piece;
 import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
@@ -59,13 +59,13 @@ public class RegisterKitchen extends HttpServlet {
 				AccessDatabaseManager dbManager = new DatabaseManager(); 
 				
 				//Add a new temporary material. A set of materials should be stored in the database
-				ArrayList<Material> mats = new ArrayList<Material>();
-				Material mat = new Material(1,"melamine", "black", 5);
+				ArrayList<Materials> mats = new ArrayList<Materials>();
+				Materials mat = new Materials("melamine", "black", 5);
 				mats.add(mat);
 				
 				//Add a new temporary extra part. A set of extra parts should be stored in the database
 				ArrayList<ExtraParts> exts = new ArrayList<ExtraParts>();
-				ExtraParts ext = new ExtraParts(0,"wheel",1f,"K");
+				ExtraParts ext = new ExtraParts(0,"wheel",1f);
 				exts.add(ext);
 				
 				//firstly get the number of boxes
@@ -90,13 +90,13 @@ public class RegisterKitchen extends HttpServlet {
 					ArrayList<ExtraParts> extrasK = new ArrayList<ExtraParts>();
 					
 					for (int k=0; k<10; i++) {
-						ext = new ExtraParts(0,"tmp_extrapart", 2.68f,"K");
+						ext = new ExtraParts(0,"tmp_extrapart", 2.68f);
 						extrasK.add(ext);
 					}
 					
-					Material mater = new Material(1,"some_material", box_colour, 1.5f);
-					/*
-					Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves,extrasK,mater,"K");
+					Materials mater = new Materials("some_material", box_colour, 1.5f);
+					
+					Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves,extrasK,mater);
 					System.out.println(box.getName());
 					ArrayList<Piece> pcs = box.getPieces();
 					Iterator<Piece> crunchifyIterator = pcs.iterator();
@@ -107,7 +107,7 @@ public class RegisterKitchen extends HttpServlet {
                 		System.out.println(curr.getWidth());
                 		System.out.println(curr.getThickness());
                 		System.out.println("--end of piece--");
-                	}*/
+                	}
 					
 					//boxes.add(box);
 				}

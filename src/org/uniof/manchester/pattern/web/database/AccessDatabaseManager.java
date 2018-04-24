@@ -9,7 +9,7 @@ import org.uniof.manchester.pattern.web.Client;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Installment;
-import org.uniof.manchester.pattern.web.Material;
+import org.uniof.manchester.pattern.web.Materials;
 import org.uniof.manchester.pattern.web.Order;
 import org.uniof.manchester.pattern.web.Piece;
 
@@ -59,7 +59,7 @@ public interface AccessDatabaseManager {
 	
 	public ArrayList<Piece> getPiecesByFurnitureId(Connection conn, int furnitureId, boolean complete) throws SQLException;
 	
-	public Material getMaterialByPieceId(Connection conn, int pieceId) throws SQLException;
+	public Materials getMaterialByPieceId(Connection conn, int pieceId) throws SQLException;
 	
 	public ArrayList<ExtraParts> getExtraPartsByPieceId(Connection conn, int pieceId) throws SQLException;
 	

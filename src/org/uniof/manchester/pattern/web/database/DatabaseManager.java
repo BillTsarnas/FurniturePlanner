@@ -14,7 +14,7 @@ import org.uniof.manchester.pattern.web.Client;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Installment;
-import org.uniof.manchester.pattern.web.Material;
+import org.uniof.manchester.pattern.web.Materials;
 import org.uniof.manchester.pattern.web.Order;
 import org.uniof.manchester.pattern.web.Piece;
 
@@ -386,7 +386,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		}
 	}
-
+	
 	public Integer setFurniture(Furniture furniture, int orderId, Connection conn) throws SQLException {
 
 		PreparedStatement ps = null;
@@ -1066,6 +1066,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 			} catch (Exception e) {}
 		}
 	}
+	
 
 
 }

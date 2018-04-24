@@ -1,15 +1,15 @@
 package org.uniof.manchester.pattern.web;
 
-public class Material {
+public class Materials {
 	
 	private int materialsId;
 	private String name;
 	private String colour;
 	private float cost;
 	
-	public Material(int materialsId, String name, String colour, float cost) {
+	public Materials(String name, String colour, float cost) {
 		super();
-		this.materialsId = materialsId;
+		this.materialsId = 0;
 		this.name = name;
 		this.colour = colour;
 		this.cost = cost;

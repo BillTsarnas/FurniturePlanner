@@ -8,48 +8,28 @@ public class Furniture {
 	
 	private int furnitureId;
 	
-	private String type; //K for Kitchen W for Wardrobe
+	private int numOfCuts;
 	
 	private ArrayList<Box> boxes;
 	
-	private ArrayList<Piece> pieces;
 	
-	
-	public Furniture(String name, int furnitureId, String type, ArrayList<Box> boxes, ArrayList<Piece> pieces) {
+	public Furniture(String name, int furnitureId, int numOfCuts, ArrayList<Box> boxes) {
 		super();
 		this.name = name;
 		this.furnitureId = furnitureId;
-		this.type = type;
+		this.numOfCuts = numOfCuts; //TODO: to be changed
 		this.boxes = boxes;
-		this.pieces = pieces;
 	}
 	
 	public Furniture() {
 		super();
 		this.name = "test";
 		this.furnitureId = -1;
+		this.numOfCuts = 0;
 		this.boxes = null;
 	}
 	
 	
-	
-	
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public ArrayList<Piece> getPieces() {
-		return pieces;
-	}
-
-	public void setPieces(ArrayList<Piece> pieces) {
-		this.pieces = pieces;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -66,6 +46,17 @@ public class Furniture {
 	public void setFurnitureId(int furnitureId) {
 		this.furnitureId = furnitureId;
 	}
+
+
+	public int getNumOfCuts() {
+		return numOfCuts;
+	}
+
+
+	public void setNumOfCuts(int numOfCuts) {
+		this.numOfCuts = numOfCuts;
+	}
+
 
 	public ArrayList<Box> getBoxes() {
 		return boxes;
