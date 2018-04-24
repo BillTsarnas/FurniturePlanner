@@ -784,7 +784,7 @@ public ArrayList<Box> getBoxesByFurnitureId(Connection conn, int furnitureId) th
 			int thickness = rs.getInt("thickness");
 			String colour = rs.getString("colour");
 			
-			Box box = new Box(boxId,name,  height, width , depth, thickness,colour);
+			Box box = new Box(boxId,name,  height, width , depth, thickness,colour,null);
 			boxes.add(box);
 		}
 		

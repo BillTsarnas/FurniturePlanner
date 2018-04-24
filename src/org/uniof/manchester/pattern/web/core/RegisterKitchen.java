@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -19,8 +20,10 @@ import org.uniof.manchester.pattern.web.BoxOneShelf;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Materials;
+import org.uniof.manchester.pattern.web.Piece;
 import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
+
 
 /**
  * Servlet implementation class RegisterKitchen
@@ -53,11 +56,11 @@ public class RegisterKitchen extends HttpServlet {
 		
 		try {
 				conn  = getConnection();	
-				AccessDatabaseManager dbManager = new DatabaseManager();
+				AccessDatabaseManager dbManager = new DatabaseManager(); 
 				
 				//Add a new temporary material. A set of materials should be stored in the database
 				ArrayList<Materials> mats = new ArrayList<Materials>();
-				Materials mat = new Materials(0,"melamine", "black", 5);
+				Materials mat = new Materials("melamine", "black", 5);
 				mats.add(mat);
 				
 				//Add a new temporary extra part. A set of extra parts should be stored in the database
@@ -82,7 +85,29 @@ public class RegisterKitchen extends HttpServlet {
 					String box_colour = (String) request.getParameter("box_colour"+i);
 					
 					
-					Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves);
+					//TODO: get the list of extraparts from the database, depending on Kitchen/Wardrobe!!
+					
+					ArrayList<ExtraParts> extrasK = new ArrayList<ExtraParts>();
+					
+					for (int k=0; k<10; i++) {
+						ext = new ExtraParts(0,"tmp_extrapart", 2.68f);
+						extrasK.add(ext);
+					}
+					
+					Materials mater = new Materials("some_material", box_colour, 1.5f);
+					
+					Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour, box_num_shelves,extrasK,mater);
+					System.out.println(box.getName());
+					ArrayList<Piece> pcs = box.getPieces();
+					Iterator<Piece> crunchifyIterator = pcs.iterator();
+					
+                	while (crunchifyIterator.hasNext()) {
+                		Piece curr = crunchifyIterator.next();
+                		System.out.println(curr.getHeight());
+                		System.out.println(curr.getWidth());
+                		System.out.println(curr.getThickness());
+                		System.out.println("--end of piece--");
+                	}
 					
 					//boxes.add(box);
 				}

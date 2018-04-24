@@ -89,7 +89,7 @@
           <%
            } 
           %>
-      <button type="submit" class="btn btn-success" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/previewOrder.jsp'">Save</button>
+      <button type="submit" class="btn btn-success" style="float: right;">Save</button>
       <button type="button" class="btn btn-danger" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
 
 </div> 

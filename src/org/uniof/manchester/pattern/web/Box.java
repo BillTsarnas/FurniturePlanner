@@ -8,8 +8,11 @@ public class Box {
 	
 	private String name;
 	private int boxId;
+	
 	//does not need to be inserted into DB, only for calculations
 	private ArrayList<Piece> pieces;
+	
+	private ArrayList<ExtraParts> extras;
 	
 	//unit: CM
 	private int height;
@@ -31,7 +34,7 @@ public class Box {
 	private String door_colour;
 	
 	
-	public Box(int boxId,String boxTypeId, int height, int width, int depth, int thickness, String colour) {
+	public Box(int boxId,String boxTypeId, int height, int width, int depth, int thickness, String colour, ArrayList<ExtraParts> extrasK) {
 		super();
 		
 		//------------------------------------------------------------------------------
@@ -48,22 +51,27 @@ public class Box {
 		//ArrayList<Piece> pcs = new ArrayList<Piece>();
 		this.pieces = new ArrayList<Piece>();
 		
+		//this.extras = new ArrayList<ExtraParts>();
+		Materials melamine = new Materials("melamine", "wood", 1.5f);
 		
-		Piece top = new Piece(depth, width-2*thickness, thickness, colour, false);
+		Piece top = new Piece(depth, width-2*thickness, thickness, colour, false, melamine);
 		this.pieces.add(top);
-		Piece bottom = new Piece(depth, width-2*thickness, thickness, colour, false);
+		Piece bottom = new Piece(depth, width-2*thickness, thickness, colour, false, melamine);
 		this.pieces.add(bottom);
 		
-		Piece side1 = new Piece(height, depth, thickness, colour, false);
+		Piece side1 = new Piece(height, depth, thickness, colour, false, melamine);
 		this.pieces.add(side1);
-		Piece side2 = new Piece(height, depth, thickness, colour, false);
+		Piece side2 = new Piece(height, depth, thickness, colour, false, melamine);
 		this.pieces.add(side2);
 		
 		//create back piece in list index 4
-		Piece back = new Piece(height, width, this.back_thickness, colour, false);
+		Piece back = new Piece(height, width, this.back_thickness, colour, false, melamine);
 		this.pieces.add(back);
 		
 		//-------------------------------------------------------------------------------
+		
+		//add the extras for the box
+		this.extras = extrasK;
 		
 		
 	}
@@ -169,6 +177,16 @@ public class Box {
 
 	public void setPieces(ArrayList<Piece> pieces) {
 		this.pieces = pieces;
+	}
+
+
+	public ArrayList<ExtraParts> getExtras() {
+		return extras;
+	}
+
+
+	public void setExtras(ArrayList<ExtraParts> extras) {
+		this.extras = extras;
 	}
 	
 	
