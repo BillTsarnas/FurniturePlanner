@@ -38,13 +38,13 @@ public class BoxFactory {
 		
 	}
 	
-	public Box createBoxOneShelf(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
-			ArrayList<ExtraParts> extrasK, Material mat) {
+	public Box createBoxWithShelf(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
+			ArrayList<ExtraParts> extrasK, Material mat, int num_shelves) {
 		
 		Box box = createBoxDefault( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour,
 				extrasK,  mat);
 		
-		int num_shelves=1;
+		
 		
 		Material melamine = new Material("melamine", "wood", 0.00075f);
 		
@@ -54,8 +54,19 @@ public class BoxFactory {
 		
 		//create door for box in list index 5
 		//-1 is for the "air"
-		Piece p = new Piece(height-1, width-1, thickness, box.getDoor_colour(), true,mat);
-		pcs.add(p);
+		if (width <= 60) {
+			Piece front_door = new Piece(height-0.3, width-0.3, thickness, box.getDoor_colour(), true,mat);
+			pcs.add(front_door);
+		}
+		else {
+			Piece front_door1 = new Piece(height-0.3, (width-0.3)/2, thickness, box.getDoor_colour(), true,mat);
+			pcs.add(front_door1);
+			Piece front_door2 = new Piece(height-0.3, (width-0.3)/2, thickness, box.getDoor_colour(), true,mat);
+			pcs.add(front_door2);
+			
+			//add a handle
+			box.getExtras().add(extrasK.get(8));
+		}
 						
 		//shelves go to the rest of the indices
 		for(int i = 0; i < num_shelves; i++) {
@@ -71,7 +82,7 @@ public class BoxFactory {
 						
 		Iterator<Piece> piece_itr = pcs.iterator();
 		while(piece_itr.hasNext()) {
-			p = piece_itr.next();
+			Piece p = piece_itr.next();
 			sum += p.getHeight() * p.getWidth();
 			//System.out.println("Piece Height:" + p.getHeight() +" Width: " + p.getWidth());
 			}
@@ -81,14 +92,11 @@ public class BoxFactory {
 				
 		//sotiria
 		
-		ArrayList<ExtraParts> ext =  new ArrayList<ExtraParts>();
-		ext.add(extrasK.get(8));
-		ext.add(extrasK.get(8));
-		ext.add(extrasK.get(8));
-		ext.add(extrasK.get(8));
-		ext.add(extrasK.get(9));
-		
-		box.setExtras(ext);
+		box.getExtras().add(extrasK.get(8));
+		box.getExtras().add(extrasK.get(8));
+		box.getExtras().add(extrasK.get(8));
+		box.getExtras().add(extrasK.get(8));
+		box.getExtras().add(extrasK.get(9));
 		
 		return box;
 		
@@ -103,33 +111,33 @@ public class BoxFactory {
 		
 		Material melamine = new Material("melamine", "wood", 0.00075f);
 		
-		
-		double space=0.5;
-		double drawer_front_height = (height - 5 * space) / 4;
+		int num_drawers = 4;
+		double space=0.3;
+		double drawer_front_height = height/4 - space;
 		
 		ArrayList<Piece> pcs = new ArrayList<Piece>();
 		
-		for (int i=0; i<4; i++) {
+		for (int i=0; i<num_drawers; i++) {
 			//creation of each drawer
-			Piece drawer_front = new Piece(drawer_front_height, width, thickness, colour, false, front_mat);
-			Piece drawer_front_inside = new Piece(drawer_front_height - 3, width - 4, thickness, colour, false, melamine);
-			Piece drawer_back_inside = new Piece(drawer_front_height - 3, width - 4, thickness, colour, false, melamine);
-			Piece drawer_side1 = new Piece(drawer_front_height -3, depth - 5, thickness, colour, false, melamine);
-			Piece drawer_side2 = new Piece(drawer_front_height -3, depth - 5, thickness, colour, false, melamine);
-			Piece drawer_bottom = new Piece(width - 4, depth - 5 + 2*thickness, box.getBack_thickness(), colour, false, melamine);
+			Piece drawer_front = new Piece(drawer_front_height, width - space, 1.8 , colour, false, front_mat);
+			//Piece drawer_front_inside = new Piece(drawer_front_height - 3, width - 4, thickness, colour, false, melamine);
+			Piece drawer_back_inside = new Piece(12 - thickness, width - 12, thickness, colour, false, melamine);
+			//Piece drawer_side1 = new Piece(drawer_front_height -3, depth - 5, thickness, colour, false, melamine);
+			//Piece drawer_side2 = new Piece(drawer_front_height -3, depth - 5, thickness, colour, false, melamine);
+			Piece drawer_bottom = new Piece(width - 11, depth - 6.5, box.getBack_thickness(), colour, false, melamine);
 			
 			box.getPieces().add(drawer_front);
-			box.getPieces().add(drawer_front_inside);
+			//box.getPieces().add(drawer_front_inside);
 			box.getPieces().add(drawer_back_inside);
-			box.getPieces().add(drawer_side1);
-			box.getPieces().add(drawer_side2);
+			//box.getPieces().add(drawer_side1);
+			//box.getPieces().add(drawer_side2);
 			box.getPieces().add(drawer_bottom);
 			//extraparts
 			
 			ArrayList<ExtraParts> ext =  new ArrayList<ExtraParts>();
 			//handle
 			ext.add(extrasK.get(1));
-			//2 drawer drivers
+			//2 drawer drivers with brakes
 			ext.add(extrasK.get(2));
 			ext.add(extrasK.get(2));
 			
@@ -140,6 +148,77 @@ public class BoxFactory {
 		
 		return box;
 		
+	}
+	
+	public Box createBoxWithBar(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
+			ArrayList<ExtraParts> extrasK, Material mat, int num_shelves) {
+		
+		//create box with two shelves
+		Box box = createBoxWithShelf( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour,
+				extrasK,  mat, num_shelves);
+		
+		//bar
+		box.getExtras().add(extrasK.get(1));
+		
+		return box;
+	}
+	
+	public Box createBoxShelfDrawers(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
+			ArrayList<ExtraParts> extrasK, Material mat, int num_shelves, int num_drawers) {
+		
+		//create box with four shelves
+		Box box = createBoxWithShelf( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour,
+				extrasK,  mat, num_shelves);
+		
+		Material melamine = new Material("melamine", "wood", 0.00075f);
+		
+		//create inside drawers
+		Piece side1 = new Piece(num_drawers*20, 51, thickness , colour, false, melamine);
+		Piece side2 = new Piece(num_drawers*20, 51, thickness , colour, false, melamine);
+		Piece bottom = new Piece(width-10-2*thickness, 51, box.getBack_thickness() , colour, false, melamine);
+		
+		//top -> traverses
+		Piece top1 = new Piece(width-10-2*thickness, 10, thickness , colour, false, melamine);
+		Piece top2 = new Piece(width-10-2*thickness, 10, thickness , colour, false, melamine);
+		
+		Piece back = new Piece(width-10, num_drawers*20, box.getBack_thickness() , colour, false, melamine);
+		
+		box.getPieces().add(side1);
+		box.getPieces().add(side2);
+		box.getPieces().add(bottom);
+		box.getPieces().add(top1);
+		box.getPieces().add(top2);
+		box.getPieces().add(back);
+		
+		for(int i=0; i<num_drawers; i++) {
+			Piece dr_filling = new Piece(num_drawers*20, 5-thickness, thickness , colour, false, melamine);
+			Piece dr_small_door = new Piece(19.6, width-10, 1.8 , colour, false, mat);
+			Piece dr_front = new Piece(width-19, 14, thickness , colour, false, melamine);
+			Piece dr_back = new Piece(width-19, 14, thickness , colour, false, melamine);
+			Piece dr_side1 = new Piece(50, 14, thickness , colour, false, melamine);
+			Piece dr_side2 = new Piece(50, 14, thickness , colour, false, melamine);
+			Piece dr_bottom = new Piece(50, width-19+2*thickness, box.getBack_thickness() , colour, false, melamine);
+			
+			box.getPieces().add(dr_filling);
+			box.getPieces().add(dr_small_door);
+			box.getPieces().add(dr_front);
+			box.getPieces().add(dr_back);
+			box.getPieces().add(dr_side1);
+			box.getPieces().add(dr_side2);
+			box.getPieces().add(dr_bottom);
+			
+			
+			//extras for each drawer
+			//simple drawer drivers 50cm
+			box.getExtras().add(extrasK.get(1));
+			
+		}
+		
+		
+		//bar
+		box.getExtras().add(extrasK.get(1));
+		
+		return box;
 	}
 
 }

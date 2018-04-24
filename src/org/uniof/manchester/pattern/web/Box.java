@@ -50,6 +50,7 @@ public class Box {
 		//pieces creation
 		//ArrayList<Piece> pcs = new ArrayList<Piece>();
 		this.pieces = new ArrayList<Piece>();
+		this.extras = new ArrayList<ExtraParts>();
 		
 		//this.extras = new ArrayList<ExtraParts>();
 		/*Materials melamine = new Materials("melamine", "wood", 1.5f);

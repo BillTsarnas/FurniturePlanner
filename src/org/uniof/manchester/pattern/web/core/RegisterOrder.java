@@ -76,7 +76,7 @@ public class RegisterOrder extends HttpServlet {
 				//create a new instance of the Helper creation class
 				BoxFactory factory = new BoxFactory();
 				
-				Box box = factory.createBoxOneShelf(1,"testbox",72.0, 60.0, 56.0, 1.6, "skata", extrasK,mater);
+				Box box = factory.createBoxShelfDrawers(1,"testbox",72.0, 60.0, 56.0, 1.6, "skata", extrasK,mater, 1,4);
 				
 				System.out.println(box.getName());
 				ArrayList<Piece> pcs = box.getPieces();
