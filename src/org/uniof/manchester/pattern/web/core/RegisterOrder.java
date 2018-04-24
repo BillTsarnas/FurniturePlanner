@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Order;
+import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
 /**
@@ -51,7 +52,7 @@ public class RegisterOrder extends HttpServlet {
 		
 		try {
 				conn  = getConnection();	
-				DatabaseManager dbManager = new DatabaseManager(); 
+				AccessDatabaseManager dbManager = new DatabaseManager();
 				
 				//get the client's ID
 				String clientId = (String) request.getParameter("clientId");

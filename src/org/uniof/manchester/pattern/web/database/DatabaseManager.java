@@ -14,8 +14,8 @@ import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Installment;
 import org.uniof.manchester.pattern.web.Order;
 
-
-public class DatabaseManager {
+										
+public class DatabaseManager implements AccessDatabaseManager {
 	
 	
 	private final static Logger LOG = Logger.getLogger(DatabaseManager.class);

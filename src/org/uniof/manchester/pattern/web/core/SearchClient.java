@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Client;
+import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
 /**
@@ -60,7 +61,7 @@ public class SearchClient extends HttpServlet {
 		
 		try {
 				conn  = getConnection();	
-				DatabaseManager dbManager = new DatabaseManager(); 
+				AccessDatabaseManager dbManager = new DatabaseManager();
 		  
 				ArrayList<Client> clientList = dbManager.getClientsByName(conn, searchName, false);
 				System.out.println("Clients:");

@@ -19,6 +19,7 @@ import org.uniof.manchester.pattern.web.BoxOneShelf;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Materials;
+import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
 /**
@@ -52,7 +53,7 @@ public class RegisterKitchen extends HttpServlet {
 		
 		try {
 				conn  = getConnection();	
-				DatabaseManager dbManager = new DatabaseManager(); 
+				AccessDatabaseManager dbManager = new DatabaseManager();
 				
 				//Add a new temporary material. A set of materials should be stored in the database
 				ArrayList<Materials> mats = new ArrayList<Materials>();

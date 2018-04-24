@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Client;
+import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
 /**
@@ -78,7 +79,7 @@ public class RegisterClient extends HttpServlet {
 		
 		try {
 				conn  = getConnection();	
-				DatabaseManager dbManager = new DatabaseManager(); 
+				AccessDatabaseManager dbManager = new DatabaseManager();
 				//Client client = dbManager.getUserById(conn, 1);
 				Client client = new Client(0,  firstName,  lastName,  mphone,  phone,  email,
 						address+", "+city+", "+postCode+", "+country);

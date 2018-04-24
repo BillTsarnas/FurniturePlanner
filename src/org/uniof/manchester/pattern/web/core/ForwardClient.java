@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Client;
+import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
 //import org.apache.log4j.Logger;
@@ -73,9 +74,10 @@ public class ForwardClient extends HttpServlet {
 			Connection conn = null;
 			
 			try {
-					conn  = getConnection();	
-					DatabaseManager dbManager = new DatabaseManager(); 
-			  
+					conn  = getConnection();
+					
+					AccessDatabaseManager dbManager = new DatabaseManager();
+				
 					//ArrayList<Client> clientList = dbManager.getClientsByName(conn, searchName, false);
 					Client client = dbManager.getUserById(conn, clientIdInt);
 					request.setAttribute("client",client);
