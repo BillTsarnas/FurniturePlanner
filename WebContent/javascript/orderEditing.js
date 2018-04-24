@@ -12,14 +12,31 @@ $(document).ready(function(){
         $('#num_boxes').val(num_box);
         console.log("Added a kitchen: Current number: " + num_box);
         var row = '<tr>' +
-            '<td><input type="text" class="form-control" id="box" name="box_name'+num_box+'"></td>' +
+            '<td>' +
+            '<select class="form-control" id="sel_box" name="sel_box" >' +
+               '<option >Select...</option>' +
+               '<option id="box_sh">Box with shelves</option>' +
+               '<option id="box_sh3">Box 3 drawers</option>' +
+               '<option id="box_sh4">Box 4 drawers</option>' +
+            '</select>' +
+            '</td>' +
             '<td><input class="form-control" type="text" id="height" name="box_height'+num_box+'"></td>' +
             '<td><input class="form-control" type="text" id="width" name="box_width'+num_box+'"></td>' +
             '<td><input class="form-control" type="text" id="depth" name="box_depth'+num_box+'"></td>' +
-            '<td><input class="form-control" type="text" id="depth" name="box_num_shelves'+num_box+'" value="0"></td>' +
-            '<td><input type="text" class="form-control" id="melMat" name="box_colour'+num_box+'"></td>' +
-            '<td><input type="text" class="form-control" id="doorColour" name="door_colour'+num_box+'"></td>' +
-            '<td><a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a></td>' +
+            '<td><input class="form-control" type="text" id="thik" name="thik'+num_box+'" value="16"></td>' +
+            '<td><input type="text" class="form-control" id="melMat" name="box_colour"></td>' +
+            '<td>' +
+            '<select class="form-control" id="sel_dcol1" name="sel_dcol" >' +
+                '<option >Select...</option>' +
+                '<option id="wood">Wood</option>' +
+                '<option id="brown">Brown</option>' +
+                '<option id="red">Red</option>' +
+                '<option id="white">White</option>' +
+            '</select>' +
+            '</td>' +
+            '<td>' +
+            '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>' +
+            '</td>' +
             '</tr>';
            
         $("#table"+this.id).append(row);     

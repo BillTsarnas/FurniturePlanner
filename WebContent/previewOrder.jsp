@@ -96,7 +96,9 @@
            <p>3000.30&euro;</p>
         </div>
 
-        <button type="submit" class="btn btn-success">Next</button>
+        <button type="button" class="btn btn-success" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Next</button>
+        <button type="submit" class="btn btn-primary" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/installments.jsp'">Set installments</button>
+        
            
 </div>    
 </form>
