@@ -3,6 +3,8 @@ package org.uniof.manchester.pattern.web.core;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -13,7 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+import org.uniof.manchester.pattern.web.Box;
+import org.uniof.manchester.pattern.web.BoxOneShelf;
+import org.uniof.manchester.pattern.web.ExtraParts;
+import org.uniof.manchester.pattern.web.Materials;
 import org.uniof.manchester.pattern.web.Order;
+import org.uniof.manchester.pattern.web.Piece;
 import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
@@ -53,6 +60,30 @@ public class RegisterOrder extends HttpServlet {
 		try {
 				conn  = getConnection();	
 				AccessDatabaseManager dbManager = new DatabaseManager();
+				
+				//create a stub box, testing purposes
+				
+				ArrayList<ExtraParts> extrasK = new ArrayList<ExtraParts>();
+				
+				for (int k=0; k<10; k++) {
+					ExtraParts ext = new ExtraParts(0,"tmp_extrapart", 2.68f);
+					extrasK.add(ext);
+				}
+				
+				Materials mater = new Materials("some_material", "skata", 1.5f);
+				
+				Box box = new BoxOneShelf(1,"test",72.0, 60.0, 40.0, 1.6, "skata", 1 ,extrasK,mater);
+				System.out.println(box.getName());
+				ArrayList<Piece> pcs = box.getPieces();
+				Iterator<Piece> crunchifyIterator = pcs.iterator();
+				
+            	while (crunchifyIterator.hasNext()) {
+            		Piece curr = crunchifyIterator.next();
+            		System.out.println(curr.getHeight());
+            		System.out.println(curr.getWidth());
+            		System.out.println(curr.getThickness());
+            		System.out.println("--end of piece--");
+            	}
 				
 				//get the client's ID
 				String clientId = (String) request.getParameter("clientId");

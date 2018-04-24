@@ -3,8 +3,8 @@ package org.uniof.manchester.pattern.web;
 public class Piece {
 
 	private int pieceId;
-	private int height;
-	private int width;
+	private double height;
+	private double width;
 	private double thickness;
 	private String colour;
 	private boolean isDoor;
@@ -12,7 +12,7 @@ public class Piece {
 	private Materials material;
 	
 	
-	public Piece(int height, int width, double thickness, String colour, boolean isDoor, Materials material) {
+	public Piece(double height, double width, double thickness, String colour, boolean isDoor, Materials material) {
 		super();
 		this.height = height;
 		this.width = width;
@@ -21,48 +21,64 @@ public class Piece {
 		this.isDoor = isDoor;
 		this.material = material;
 	}
-	
-	
+
+
 	public int getPieceId() {
 		return pieceId;
 	}
+
 
 	public void setPieceId(int pieceId) {
 		this.pieceId = pieceId;
 	}
 
-	public void setDoor(boolean isDoor) {
-		this.isDoor = isDoor;
-	}
 
-	public int getHeight() {
+	public double getHeight() {
 		return height;
 	}
-	public void setHeight(int height) {
+
+
+	public void setHeight(double height) {
 		this.height = height;
 	}
-	public int getWidth() {
+
+
+	public double getWidth() {
 		return width;
 	}
-	public void setWidth(int width) {
+
+
+	public void setWidth(double width) {
 		this.width = width;
 	}
+
+
 	public double getThickness() {
 		return thickness;
 	}
-	public void setThickness(int thickness) {
+
+
+	public void setThickness(double thickness) {
 		this.thickness = thickness;
 	}
+
+
 	public String getColour() {
 		return colour;
 	}
+
+
 	public void setColour(String colour) {
 		this.colour = colour;
 	}
-	public boolean getIsDoor() {
+
+
+	public boolean isDoor() {
 		return isDoor;
 	}
-	public void setIsDoor(boolean isDoor) {
+
+
+	public void setDoor(boolean isDoor) {
 		this.isDoor = isDoor;
 	}
 
@@ -75,6 +91,7 @@ public class Piece {
 	public void setMaterial(Materials material) {
 		this.material = material;
 	}
+	
 	
 	
 	

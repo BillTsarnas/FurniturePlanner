@@ -8,7 +8,7 @@ public class BoxOneShelf extends Box {
 
 	private int num_shelves=1;
 
-	public BoxOneShelf(int boxId, String boxTypeId, int height, int width, int depth, int thickness, String colour,
+	public BoxOneShelf(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
 			int num_shelves, ArrayList<ExtraParts> extrasK, Materials mat) {
 		
 		super(boxId ,boxTypeId, height, width, depth, thickness, colour, extrasK);

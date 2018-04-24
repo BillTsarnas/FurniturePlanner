@@ -89,7 +89,7 @@ public class RegisterKitchen extends HttpServlet {
 					
 					ArrayList<ExtraParts> extrasK = new ArrayList<ExtraParts>();
 					
-					for (int k=0; k<10; i++) {
+					for (int k=0; k<10; k++) {
 						ext = new ExtraParts(0,"tmp_extrapart", 2.68f);
 						extrasK.add(ext);
 					}

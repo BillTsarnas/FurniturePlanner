@@ -15,10 +15,10 @@ public class Box {
 	private ArrayList<ExtraParts> extras;
 	
 	//unit: CM
-	private int height;
-	private int width;
-	private int depth;
-	private int sizeInSqMts; //total surface size for all the sides combined
+	private double height;
+	private double width;
+	private double depth;
+	private double sizeInSqMts; //total surface size for all the sides combined
 	//TODO: Not reliable for cost calculation
 	
 	//16 or 18, 16 can be default
@@ -34,7 +34,7 @@ public class Box {
 	private String door_colour;
 	
 	
-	public Box(int boxId,String boxTypeId, int height, int width, int depth, int thickness, String colour, ArrayList<ExtraParts> extrasK) {
+	public Box(int boxId,String boxTypeId, double height, double width, double depth, double thickness, String colour, ArrayList<ExtraParts> extrasK) {
 		super();
 		
 		//------------------------------------------------------------------------------
@@ -75,13 +75,21 @@ public class Box {
 		
 		
 	}
-	
-	
-	public int getBoxId() {
-		return boxId;
+
+
+	public String getName() {
+		return name;
 	}
 
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public int getBoxId() {
+		return boxId;
+	}
 
 
 	public void setBoxId(int boxId) {
@@ -89,91 +97,10 @@ public class Box {
 	}
 
 
-
-
-	public int getSizeInSqMts() {
-		return sizeInSqMts;
-	}
-
-	public void setSizeInSqMts(int sizeInSqMts) {
-		this.sizeInSqMts = sizeInSqMts;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getDepth() {
-		return depth;
-	}
-
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
-
-	public double getThickness() {
-		return thickness;
-	}
-
-	public void setThickness(int thickness) {
-		this.thickness = thickness;
-	}
-
-	public double getBack_thickness() {
-		return back_thickness;
-	}
-
-	/*public static void setBack_thickness(double back_thickness) {
-		Box.back_thickness = back_thickness;
-	}*/
-
-	public String getColour() {
-		return colour;
-	}
-
-	public void setColour(String colour) {
-		this.colour = colour;
-	}
-
-	public boolean isHasDoor() {
-		return hasDoor;
-	}
-
-	public void setHasDoor(boolean hasDoor) {
-		this.hasDoor = hasDoor;
-	}
-
-	public String getDoor_colour() {
-		return door_colour;
-	}
-
-	public void setDoor_colour(String door_colour) {
-		this.door_colour = door_colour;
-	}
-
 	public ArrayList<Piece> getPieces() {
 		return pieces;
 	}
+
 
 	public void setPieces(ArrayList<Piece> pieces) {
 		this.pieces = pieces;
@@ -187,6 +114,86 @@ public class Box {
 
 	public void setExtras(ArrayList<ExtraParts> extras) {
 		this.extras = extras;
+	}
+
+
+	public double getHeight() {
+		return height;
+	}
+
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
+
+	public double getWidth() {
+		return width;
+	}
+
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+
+	public double getDepth() {
+		return depth;
+	}
+
+
+	public void setDepth(double depth) {
+		this.depth = depth;
+	}
+
+
+	public double getSizeInSqMts() {
+		return sizeInSqMts;
+	}
+
+
+	public void setSizeInSqMts(double sizeInSqMts) {
+		this.sizeInSqMts = sizeInSqMts;
+	}
+
+
+	public double getThickness() {
+		return thickness;
+	}
+
+
+	public void setThickness(double thickness) {
+		this.thickness = thickness;
+	}
+
+
+	public String getColour() {
+		return colour;
+	}
+
+
+	public void setColour(String colour) {
+		this.colour = colour;
+	}
+
+
+	public boolean isHasDoor() {
+		return hasDoor;
+	}
+
+
+	public void setHasDoor(boolean hasDoor) {
+		this.hasDoor = hasDoor;
+	}
+
+
+	public String getDoor_colour() {
+		return door_colour;
+	}
+
+
+	public void setDoor_colour(String door_colour) {
+		this.door_colour = door_colour;
 	}
 	
 	
