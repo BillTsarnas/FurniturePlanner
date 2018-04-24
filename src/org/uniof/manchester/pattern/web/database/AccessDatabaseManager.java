@@ -63,7 +63,7 @@ public interface AccessDatabaseManager {
 	
 	public ArrayList<ExtraParts> getExtraPartsByPieceId(Connection conn, int pieceId) throws SQLException;
 	
-	
+	public ArrayList<ExtraParts> getExtraPartsByType(Connection conn, String type) throws SQLException;
 	
 	
 	
