@@ -1032,7 +1032,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 		ArrayList<ExtraParts> extraparts = new  ArrayList<ExtraParts>();
 		ResultSet rs = null;
 		PreparedStatement ps = null;
-
+		
 		try {
 
 			String query = 	" select ec.extrapartid, " + 
@@ -1042,7 +1042,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 					"where ec.type = ?";
 
 			ps = conn.prepareStatement(query);
-			ps.setString(1, type);
+			ps.setString(1, type.toUpperCase());
 			rs = ps.executeQuery();
 
 			while(rs.next()){
