@@ -135,7 +135,7 @@
         <h3>Preview details of the order</h3>
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Insert order name.." id="searchOrder" name="searchName">
-          <!-- input type="hidden" name = "hid_ord_val" value="2"-->
+          <input type="hidden" name = "hid_ord_val" value="2">
           <span class="input-group-btn">
             <button class="btn btn-default" type="submit" onclick="location.href='http://localhost:8080/FurniturePlanner/searchOrder.jsp'">Go!</button>
           </span>
