@@ -57,9 +57,7 @@
                             </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td width="20%">
-                               <select class="form-control" id="sel_box" name="sel_box<%=i+1%>1" >
+                        <tr><td width="20%"><select class="form-control" id="sel_box" name="sel_box<%=i+1%>1" >
 	                               <option >Select...</option>
 	                               <option id="box_sh">Box with shelves</option>
 	                               <option id="box_sh3">Box 3 drawers</option>
@@ -70,9 +68,7 @@
                             <td width="10%"><input class="form-control" type="text" id="width" name="box_width<%=i+1%>1"></td>
                             <td width="10%"><input class="form-control" type="text" id="depth" name="box_depth<%=i+1%>1"></td>
                             <td width="10%"><input class="form-control" type="text" id="thik" name="box_thick<%=i+1%>1" value="16"></td>
-                            <td width="20%"><input type="text" class="form-control" id="melMat" name="mel<%=i+1%>1"></td>
-                            <td width="10%">
-                               <select class="form-control" id="box_colour<%=i+1%>1" name="box_colour<%=i+1%>1" >
+                            <td width="20%"><input type="text" class="form-control" id="melMat" name="mel<%=i+1%>1"></td><td width="10%"><select class="form-control" id="box_colour<%=i+1%>1" name="box_colour<%=i+1%>1" >
 	                               <option >Select...</option>
 	                               <option id="wood">Wood</option>
 	                               <option id="brown">Brown</option>
