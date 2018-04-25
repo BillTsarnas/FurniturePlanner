@@ -9,10 +9,10 @@ public class BoxFactory {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Box createBoxDefault(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
+	public Box createBoxDefault(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour, String door_colour,
 			ArrayList<ExtraParts> extrasK, Material mat) {
 		
-		Box box = new Box(boxId ,boxTypeId, height, width, depth, thickness, colour, extrasK);
+		Box box = new Box(boxId ,boxTypeId, height, width, depth, thickness, colour, door_colour, new ArrayList<Piece>(), extrasK);
 		
 		Material melamine = new Material("melamine", "wood", 0.00075f);
 		
@@ -38,10 +38,10 @@ public class BoxFactory {
 		
 	}
 	
-	public Box createBoxWithShelf(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
+	public Box createBoxWithShelf(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,String door_colour,
 			ArrayList<ExtraParts> extrasK, Material mat, int num_shelves) {
 		
-		Box box = createBoxDefault( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour,
+		Box box = createBoxDefault( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour, door_colour,
 				extrasK,  mat);
 		
 		
@@ -102,11 +102,11 @@ public class BoxFactory {
 		
 	}
 	
-	public Box createBoxFourDrawers(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
+	public Box createBoxFourDrawers(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour, String door_colour,
 			ArrayList<ExtraParts> extrasK, Material front_mat) {
 		
 		
-		Box box = createBoxDefault( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour,
+		Box box = createBoxDefault( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour, door_colour,
 				extrasK,  front_mat);
 		
 		Material melamine = new Material("melamine", "wood", 0.00075f);
@@ -150,11 +150,11 @@ public class BoxFactory {
 		
 	}
 	
-	public Box createBoxWithBar(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
+	public Box createBoxWithBar(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour, String door_colour,
 			ArrayList<ExtraParts> extrasK, Material mat, int num_shelves) {
 		
 		//create box with two shelves
-		Box box = createBoxWithShelf( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour,
+		Box box = createBoxWithShelf( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour, door_colour,
 				extrasK,  mat, num_shelves);
 		
 		//bar
@@ -163,11 +163,11 @@ public class BoxFactory {
 		return box;
 	}
 	
-	public Box createBoxShelfDrawers(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour,
+	public Box createBoxShelfDrawers(int boxId, String boxTypeId, double height, double width, double depth, double thickness, String colour, String door_colour,
 			ArrayList<ExtraParts> extrasK, Material mat, int num_shelves, int num_drawers) {
 		
 		//create box with four shelves
-		Box box = createBoxWithShelf( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour,
+		Box box = createBoxWithShelf( boxId,  boxTypeId,  height,  width,  depth,  thickness,  colour, door_colour,
 				extrasK,  mat, num_shelves);
 		
 		Material melamine = new Material("melamine", "wood", 0.00075f);

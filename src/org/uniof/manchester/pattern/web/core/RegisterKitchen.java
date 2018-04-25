@@ -1,6 +1,7 @@
 package org.uniof.manchester.pattern.web.core;
 
 import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Box;
-import org.uniof.manchester.pattern.web.BoxOneShelf;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Material;
@@ -96,7 +96,7 @@ public class RegisterKitchen extends HttpServlet {
 					
 					Material mater = new Material("some_material", box_colour, 1.5f);
 					
-					Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour,extrasK,mater);
+					/*Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour, "skata",extrasK,mater);
 					System.out.println(box.getName());
 					ArrayList<Piece> pcs = box.getPieces();
 					Iterator<Piece> crunchifyIterator = pcs.iterator();
@@ -107,7 +107,7 @@ public class RegisterKitchen extends HttpServlet {
                 		System.out.println(curr.getWidth());
                 		System.out.println(curr.getThickness());
                 		System.out.println("--end of piece--");
-                	}
+                	}*/
 					
 					//boxes.add(box);
 				}

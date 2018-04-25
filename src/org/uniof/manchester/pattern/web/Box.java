@@ -29,28 +29,31 @@ public class Box {
 	
 	private String colour;
 	
-	private boolean hasDoor;
-	
 	private String door_colour;
 	
 	
-	public Box(int boxId,String boxTypeId, double height, double width, double depth, double thickness, String colour, ArrayList<ExtraParts> extrasK) {
+	public Box(int boxId,String name, double height, double width, double depth, double thickness, String colour, String door_colour, ArrayList<Piece> pieces, ArrayList<ExtraParts> extrasK) {
 		super();
 		
 		//------------------------------------------------------------------------------
-		this.name = boxTypeId;
+		this.boxId = boxId;
+		this.name = name;
+		
+		this.pieces = pieces;
+		this.extras = extrasK;
+		
 		this.height = height; //y
 		this.width = width; //x
 		this.depth = depth; //z
 		this.sizeInSqMts = 0;
 		this.thickness = thickness;
 		this.colour = colour;
+		this.door_colour = door_colour;
 		
 		
 		//pieces creation
 		//ArrayList<Piece> pcs = new ArrayList<Piece>();
-		this.pieces = new ArrayList<Piece>();
-		this.extras = new ArrayList<ExtraParts>();
+		
 		
 		//this.extras = new ArrayList<ExtraParts>();
 		/*Materials melamine = new Materials("melamine", "wood", 1.5f);
@@ -175,16 +178,6 @@ public class Box {
 
 	public void setColour(String colour) {
 		this.colour = colour;
-	}
-
-
-	public boolean isHasDoor() {
-		return hasDoor;
-	}
-
-
-	public void setHasDoor(boolean hasDoor) {
-		this.hasDoor = hasDoor;
 	}
 
 

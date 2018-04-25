@@ -1,6 +1,7 @@
 package org.uniof.manchester.pattern.web.core;
 
 import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,7 +18,6 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Box;
 import org.uniof.manchester.pattern.web.BoxFactory;
-import org.uniof.manchester.pattern.web.BoxOneShelf;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Material;
 import org.uniof.manchester.pattern.web.Order;
@@ -76,7 +76,7 @@ public class RegisterOrder extends HttpServlet {
 				//create a new instance of the Helper creation class
 				BoxFactory factory = new BoxFactory();
 				
-				Box box = factory.createBoxShelfDrawers(1,"testbox",72.0, 60.0, 56.0, 1.6, "skata", extrasK,mater, 1,4);
+				Box box = factory.createBoxShelfDrawers(1,"testbox",72.0, 60.0, 56.0, 1.6, "skata", "kafe" ,extrasK,mater, 1,4);
 				
 				System.out.println(box.getName());
 				ArrayList<Piece> pcs = box.getPieces();
