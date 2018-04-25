@@ -29,17 +29,20 @@
       <h1>Details and summary of the order</h1> 
       <h2>For client #Client_id</h2>
       
+      <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterKitchen">
+      
       <% 
         //int num_ord = (Integer) request.getAttribute("totOrders");
-        for (int i=0; i<= 2; i++) {
-        	String tabName = "table"+i;
+        int num_furniture = 3;
+        for (int i=0; i< num_furniture; i++) {
+        	String tabName = "table"+(i+1);
         	String tbutton = "tbutton"+i;
       %>
   
       <details>
         <summary>Kitchen - lebes_kitch</summary>
         <div class="table-wrapper">
-        <button type="button" class="tbutton" id=<%=i%> ><i class="fa fa-plus"></i> Add new box</button>
+        <button type="button" class="tbutton" id="<%=i+1%>" ><i class="fa fa-plus"></i> Add new box</button>
                 
                 <table id=<%=tabName%> class="table table-bordered">
                     <thead>
@@ -56,20 +59,20 @@
                     <tbody>
                         <tr>
                             <td width="20%">
-                               <select class="form-control" id="sel_box" name="sel_box" >
+                               <select class="form-control" id="sel_box" name="sel_box<%=i+1%>1" >
 	                               <option >Select...</option>
 	                               <option id="box_sh">Box with shelves</option>
 	                               <option id="box_sh3">Box 3 drawers</option>
 	                               <option id="box_sh4">Box 4 drawers</option>
 	                           </select>
                             </td>
-                            <td width="10%"><input class="form-control" type="text" id="height" name="box_height"></td>
-                            <td width="10%"><input class="form-control" type="text" id="width" name="box_width"></td>
-                            <td width="10%"><input class="form-control" type="text" id="depth" name="box_depth"></td>
-                            <td width="10%"><input class="form-control" type="text" id="thik" name="thik" value="16"></td>
-                            <td width="20%"><input type="text" class="form-control" id="melMat" name="box_colour"></td>
+                            <td width="10%"><input class="form-control" type="text" id="height" name="box_height<%=i+1%>1"></td>
+                            <td width="10%"><input class="form-control" type="text" id="width" name="box_width<%=i+1%>1"></td>
+                            <td width="10%"><input class="form-control" type="text" id="depth" name="box_depth<%=i+1%>1"></td>
+                            <td width="10%"><input class="form-control" type="text" id="thik" name="box_thick<%=i+1%>1" value="16"></td>
+                            <td width="20%"><input type="text" class="form-control" id="melMat" name="mel<%=i+1%>1"></td>
                             <td width="10%">
-                               <select class="form-control" id="sel_dcol1" name="sel_dcol" >
+                               <select class="form-control" id="box_colour<%=i+1%>1" name="box_colour<%=i+1%>1" >
 	                               <option >Select...</option>
 	                               <option id="wood">Wood</option>
 	                               <option id="brown">Brown</option>
@@ -77,7 +80,7 @@
 	                               <option id="white">White</option>
 	                           </select>
                             </td>
-                            <td width="10%">
+                            <td width="10%" id="delete<%=i+1%>" >
                                 <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                             </td>
                         </tr>  
@@ -86,12 +89,18 @@
         </div>
       </details>
       
+      <input type="hidden" id = "num_boxes<%=i+1%>" name = "num_boxes<%=i+1%>" value="1">
+      
           <%
            } 
           %>
+          
+        
+      <input type="hidden" id = "num_furnitures" name = "num_furniture" value="<%=num_furniture%>">   
+          
       <button type="submit" class="btn btn-success" style="float: right;">Save</button>
       <button type="button" class="btn btn-danger" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
-
+	  </form>
 </div> 
 </body>
 </html>  
