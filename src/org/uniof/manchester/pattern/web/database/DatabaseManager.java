@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -282,7 +283,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		try {
 
-			String query ="select max(boxid) pieceid from BOX_CATALOGUE";
+			String query ="select max(boxid) boxid from BOXES_CATALOGUE";
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 
@@ -323,7 +324,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 			ps.setInt(4, orden.getStatus());
 
 			ps.executeUpdate();
-
+			
 			int orderId = getMaxOrderId(conn); //Get the id of the order that we just inserted
 
 			// Composite pattern objects inside more objects
@@ -367,33 +368,29 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 	public  Integer setInstallment(Installment installment, int orderId, Connection conn) throws SQLException {
 
-		PreparedStatement ps = null;
-		PreparedStatement ps2 = null;
+		Statement st = null;
+		Statement st2 = null;
 
 		try {
-			String query ="insert into INSTALLMENTS (amount, paytype) VALUES (?,?)";
-			ps = conn.prepareStatement(query);
-			ps.setDouble(1, installment.getAmount());
-			ps.setString(2, installment.getPaytype());
-			ps.executeUpdate(query);
-
+			
+			st = conn.createStatement();
+		    st.executeUpdate("insert into INSTALLMENTS (amount, paytype) " + "VALUES ("+installment.getAmount()+", '"+installment.getPaytype()+"')");
+		    
 			Integer installmentId = getMaxInstallmentId(conn); //Get the id of the furnitureId that we just inserted
 
 			//Insert the relationship
-			query ="INSERT INTO ORDER_INSTALLMENTS (orderid, installmentid) VALUES (?,?)";
-			ps2 = conn.prepareStatement(query);
-			ps2.setInt(1, orderId);
-			ps2.setInt(2, installmentId);
-			ps2.executeUpdate();
-
+			
+			st2 = conn.createStatement();
+		    st2.executeUpdate("INSERT INTO ORDER_INSTALLMENTS (orderid, installmentid) " + "VALUES ("+orderId+", "+installmentId+")");
+			  
 			return installmentId;
 
 		} finally {
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 			try {
-				ps2.close();
+				st2.close();
 			} catch (Exception e) {}
 		}
 	}
@@ -425,36 +422,32 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 	public Integer setFurniture(Furniture furniture, int orderId, Connection conn) throws SQLException {
 
-		PreparedStatement ps = null;
-		PreparedStatement ps2 = null;
-
+		Statement st = null;
+		Statement st2 = null;
+		
 		try {
-			String query ="insert into FURNITURE (name,numofcuts) VALUES (?,?)";
-			ps = conn.prepareStatement(query);
-			ps.setString(1, furniture.getName());
-			ps.setInt(2, furniture.getNumOfCuts());
-			ps.executeUpdate(query);
+			
+	     	st = conn.createStatement();
+		    st.executeUpdate("INSERT INTO FURNITURE (name, numofcuts) " + "VALUES ('"+furniture.getName()+"', "+furniture.getNumOfCuts()+")");
+			
 
 			Integer furnitureId = getMaxFurnitureId(conn); //Get the id of the furnitureId that we just inserted
-
-			//Insert the relationship
-			query ="INSERT INTO ORDER_FURNITURE (orderid, furnitureid) VALUES (?,?)";
-			ps2 = conn.prepareStatement(query);
-			ps2.setInt(1, orderId);
-			ps2.setInt(2, furnitureId);
-			ps2.executeUpdate();
-
+			
+			
+			st2 = conn.createStatement();
+		    st2.executeUpdate("INSERT INTO ORDER_FURNITURE (orderid, furnitureid) " + "VALUES ("+orderId+", "+furnitureId+")");
+			
 			// Insert the boxes
 			setBoxes(furniture.getBoxes(), furnitureId, conn);
-
+			
 			return furnitureId;
 
 		} finally {
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 			try {
-				ps2.close();
+				st2.close();
 			} catch (Exception e) {}
 		}
 	}
@@ -481,32 +474,23 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 	public Integer setBox(Box box, int furnitureId, Connection conn) throws SQLException {
 
-		PreparedStatement ps = null;
-		PreparedStatement ps2 = null;
+		Statement st = null;
+		Statement st2 = null;
 
 		try {
 
-			String query ="INSERT INTO BOXES_CATALOGUE(name,height,width,depth,thickness,colour,door_colour) VALUES (?,?,?,?,?)";
-			ps = conn.prepareStatement(query);
-			ps.setString(1, box.getName());
-			ps.setDouble(2, box.getHeight());
-			ps.setDouble(3, box.getWidth());
-			ps.setDouble(4, box.getDepth());
-			ps.setDouble(5, box.getThickness());
-			ps.setString(6, box.getColour());
-			ps.setString(6, box.getDoor_colour());
-			ps.executeUpdate(query);
+			
+			st = conn.createStatement();
+		    st.executeUpdate("INSERT INTO BOXES_CATALOGUE(name,height,width,depth,thickness,colour,door_colour) " + "VALUES ('"+box.getName()+"', "+box.getHeight()+","+box.getWidth()+","+box.getDepth()+","+box.getThickness()+",'"+box.getColour()+"','"+box.getDoor_colour()+"')");
+			
+			Integer boxId = getMaxBoxId(conn); //Get the id of the furnitureId that we just inserted
 
-			Integer boxId = getMaxPieceId(conn); //Get the id of the furnitureId that we just inserted
-
+			//System.out.println("box id" +boxId );
+			
 			//Insert the relationship
-			query ="insert into FURNITURE_BOXES (furnitureid, boxid) VALUES (?,?)";
-			ps2 = conn.prepareStatement(query);
-			ps2.setInt(1, boxId);
-			ps2.setInt(2, furnitureId);
-			ps2.executeUpdate();
-
-
+			st2 = conn.createStatement();
+		    st2.executeUpdate("INSERT INTO FURNITURE_BOXES (furnitureid, boxid) " + "VALUES ("+furnitureId+", "+boxId+")");
+		
 			// Insert the pieces
 			setPieces(box.getPieces(), boxId, conn);
 
@@ -517,10 +501,10 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		} finally {
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 			try {
-				ps2.close();
+				st2.close();
 			} catch (Exception e) {}
 		}
 	}
@@ -553,27 +537,26 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 	public Integer setPiece(Piece piece, int boxId, Connection conn) throws SQLException {
 
-		PreparedStatement ps = null;
-		PreparedStatement ps2 = null;
-
+		Statement st = null;
+		Statement st2 = null;
+		int door = 0;
+		
 		try {
-			String query ="INSERT INTO PIECES_PROPERTIES(height,width,thickness,colour,isDoor) VALUES (?,?,?,?,?)";
-			ps = conn.prepareStatement(query);
-			ps.setDouble(1, piece.getHeight());
-			ps.setDouble(2, piece.getWidth());
-			ps.setDouble(3, piece.getThickness());
-			ps.setString(4, piece.getColour());
-			ps.setBoolean(5, piece.isDoor());
-			ps.executeUpdate(query);
-
+			
+			st = conn.createStatement();
+			
+			if(piece.isDoor())
+			{
+				door = 1;
+			}
+			
+		    st.executeUpdate("INSERT INTO PIECES_PROPERTIES(height,width,thickness,colour,isDoor) " + "VALUES ("+piece.getHeight()+","+piece.getWidth()+","+piece.getThickness()+",'"+piece.getColour()+"',"+door+")");
+		
 			Integer pieceId = getMaxPieceId(conn); //Get the id of the furnitureId that we just inserted
 
 			//Insert the relationship
-			query ="INSERT INTO BOX_PIECES(boxid,pieceid) (?,?)";
-			ps2 = conn.prepareStatement(query);
-			ps2.setInt(1, boxId);
-			ps2.setInt(2, pieceId);
-			ps2.executeUpdate();
+			st2 = conn.createStatement();
+		    st2.executeUpdate("INSERT INTO BOX_PIECES(boxid,pieceid) " + "VALUES ("+boxId+", "+pieceId+")");
 
 			// Insert the materials
 			setMaterialRelation(piece.getMaterial().getMaterialsId(), pieceId, conn);
@@ -582,31 +565,28 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		} finally {
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 			try {
-				ps2.close();
+				st2.close();
 			} catch (Exception e) {}
 		}
 	}
 
 	public void setMaterialRelation(int materialId, int pieceId, Connection conn) throws SQLException {
 
-		PreparedStatement ps = null;
+		Statement st = null;
 
 		try {
 
 			//Insert the relationship
-			String query ="insert into PIECE_MATERIAL (pieceid, materialid) VALUES (?,?)";
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, pieceId);
-			ps.setInt(2, materialId);
-			ps.executeUpdate();
+			st = conn.createStatement();
+		    st.executeUpdate("INSERT INTO PIECE_MATERIAL (pieceid, materialid) " + "VALUES ("+pieceId+", "+materialId+")");
 
 
 		} finally {
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 		}
 	}
@@ -633,20 +613,18 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 	public void setExtraPartRelation(int extrapartId, int boxId, Connection conn) throws SQLException {
 
-		PreparedStatement ps = null;
+		Statement st = null;
 
 		try {
 
 			//Insert the relationship
-			String query ="insert into BOX_EXTRAPARTS (boxid, extrapartid) VALUES (?,?)";
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, boxId);
-			ps.setInt(2, extrapartId);
-			ps.executeUpdate();
+			st = conn.createStatement();
+		    st.executeUpdate("INSERT INTO BOX_EXTRAPARTS (boxid, extrapartid) " + "VALUES ("+boxId+", "+extrapartId+")");
+		
 
 		} finally {
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 		}
 	}
