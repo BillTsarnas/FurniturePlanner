@@ -80,8 +80,8 @@
 	                               <option id="white">White</option>
 	                           </select>
                             </td>
-                            <td width="10%" id="delete<%=i+1%>" >
-                                <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                            <td width="10%" >
+                                <a class="delete" title="Delete" data-toggle="tooltip" id="<%=i+1%>,delete"><i class="material-icons">&#xE872;</i></a>
                             </td>
                         </tr>  
                     </tbody>

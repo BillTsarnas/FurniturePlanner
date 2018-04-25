@@ -36,7 +36,7 @@ $(document).ready(function(){
             '</select>' +
             '</td>' +
             '<td>' +
-            '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>' +
+            '<a class="delete" title="Delete" data-toggle="tooltip" id="'+ this.id +',delete"><i class="material-icons">&#xE872;</i></a>' +
             '</td>' +
             '</tr>';
            
@@ -48,13 +48,11 @@ $(document).ready(function(){
     //Delete row
     $(document).on("click", ".delete", function(){
     	
-        
-        
-        //var id = $(this).parents("td").attr("id");
-        var id = $(this).parent("table").id;
+        var id = this.id.split(",")[0];
+        //var id = $(this).parent("table").attr("id");
         
         console.log("Current id: " + id);
-        console.log("Current number: " + $('#num_boxes'+this.id).val());
+        //console.log("Current number: " + $('#num_boxes'+this.id).val());
         var num_box = parseInt($('#num_boxes'+this.id).val()) - 1;
         $('#num_boxes'+this.id).val(num_box);
         
