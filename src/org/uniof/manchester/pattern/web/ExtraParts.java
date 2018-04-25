@@ -5,9 +5,10 @@ public class ExtraParts {
 	private int extraPartId;
 	private String name;
 	private float cost;
+	private String type;
 	
 	
-	public ExtraParts(int extraPartId, String name, float cost) {
+	public ExtraParts(int extraPartId, String name, float cost, String type) {
 		super();
 		this.extraPartId = extraPartId;
 		this.name = name;
@@ -42,6 +43,16 @@ public class ExtraParts {
 
 	public void setCost(float cost) {
 		this.cost = cost;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	

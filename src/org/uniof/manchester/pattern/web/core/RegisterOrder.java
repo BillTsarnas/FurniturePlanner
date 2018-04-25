@@ -67,11 +67,11 @@ public class RegisterOrder extends HttpServlet {
 				ArrayList<ExtraParts> extrasK = new ArrayList<ExtraParts>();
 				
 				for (int k=0; k<10; k++) {
-					ExtraParts ext = new ExtraParts(0,"tmp_extrapart", 2.68f);
+					ExtraParts ext = new ExtraParts(0,"tmp_extrapart", 2.68f, "K");
 					extrasK.add(ext);
 				}
 				
-				Material mater = new Material("some_material", "skata", 1.5f);
+				Material mater = new Material(0, "some_material", "skata", 1.5f);
 				
 				//create a new instance of the Helper creation class
 				BoxFactory factory = new BoxFactory();

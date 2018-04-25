@@ -60,12 +60,12 @@ public class RegisterKitchen extends HttpServlet {
 				
 				//Add a new temporary material. A set of materials should be stored in the database
 				ArrayList<Material> mats = new ArrayList<Material>();
-				Material mat = new Material("melamine", "black", 5);
+				Material mat = new Material(0, "melamine", "black", 5);
 				mats.add(mat);
 				
 				//Add a new temporary extra part. A set of extra parts should be stored in the database
 				ArrayList<ExtraParts> exts = new ArrayList<ExtraParts>();
-				ExtraParts ext = new ExtraParts(0,"wheel",1f);
+				ExtraParts ext = new ExtraParts(0,"wheel",1f, "K");
 				exts.add(ext);
 				
 				//firstly get the number of boxes
@@ -90,11 +90,11 @@ public class RegisterKitchen extends HttpServlet {
 					ArrayList<ExtraParts> extrasK = new ArrayList<ExtraParts>();
 					
 					for (int k=0; k<10; k++) {
-						ext = new ExtraParts(0,"tmp_extrapart", 2.68f);
+						ext = new ExtraParts(0,"tmp_extrapart", 2.68f, "K");
 						extrasK.add(ext);
 					}
 					
-					Material mater = new Material("some_material", box_colour, 1.5f);
+					Material mater = new Material(0, "some_material", box_colour, 1.5f);
 					
 					/*Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour, "skata",extrasK,mater);
 					System.out.println(box.getName());

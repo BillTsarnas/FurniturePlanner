@@ -7,9 +7,9 @@ public class Material {
 	private String colour;
 	private float cost;
 	
-	public Material(String name, String colour, float cost) {
+	public Material(int materialsId, String name, String colour, float cost) {
 		super();
-		this.materialsId = 0;
+		this.materialsId = materialsId;
 		this.name = name;
 		this.colour = colour;
 		this.cost = cost;

@@ -12,8 +12,9 @@ public class Piece {
 	private Material material;
 	
 	
-	public Piece(double height, double width, double thickness, String colour, boolean isDoor, Material material) {
+	public Piece(double height, double width, double thickness, String colour, boolean isDoor, Material material, int pieceId) {
 		super();
+		this.pieceId = pieceId;
 		this.height = height;
 		this.width = width;
 		this.thickness = thickness;
