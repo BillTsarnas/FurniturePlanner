@@ -271,6 +271,42 @@ public class DatabaseManager implements AccessDatabaseManager {
 		}
 	}
 
+	protected int getMaxBoxId(Connection conn) throws SQLException {
+		if(LOG.isDebugEnabled()){
+			LOG.debug("getMaxBoxId");
+		}
+
+		int pieceId=0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+
+			String query ="select max(boxid) pieceid from BOX_CATALOGUE";
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+
+			while(rs.next()){
+
+				pieceId = rs.getInt("boxid");
+			}
+
+			if(LOG.isDebugEnabled()){
+				LOG.debug("getMaxBoxId" + pieceId);
+			}
+
+			return pieceId;
+
+		} finally {
+			try {
+				ps.close();
+			} catch (Exception e) {}
+			try {
+				rs.close();
+			} catch (Exception e) {}
+		}
+	}
+
 	// Here start the setters on cascade
 
 	public int setOrder(Order orden, boolean complete, Connection conn) throws SQLException {
@@ -386,17 +422,17 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		}
 	}
-	
+
 	public Integer setFurniture(Furniture furniture, int orderId, Connection conn) throws SQLException {
 
 		PreparedStatement ps = null;
 		PreparedStatement ps2 = null;
 
 		try {
-			String query ="INSERT INTO FURNITURE (name, type) VALUES (?,?)";
+			String query ="insert into FURNITURE (name,numofcuts) VALUES (?,?)";
 			ps = conn.prepareStatement(query);
 			ps.setString(1, furniture.getName());
-			ps.setString(2, furniture.getType());
+			ps.setInt(2, furniture.getNumOfCuts());
 			ps.executeUpdate(query);
 
 			Integer furnitureId = getMaxFurnitureId(conn); //Get the id of the furnitureId that we just inserted
@@ -410,9 +446,6 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 			// Insert the boxes
 			setBoxes(furniture.getBoxes(), furnitureId, conn);
-
-			//Insert the pieces
-			setPieces(furniture.getPieces(), furnitureId, conn);
 
 			return furnitureId;
 
@@ -435,7 +468,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 			while (boxesIterator.hasNext())
 			{
 				Box box = boxesIterator.next();
-				setBoxRelation(box.getBoxId(),furnitureId,conn);
+				setBox(box,furnitureId,conn);
 			}
 
 		} finally {
@@ -446,28 +479,53 @@ public class DatabaseManager implements AccessDatabaseManager {
 		}
 	}
 
-	public void setBoxRelation(int boxId, int furnitureId, Connection conn) throws SQLException {
+	public Integer setBox(Box box, int furnitureId, Connection conn) throws SQLException {
 
 		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
 
 		try {
 
-			//Insert the relationship
-			String query ="insert into FURNITURE_BOXES (furnitureid, boxid) VALUES (?,?)";
+			String query ="INSERT INTO BOXES_CATALOGUE(name,height,width,depth,thickness,colour,door_colour) VALUES (?,?,?,?,?)";
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, boxId);
-			ps.setInt(2, furnitureId);
-			ps.executeUpdate();
+			ps.setString(1, box.getName());
+			ps.setDouble(2, box.getHeight());
+			ps.setDouble(3, box.getWidth());
+			ps.setDouble(4, box.getDepth());
+			ps.setDouble(5, box.getThickness());
+			ps.setString(6, box.getColour());
+			ps.setString(6, box.getDoor_colour());
+			ps.executeUpdate(query);
 
+			Integer boxId = getMaxPieceId(conn); //Get the id of the furnitureId that we just inserted
+
+			//Insert the relationship
+			query ="insert into FURNITURE_BOXES (furnitureid, boxid) VALUES (?,?)";
+			ps2 = conn.prepareStatement(query);
+			ps2.setInt(1, boxId);
+			ps2.setInt(2, furnitureId);
+			ps2.executeUpdate();
+
+
+			// Insert the pieces
+			setPieces(box.getPieces(), boxId, conn);
+
+			//Insert the extraparts
+			setExtraParts(box.getExtras(), boxId, conn);
+
+			return boxId;
 
 		} finally {
 			try {
 				ps.close();
 			} catch (Exception e) {}
+			try {
+				ps2.close();
+			} catch (Exception e) {}
 		}
 	}
 
-	public ArrayList<Integer> setPieces(ArrayList<Piece> pieces, int furnitureId, Connection conn) throws SQLException {
+	public ArrayList<Integer> setPieces(ArrayList<Piece> pieces, int boxId, Connection conn) throws SQLException {
 
 		ArrayList<Integer> idPieces = new ArrayList<Integer>(); 
 
@@ -478,8 +536,8 @@ public class DatabaseManager implements AccessDatabaseManager {
 			while (piecesIterator.hasNext())
 			{
 				Piece piece = piecesIterator.next();
-				setPiece(piece,furnitureId,conn);
-				idPieces.add(furnitureId);
+				setPiece(piece,boxId,conn);
+				idPieces.add(boxId);
 			}
 
 			return idPieces;	
@@ -493,7 +551,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 		}
 	}
 
-	public Integer setPiece(Piece piece, int furnitureId, Connection conn) throws SQLException {
+	public Integer setPiece(Piece piece, int boxId, Connection conn) throws SQLException {
 
 		PreparedStatement ps = null;
 		PreparedStatement ps2 = null;
@@ -501,27 +559,24 @@ public class DatabaseManager implements AccessDatabaseManager {
 		try {
 			String query ="INSERT INTO PIECES_PROPERTIES(height,width,thickness,colour,isDoor) VALUES (?,?,?,?,?)";
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, piece.getHeight());
-			ps.setInt(2, piece.getWidth());
+			ps.setDouble(1, piece.getHeight());
+			ps.setDouble(2, piece.getWidth());
 			ps.setDouble(3, piece.getThickness());
 			ps.setString(4, piece.getColour());
-			ps.setBoolean(5, piece.getIsDoor());
+			ps.setBoolean(5, piece.isDoor());
 			ps.executeUpdate(query);
 
 			Integer pieceId = getMaxPieceId(conn); //Get the id of the furnitureId that we just inserted
 
 			//Insert the relationship
-			query ="INSERT INTO PIECES_FURNITURE(furnitureid,pieceid) (?,?)";
+			query ="INSERT INTO BOX_PIECES(boxid,pieceid) (?,?)";
 			ps2 = conn.prepareStatement(query);
-			ps2.setInt(1, furnitureId);
+			ps2.setInt(1, boxId);
 			ps2.setInt(2, pieceId);
 			ps2.executeUpdate();
 
 			// Insert the materials
 			setMaterialRelation(piece.getMaterial().getMaterialsId(), pieceId, conn);
-
-			//Insert the extraparts
-			setExtraParts(piece.getExtras(), pieceId, conn);
 
 			return pieceId;
 
@@ -556,7 +611,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 		}
 	}
 
-	public void setExtraParts(ArrayList<ExtraParts> extraparts, int pieceId, Connection conn) throws SQLException {
+	public void setExtraParts(ArrayList<ExtraParts> extraparts, int boxId, Connection conn) throws SQLException {
 
 		try {
 
@@ -565,7 +620,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 			while (boxesIterator.hasNext())
 			{
 				ExtraParts extrapart = boxesIterator.next();
-				setExtraPartRelation(extrapart.getExtraPartId(),pieceId,conn);
+				setExtraPartRelation(extrapart.getExtraPartId(),boxId,conn);
 			}
 
 		} finally {
@@ -576,16 +631,16 @@ public class DatabaseManager implements AccessDatabaseManager {
 		}
 	}
 
-	public void setExtraPartRelation(int extrapartId, int pieceId, Connection conn) throws SQLException {
+	public void setExtraPartRelation(int extrapartId, int boxId, Connection conn) throws SQLException {
 
 		PreparedStatement ps = null;
 
 		try {
 
 			//Insert the relationship
-			String query ="insert into PIECE_EXTRAPARTS (pieceid, extrapartid) VALUES (?,?)";
+			String query ="insert into BOX_EXTRAPARTS (boxid, extrapartid) VALUES (?,?)";
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, pieceId);
+			ps.setInt(1, boxId);
 			ps.setInt(2, extrapartId);
 			ps.executeUpdate();
 
@@ -595,7 +650,6 @@ public class DatabaseManager implements AccessDatabaseManager {
 			} catch (Exception e) {}
 		}
 	}
-
 
 	// The getters in cascade start here.
 
@@ -687,6 +741,45 @@ public class DatabaseManager implements AccessDatabaseManager {
 				String name = rs.getString("name");
 				float totalcost = rs.getFloat("totalcost");
 				clientId = rs.getInt("clientId");
+				int status = rs.getInt("status");
+
+				ArrayList<Furniture> furnitures = getFurnituresByOrderId(conn, orderId, complete);
+				ArrayList<Installment> installments = getInstallmentsByOrderId(conn, orderId);
+				orden = new Order( orderId, furnitures,clientId, status, installments, totalcost,name);
+
+			}
+
+			return orden;
+
+		} finally {
+			try {
+				rs.close();
+			} catch (Exception e) {}
+			try {
+				ps.close();
+			} catch (Exception e) {}
+		}
+	}
+
+	public Order getOrderByOrderId(Connection conn, int orderId, boolean complete) throws SQLException {
+
+		Order orden = null;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+
+		try {
+
+			String query =null;
+			query = "select orderid, name, surname, totalcost, clientId, status from ORDERS where orderid=?";
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, orderId);
+			rs = ps.executeQuery();
+
+			while(rs.next()){
+
+				String name = rs.getString("name");
+				float totalcost = rs.getFloat("totalcost");
+				int clientId = rs.getInt("clientId");
 				int status = rs.getInt("status");
 
 				ArrayList<Furniture> furnitures = getFurnituresByOrderId(conn, orderId, complete);
@@ -806,7 +899,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 			String query = "select f.furnitureid," + 
 					"       f.name," + 
-					"       f.type" + 
+					"       f.numofcuts" + 
 					"from FURNITURE f," + 
 					"(select distinct of.furnitureId furnitureId from ORDER_FURNITURE of where of.orderid=?) t" + 
 					"where f.furnitureId = t.furnitureId";
@@ -818,17 +911,14 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 				int furnitureId = rs.getInt("furnitureId");
 				String name = rs.getString("name");
-				String type = rs.getString("type");
+				int numofcuts = rs.getInt("numofcuts");
 
-				Furniture furniture = new Furniture(name, furnitureId , type, null, null);
+				Furniture furniture = new Furniture(name, furnitureId , numofcuts, null);
 
 				if(complete)
 				{
-					ArrayList<Box> boxes = getBoxesByFurnitureId(conn,furnitureId);
+					ArrayList<Box> boxes = getBoxesByFurnitureId(conn,furnitureId, complete);
 					furniture.setBoxes(boxes);
-
-					ArrayList<Piece> pieces = getPiecesByFurnitureId(conn,furnitureId, true);
-					furniture.setPieces(pieces);
 				}	
 				furnitures.add(furniture);
 			}
@@ -844,7 +934,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 		}
 	}
 
-	public ArrayList<Box> getBoxesByFurnitureId(Connection conn, int furnitureId) throws SQLException {
+	public ArrayList<Box> getBoxesByFurnitureId(Connection conn, int furnitureId, boolean complete) throws SQLException {
 
 		ArrayList<Box> boxes = new  ArrayList<Box>();
 		ResultSet rs = null;
@@ -854,7 +944,12 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 			String query = 	"select bc.boxId," + 
 					"       bc.name," + 
-					"       bc.type" + 
+					"       bc.height," + 
+					"       bc.width," + 
+					"       bc.depth," + 
+					"       bc.thickness," + 
+					"       bc.colour," +
+					"       bc.door_colour" +
 					"from BOXES_CATALOGUE bc," + 
 					"(select distinct fb.boxId boxId from FURNITURE_BOXES fb where fb.furnitureId=?) t " + 
 					"where bc.boxId = t.boxId";
@@ -867,9 +962,30 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 				int boxId = rs.getInt("boxid");
 				String name = rs.getString("name");
-				String type = rs.getString("type");
+				double height = rs.getDouble("height");
+				double width = rs.getDouble("width");
+				double depth = rs.getDouble("depth");
+				double thickness = rs.getDouble("thickness");
+				String colour = rs.getString("colour");
+				String doorColour = rs.getString("door_colour");
 
-				Box box = new Box(boxId,name, type);
+				Box box = new Box(boxId,name, height, width, depth, thickness, colour, doorColour, null,null);
+
+				if(complete)
+				{
+
+					//Pieces
+					ArrayList<Piece> pieces = getPiecesByBoxId(conn,boxId, complete);
+					box.setPieces(pieces);
+
+					//ExtraParts
+					//ArrayList<ExtraParts> extraparts = getExtraPartsByPieceId(conn, pieceId);
+					//piece.setExtras(extraparts);
+
+
+				}	
+
+
 				boxes.add(box);
 			}
 
@@ -885,7 +1001,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 		}
 	}
 
-	public ArrayList<Piece> getPiecesByFurnitureId(Connection conn, int furnitureId, boolean complete) throws SQLException {
+	public ArrayList<Piece> getPiecesByBoxId(Connection conn, int boxId, boolean complete) throws SQLException {
 
 		ArrayList<Piece> pieces = new  ArrayList<Piece>();
 		ResultSet rs = null;
@@ -900,32 +1016,28 @@ public class DatabaseManager implements AccessDatabaseManager {
 					"       pp.thickness," + 
 					"       pp.colour" + 
 					"from PIECES_PROPERTIES pp," + 
-					"(select distinct pf.pieceid pieceid from PIECES_FURNITURE pf where pf.furnitureId=?) t " + 
+					"(select distinct pf.pieceid pieceid from BOX_PIECES pf where pf.boxId=?) t " + 
 					"where pp.pieceid = t.pieceid";
 
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, furnitureId);
+			ps = conn.prepareStatement(query); 
+			ps.setInt(1, boxId);
 			rs = ps.executeQuery();
 
 			while(rs.next()){
 
 				int pieceId = rs.getInt("pieceid");
-				int height = rs.getInt("height");	
-				int width = rs.getInt("width");
-				boolean isDoor = rs.getBoolean("isdoor");
-				int thickness = rs.getInt("thickness");
+				double height = rs.getDouble("height");	
+				double width = rs.getDouble("width");
+				double thickness = rs.getDouble("thickness");
 				String colour = rs.getString("colour");
+				boolean isDoor = rs.getBoolean("isdoor");
 
-				Piece piece = new Piece(pieceId,height, width, thickness, colour, isDoor,null, null);
-
+				Piece piece = new Piece(height, width, thickness, colour, isDoor,null,pieceId);
 
 				if(complete)
 				{
 					Material material =  getMaterialByPieceId(conn, pieceId);
 					piece.setMaterial(material);
-
-					ArrayList<ExtraParts> extraparts = getExtraPartsByPieceId(conn, pieceId);
-					piece.setExtras(extraparts);
 				}
 
 				pieces.add(piece);
@@ -970,7 +1082,8 @@ public class DatabaseManager implements AccessDatabaseManager {
 				String name = rs.getString("name");	
 				float cost = rs.getFloat("cost");
 				String colour = rs.getString("colour");
-				material = new Material(materialId, name, colour , cost); 
+				material = new Material(materialId, name, colour , cost);
+
 			}
 			return material;
 
@@ -984,7 +1097,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 		}
 	}
 
-	public ArrayList<ExtraParts> getExtraPartsByPieceId(Connection conn, int pieceId) throws SQLException {
+	public ArrayList<ExtraParts> getExtraPartsByBoxId(Connection conn, int boxId) throws SQLException {
 
 		ArrayList<ExtraParts> extraparts = new  ArrayList<ExtraParts>();
 		ResultSet rs = null;
@@ -997,11 +1110,11 @@ public class DatabaseManager implements AccessDatabaseManager {
 					"       ec.cost," + 
 					"       ec.type" + 
 					"from EXTRAPARTS_CATALOGUE ec, " + 
-					"(select distinct pe.extrapartid extrapartid from PIECE_EXTRAPARTS pe where pe.pieceid=1) t " + 
+					"(select distinct pe.extrapartid extrapartid from BOX_EXTRAPARTS pe where pe.boxid=?) t " + 
 					"where ec.extrapartid = t.extrapartid";
 
 			ps = conn.prepareStatement(query);
-			ps.setInt(1, pieceId);
+			ps.setInt(1, boxId);
 			rs = ps.executeQuery();
 
 			while(rs.next()){
@@ -1026,13 +1139,13 @@ public class DatabaseManager implements AccessDatabaseManager {
 			} catch (Exception e) {}
 		}
 	}
-	
+
 	public ArrayList<ExtraParts> getExtraPartsByType(Connection conn, String type) throws SQLException {
 
 		ArrayList<ExtraParts> extraparts = new  ArrayList<ExtraParts>();
 		ResultSet rs = null;
 		PreparedStatement ps = null;
-		
+
 		try {
 
 			String query = 	" select ec.extrapartid, " + 
@@ -1050,7 +1163,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 				int extraPartId = rs.getInt("pieceid");
 				String name = rs.getString("name");
 				float cost = rs.getFloat("cost");
-		
+
 				ExtraParts extrapart = new ExtraParts(extraPartId,name, cost,type);
 				extraparts.add(extrapart);
 			}
@@ -1066,7 +1179,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 			} catch (Exception e) {}
 		}
 	}
-	
+
 
 
 }

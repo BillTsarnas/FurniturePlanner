@@ -104,16 +104,16 @@ CREATE TABLE FURNITURE
 (
     furnitureid              int NOT NULL AUTO_INCREMENT,
     name                     varchar(255),  
-    type                     char(1), 
+    numofcuts                int, 
     PRIMARY KEY(furnitureId)
 );
 
-insert into FURNITURE (name,type) VALUES
-('Kitchen 1','K'),
-('Kitchen 2','K'),
-('Wardrobe 1','W'),
-('Wardrobe 2','W'),
-('Wardrobe 3','W');
+insert into FURNITURE (name,numofcuts) VALUES
+('Kitchen 1',3),
+('Kitchen 2',4),
+('Wardrobe 1',5),
+('Wardrobe 2',2),
+('Wardrobe 3',3);
 
 
 
@@ -155,14 +155,14 @@ INSERT INTO MATERIAL_CATALOGUE(name,cost,colour) VALUES
 ('maple', 250.0,'dark');
 
 
-CREATE TABLE PIECE_EXTRAPARTS 
+CREATE TABLE BOX_EXTRAPARTS 
 (
-    pieceid             int NOT NULL,
+    boxid             int NOT NULL,
     extrapartid             int NOT NULL,
-    PRIMARY KEY(extrapartid,pieceid)
+    PRIMARY KEY(extrapartid,boxid)
 );
 
-insert into PIECE_EXTRAPARTS (pieceid, extrapartid) VALUES
+insert into BOX_EXTRAPARTS (boxid, extrapartid) VALUES
 (1,3),
 (1,4),
 (1,5),
@@ -231,29 +231,28 @@ INSERT INTO EXTRAPARTS_CATALOGUE(name,cost,type) VALUES
 ('Wardrobe bar','2','W');
 
 
-CREATE TABLE PIECES_FURNITURE 
+CREATE TABLE BOX_PIECES
 (
-    furnitureid             int NOT NULL,
-    pieceid 				int NOT NULL,
-    sizeinsqmts             int,
-    PRIMARY KEY(pieceid,furnitureid)
+    boxid             int NOT NULL,
+    pieceid 		  int NOT NULL,
+    PRIMARY KEY(pieceid,boxid)
 );
 
 
-INSERT INTO PIECES_FURNITURE(furnitureid,pieceid,sizeinsqmts) VALUES
-(1,1, 5),
-(1,2, 4),
-(1,3, 5),
-(2,1, 5),
-(2,2, 1),
-(2,3, 6),
-(3,1, 16),
-(3,2, 18),
-(4,1, 24),
-(4,2, 12),
-(5,1, 16),
-(5,2, 17),
-(5,5, 19);
+INSERT INTO BOX_PIECES(boxid,pieceid) VALUES
+(1,1),
+(1,2),
+(1,3),
+(2,1),
+(2,2),
+(2,3),
+(3,1),
+(3,2),
+(4,1),
+(4,2),
+(5,1),
+(5,2),
+(5,5);
 
 
 CREATE TABLE PIECES_PROPERTIES
@@ -309,14 +308,19 @@ CREATE TABLE BOXES_CATALOGUE
 (
     boxid                   int NOT NULL AUTO_INCREMENT,
     name 				    varchar(255),
-    type                 	char(1),
+    height 				    double,
+    width                   double,
+    depth                   double,
+    thickness               double,
+    colour                  varchar(255),
+    door_colour             varchar(255),
     PRIMARY KEY(boxid)
 );
 
-INSERT INTO BOXES_CATALOGUE(name,type) VALUES
-('SELF', 'K'),
-('4 DRAWERS','K'),
-('3 DRAWERS','K'),
-('LONG BOX','W'),
-('HOOKING BAR', 'W');
+INSERT INTO BOXES_CATALOGUE(name,height,width,depth,thickness,colour,door_colour) VALUES
+('SELF',1,1,1,1,'Green','Black'),
+('4 DRAWERS',1,1,1,1,'Green','Black'),
+('3 DRAWERS',1,1,1,1,'Green','Black'),
+('LONG BOX',1,1,1,1,'Green','Black'),
+('HOOKING BAR',1,1,1,1,'Green','Black');
 
