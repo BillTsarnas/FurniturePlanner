@@ -31,25 +31,50 @@
 
   <h1>Preview of order</h1>
   
-  
+  <!-- client details table -->
   <table class="table table-bordered">
      <thead>
+     <th scope="row" style="color:blue;">Client details</th>
         <tr>
-           <td><b>For client</b></td> 
-           <td><b>Order name</b></td> 
-           <td><b>Order status</b></td> 
+           <td width="20%"><b>For client</b></td> 
+           <td width="20%"><b>Order name</b></td> 
+           <td width="10%"><b>Order status</b></td> 
         </tr>
      </thead>
      <tbody>
         <tr>
            <td>Constantinos Lebesis</td> 
            <td>#1</td> 
-           <td>Active</td> 
+           <td>Active</td>   
         </tr>
      </tbody>
    </table>
+   
+   <!-- installments table -->
+   <table class="table table-bordered">
+     <thead>
+     <th scope="row" style="color:blue;">Installment details</th>
+        <tr>
+           <td width="40%"><b>Installments</b></td> 
+           <td width="30%"><b>Amount</b></td> 
+           <td width="30%"><b>Payment method</b></td> 
+        </tr>
+     </thead>
+     <tbody>
         <% 
-        //int num_ord = (Integer) request.getAttribute("totOrders");
+        for (int c=0; c<= 1; c++) {
+        %>
+        <tr>
+           <td>4</td> 
+           <td>300&euro;</td> 
+           <td>Credit/Debit card</td> 
+        </tr>
+        <%
+        } 
+        %>
+     </tbody>
+   </table>
+        <% 
         for (int i=0; i<= 2; i++) {
         %>
         <details>
@@ -100,7 +125,8 @@
            <label>Total price</label>
            <p>3000.30&euro;</p>
         </div>
-
+        
+        <button type="submit" class="btn btn-danger" style="float: left;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
         <button type="button" class="btn btn-success" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Next</button>
         <button type="submit" class="btn btn-primary" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/installments.jsp'">Set installments</button>
         
