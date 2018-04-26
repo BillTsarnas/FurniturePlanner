@@ -54,6 +54,7 @@
                                 <th>Thickness</th>
                                 <th>Melamine colour</th>
                                 <th>Door colour</th>  
+                                <th>Material</th> 
                             </tr>
                     </thead>
                     <tbody>
@@ -69,13 +70,19 @@
                             <td width="10%"><input class="form-control" type="text" id="depth" name="box_depth<%=i+1%>1"></td>
                             <td width="10%"><input class="form-control" type="text" id="thik" name="box_thick<%=i+1%>1" value="16"></td>
                             <td width="20%"><input type="text" class="form-control" id="melMat" name="mel<%=i+1%>1"></td><td width="10%"><select class="form-control" id="box_colour<%=i+1%>1" name="box_colour<%=i+1%>1" >
-	                               <option >Select...</option>
 	                               <option id="wood">Wood</option>
 	                               <option id="brown">Brown</option>
 	                               <option id="red">Red</option>
 	                               <option id="white">White</option>
 	                           </select>
+                            </td><td width="10%"><select class="form-control" id="material" name="material<%=i+1%>1" >
+	                               <option id = "melamin">Melamine</option>
+	                               <option id="oak">Oak</option>
+	                               <option id="maple">Maple</option>
+	                               <option id="beech">Beech wood</option>
+	                           </select>
                             </td>
+                            
                             <td width="10%" >
                                 <a class="delete" title="Delete" data-toggle="tooltip" id="<%=i+1%>,delete"><i class="material-icons">&#xE872;</i></a>
                             </td>

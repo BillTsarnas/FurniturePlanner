@@ -28,11 +28,18 @@ $(document).ready(function(){
             '<td><input type="text" class="form-control" id="melMat" name="mel'+this.id+num_box+'"></td>' +
             '<td>' +
             '<select class="form-control" id="box_colour" name="box_colour'+this.id+num_box+'" >' +
-                '<option >Select...</option>' +
                 '<option id="wood">Wood</option>' +
                 '<option id="brown">Brown</option>' +
                 '<option id="red">Red</option>' +
                 '<option id="white">White</option>' +
+            '</select>' +
+            '</td>' +
+            '<td>' +
+            '<select class="form-control" id="material" name="material'+this.id+num_box+'" >' +
+                '<option id = "melamin">Melamine</option>' +
+                '<option id="oak">Oak</option>' +
+                '<option id="maple">Maple</option>' +
+                '<option id="beech">Beech wood</option>' +
             '</select>' +
             '</td>' +
             '<td>' +
