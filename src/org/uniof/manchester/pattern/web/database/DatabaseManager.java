@@ -748,7 +748,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 		try {
 
 			String query =null;
-			query = "select orderid, name, surname, totalcost, clientId, status from ORDERS where orderid=?";
+			query = "select name, totalcost, clientId, status from ORDERS where orderid=?";
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, orderId);
 			rs = ps.executeQuery();
@@ -761,6 +761,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 				int status = rs.getInt("status");
 
 				ArrayList<Furniture> furnitures = getFurnituresByOrderId(conn, orderId, complete);
+				 
 				ArrayList<Installment> installments = getInstallmentsByOrderId(conn, orderId);
 				orden = new Order( orderId, furnitures,clientId, status, installments, totalcost,name);
 
@@ -830,21 +831,19 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		ArrayList<Installment> installments = new  ArrayList<Installment>();
 		ResultSet rs = null;
-		PreparedStatement ps = null;
+		Statement st = null;
 
 		try {
 
-			String query = 	" select i.installmentid," + 
-					"        t.paytype, " + 
-					"        i.amount " + 
-					"from INSTALLMENTS i,  " + 
-					"(select distinct io.installmentid installmentid, paytype from ORDER_INSTALLMENTS io where io.orderid=1) t " + 
-					"where i.installmentid = t.furnitureId";
-
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, orderId);
-			rs = ps.executeQuery();
-
+			
+			st = conn.createStatement();
+			rs = st.executeQuery(	" select i.installmentid," + 
+									"        i.paytype, " + 
+									"        i.amount " + 
+									"		from INSTALLMENTS i,  " + 
+									"		(select distinct io.installmentid installmentid from ORDER_INSTALLMENTS io where io.orderid="+orderId+") t " + 
+									"		where i.installmentid = t.installmentid");
+	
 			while(rs.next()){
 
 				int installmentId = rs.getInt("installmentID");
@@ -862,7 +861,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 				rs.close();
 			} catch (Exception e) {}
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 		}
 	}
@@ -871,20 +870,20 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		ArrayList<Furniture> furnitures = new  ArrayList<Furniture>();
 		ResultSet rs = null;
-		PreparedStatement ps = null;
-
+		Statement st = null;
+		
+		
 		try {
-
-			String query = "select f.furnitureid," + 
-					"       f.name," + 
-					"       f.numofcuts" + 
-					"from FURNITURE f," + 
-					"(select distinct of.furnitureId furnitureId from ORDER_FURNITURE of where of.orderid=?) t" + 
-					"where f.furnitureId = t.furnitureId";
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, orderId);
-			rs = ps.executeQuery();
-
+		
+			st = conn.createStatement();
+			rs = st.executeQuery(	" select f.furnitureid, " + 
+									"       f.name, " + 
+									"       f.numofcuts " + 
+									"		from FURNITURE f, " + 
+									"		(select distinct of.furnitureId furnitureId from ORDER_FURNITURE of where of.orderid="+orderId+") t " + 
+									"		where f.furnitureId = t.furnitureId ");
+			
+			
 			while(rs.next()){
 
 				int furnitureId = rs.getInt("furnitureId");
@@ -907,7 +906,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 				rs.close();
 			} catch (Exception e) {}
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 		}
 	}
@@ -916,26 +915,25 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		ArrayList<Box> boxes = new  ArrayList<Box>();
 		ResultSet rs = null;
-		PreparedStatement ps = null;
+		Statement st = null;
 
 		try {
 
-			String query = 	"select bc.boxId," + 
-					"       bc.name," + 
-					"       bc.height," + 
-					"       bc.width," + 
-					"       bc.depth," + 
-					"       bc.thickness," + 
-					"       bc.colour," +
-					"       bc.door_colour" +
-					"from BOXES_CATALOGUE bc," + 
-					"(select distinct fb.boxId boxId from FURNITURE_BOXES fb where fb.furnitureId=?) t " + 
-					"where bc.boxId = t.boxId";
-
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, furnitureId);
-			rs = ps.executeQuery();
-
+			
+			st = conn.createStatement();
+			rs = st.executeQuery(	"select bc.boxId," + 
+									"       bc.name," + 
+									"       bc.height," + 
+									"       bc.width," + 
+									"       bc.depth," + 
+									"       bc.thickness," + 
+									"       bc.colour," +
+									"       bc.door_colour" +
+									"		from BOXES_CATALOGUE bc," + 
+									" 		(select distinct fb.boxId boxId from FURNITURE_BOXES fb where fb.furnitureId="+furnitureId+") t " + 
+									"		where bc.boxId = t.boxId");
+			
+			
 			while(rs.next()){
 
 				int boxId = rs.getInt("boxid");
@@ -957,8 +955,8 @@ public class DatabaseManager implements AccessDatabaseManager {
 					box.setPieces(pieces);
 
 					//ExtraParts
-					//ArrayList<ExtraParts> extraparts = getExtraPartsByPieceId(conn, pieceId);
-					//piece.setExtras(extraparts);
+					ArrayList<ExtraParts> extraparts = getExtraPartsByBoxId(conn, boxId);
+					box.setExtras(extraparts);
 
 
 				}	
@@ -974,7 +972,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 				rs.close();
 			} catch (Exception e) {}
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 		}
 	}
@@ -983,24 +981,22 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		ArrayList<Piece> pieces = new  ArrayList<Piece>();
 		ResultSet rs = null;
-		PreparedStatement ps = null;
+		Statement st = null;
 
 		try {
 
-			String query = 	" select pp.pieceid, " + 
-					" 	     pp.height," + 
-					"       pp.width," + 
-					"       pp.isdoor," + 
-					"       pp.thickness," + 
-					"       pp.colour" + 
-					"from PIECES_PROPERTIES pp," + 
-					"(select distinct pf.pieceid pieceid from BOX_PIECES pf where pf.boxId=?) t " + 
-					"where pp.pieceid = t.pieceid";
-
-			ps = conn.prepareStatement(query); 
-			ps.setInt(1, boxId);
-			rs = ps.executeQuery();
-
+			
+			st = conn.createStatement();
+			rs = st.executeQuery(	" select pp.pieceid, " + 
+									" 	     pp.height," + 
+									"       pp.width," + 
+									"       pp.isdoor," + 
+									"       pp.thickness," + 
+									"       pp.colour" + 
+									"		from PIECES_PROPERTIES pp," + 
+									"		(select distinct pf.pieceid pieceid from BOX_PIECES pf where pf.boxId="+boxId+") t " + 
+									"		where pp.pieceid = t.pieceid");
+			
 			while(rs.next()){
 
 				int pieceId = rs.getInt("pieceid");
@@ -1029,7 +1025,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 				rs.close();
 			} catch (Exception e) {}
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 		}
 	}
@@ -1038,22 +1034,23 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		Material material = null;
 		ResultSet rs = null;
-		PreparedStatement ps = null;
+		Statement st = null;
+	
 
 		try {
 
-			String query = 	"select mc.materialid, " + 
-					"       mc.name," + 
-					"       mc.cost," + 
-					"       mc.colour" + 
-					"from MATERIAL_CATALOGUE mc, " + 
-					"(select distinct pm.materialid materialid from PIECE_MATERIAL pm where pm.pieceid=?) t " + 
-					"where mc.materialid = t.materialid";
-
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, pieceId);
-			rs = ps.executeQuery();
-
+			st = conn.createStatement();
+			
+			rs = st.executeQuery(	"select mc.materialid, " + 
+									"       mc.name," + 
+									"       mc.cost," + 
+									"       mc.colour" + 
+									"		from MATERIAL_CATALOGUE mc, " + 
+									"		(select distinct pm.materialid materialid from PIECE_MATERIAL pm where pm.pieceid="+pieceId+") t " + 
+									"		where mc.materialid = t.materialid");
+			
+		
+	
 			while(rs.next())
 			{
 				int materialId = rs.getInt("materialId");
@@ -1070,7 +1067,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 				rs.close();
 			} catch (Exception e) {}
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 		}
 	}
@@ -1079,25 +1076,22 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 		ArrayList<ExtraParts> extraparts = new  ArrayList<ExtraParts>();
 		ResultSet rs = null;
-		PreparedStatement ps = null;
+		Statement st = null;
 
 		try {
-
-			String query = 	" select ec.extrapartid, " + 
-					"       ec.name," + 
-					"       ec.cost," + 
-					"       ec.type" + 
-					"from EXTRAPARTS_CATALOGUE ec, " + 
-					"(select distinct pe.extrapartid extrapartid from BOX_EXTRAPARTS pe where pe.boxid=?) t " + 
-					"where ec.extrapartid = t.extrapartid";
-
-			ps = conn.prepareStatement(query);
-			ps.setInt(1, boxId);
-			rs = ps.executeQuery();
+			
+			st = conn.createStatement();
+			rs = st.executeQuery(	" select ec.extrapartid, " + 
+									"       ec.name," + 
+									"       ec.cost," + 
+									"       ec.type" + 
+									"		from EXTRAPARTS_CATALOGUE ec, " + 
+									"		(select distinct pe.extrapartid extrapartid from BOX_EXTRAPARTS pe where pe.boxid="+boxId+") t " + 
+									"		where ec.extrapartid = t.extrapartid");
 
 			while(rs.next()){
 
-				int extraPartId = rs.getInt("pieceid");
+				int extraPartId = rs.getInt("extrapartid");
 				String name = rs.getString("name");
 				float cost = rs.getFloat("cost");
 				String type = rs.getString("type");
@@ -1113,7 +1107,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 				rs.close();
 			} catch (Exception e) {}
 			try {
-				ps.close();
+				st.close();
 			} catch (Exception e) {}
 		}
 	}
