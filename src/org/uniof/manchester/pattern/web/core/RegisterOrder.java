@@ -79,7 +79,7 @@ public class RegisterOrder extends HttpServlet {
 				BoxFactory factory = new BoxFactory();
 				System.out.println("meta factory");
 				
-				String boxType = "Box with shelf";
+				String boxType = "Box with 4 shelves and a set of 4 drawers";
 				double height = 72.0;
 				double width = 60.0;
 				double depth = 56.0;
@@ -87,7 +87,7 @@ public class RegisterOrder extends HttpServlet {
 				String colour = "wood";
 				String door_colour = "red";
 				String mat = "oksia";
-				String FurType = "K";
+				String FurType = "W";
 				
 				System.out.println("prin");
 				BoxEntity box = factory.createBox(boxType, height, width, depth, thickness, colour, door_colour, extrasK, mat, FurType);
@@ -95,6 +95,7 @@ public class RegisterOrder extends HttpServlet {
 				//Box box = factory.createBoxShelfDrawers(1,"testbox",72.0, 60.0, 56.0, 1.6, "skata", "kafe" ,extrasK,mater, 1,4);
 				
 				System.out.println(box.getName());
+				System.out.println("getName");
 				ArrayList<Piece> pcs = box.getPieces();
 				Iterator<Piece> crunchifyIterator = pcs.iterator();
 				

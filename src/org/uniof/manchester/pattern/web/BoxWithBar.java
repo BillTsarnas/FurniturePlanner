@@ -36,7 +36,7 @@ public class BoxWithBar implements BoxEntity{
 		this.boxId = boxId;
 		this.name = name;
 		
-		this.pieces = pieces;
+		this.pieces = new ArrayList<Piece>();
 		this.extras = extrasW;
 		
 		this.height = height; //y
@@ -80,6 +80,7 @@ public class BoxWithBar implements BoxEntity{
 			pcs.add(shelf);
 		}
 				
+		this.getPieces().addAll(pcs);
 		return pcs;
 		
 	}
@@ -108,6 +109,7 @@ public class BoxWithBar implements BoxEntity{
 		//bar
 		extraParts.add(extrasKW.get(8));
 		
+		this.setExtras(extraParts);
 		return extraParts;
 	}
 	

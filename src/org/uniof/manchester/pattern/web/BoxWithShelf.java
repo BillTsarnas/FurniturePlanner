@@ -38,7 +38,7 @@ public class BoxWithShelf implements BoxEntity{
 		
 		
 		this.extras = extrasK;
-		this.pieces = pieces;
+		this.pieces = new ArrayList<Piece>();
 		this.height = height; //y
 		this.width = width; //x
 		this.depth = depth; //z
@@ -80,6 +80,7 @@ public class BoxWithShelf implements BoxEntity{
 			pcs.add(shelf);
 		}
 				
+		this.getPieces().addAll(pcs);
 		return pcs;
 		
 	}
@@ -90,7 +91,7 @@ public class BoxWithShelf implements BoxEntity{
 		
 		if (width <= 60) {
 			
-			//add 2 handles
+			//add 1 handles
 			extraParts.add(extrasKW.get(8));
 		}
 		else {
@@ -105,6 +106,7 @@ public class BoxWithShelf implements BoxEntity{
 			extraParts.add(extrasKW.get(1));
 		}
 		
+		this.setExtras(extraParts);
 		return extraParts;
 	}
 	

@@ -68,7 +68,6 @@ $(document).ready(function(){
         for(i=0; i<rows.length; i++){
         	cols = rows[i].getElementsByTagName('td');
         	for(j=0; j<cols.length - 1; j++){
-        			var cur_name = cols[j].childNodes[0].getAttribute("name");
 	        		cur_name = cur_name.substr(0,cur_name.length - 1 ) + (i+1);
 	        		cols[j].childNodes[0].setAttribute("name",cur_name);
         	}

@@ -36,7 +36,7 @@ public class BoxWithDrawers implements BoxEntity{
 		this.boxId = boxId;
 		this.name = name;
 		
-		this.pieces = pieces;
+		this.pieces = new ArrayList<Piece>();
 		this.extras = extrasK;
 		
 		this.height = height; //y
@@ -82,6 +82,7 @@ public class BoxWithDrawers implements BoxEntity{
 			pcs.add(drawer_bottom);
 		
 		}
+		this.getPieces().addAll(pcs);
 		return pcs;
 		
 	}
@@ -98,6 +99,7 @@ public class BoxWithDrawers implements BoxEntity{
 			extraParts.add(extrasKW.get(2));
 		}
 		
+		this.setExtras(extraParts);
 		return extraParts;
 	}
 	

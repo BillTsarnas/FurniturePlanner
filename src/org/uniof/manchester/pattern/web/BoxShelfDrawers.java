@@ -36,7 +36,7 @@ public class BoxShelfDrawers implements BoxEntity{
 		this.boxId = boxId;
 		this.name = name;
 		
-		this.pieces = pieces;
+		this.pieces = new ArrayList<Piece>();
 		this.extras = extrasW;
 		
 		this.height = height; //y
@@ -57,6 +57,25 @@ public class BoxShelfDrawers implements BoxEntity{
 		Material front_mat = new Material(0, mat, door_colour, 0.00075f);
 		
 		ArrayList<Piece> pcs = new ArrayList<Piece>();
+		
+		//create door for box in list index 5
+		// -1 is for the "air"
+		if (width <= 60) {
+			Piece front_door = new Piece(height - 0.3, width - 0.3, thickness, door_colour, true, front_mat, 0);
+			pcs.add(front_door);
+		} else {
+			Piece front_door1 = new Piece(height - 0.3, (width - 0.3) / 2, thickness, door_colour, true, front_mat, 0);
+			pcs.add(front_door1);
+			Piece front_door2 = new Piece(height - 0.3, (width - 0.3) / 2, thickness, door_colour, true, front_mat, 0);
+			pcs.add(front_door2);
+
+		}
+
+		// shelves go to the rest of the indices
+		for (int i = 0; i < num_shelves; i++) {
+			Piece shelf = new Piece(depth - 1, width - 2 * thickness, thickness, colour, false, melamine, 0);
+			pcs.add(shelf);
+		}
 		
 		//create inside drawers
 		Piece side1 = new Piece(num_drawers * 20, 51, thickness, colour, false, melamine, 0);
@@ -96,6 +115,7 @@ public class BoxShelfDrawers implements BoxEntity{
 
 		}
 
+		this.getPieces().addAll(pcs);
 		return pcs;	
 	}
 
@@ -105,7 +125,7 @@ public class BoxShelfDrawers implements BoxEntity{
 		
 		if (width <= 60) {
 			
-			//add 2 handles
+			//add 1 handles
 			extraParts.add(extrasKW.get(8));
 		}
 		else {
@@ -125,6 +145,7 @@ public class BoxShelfDrawers implements BoxEntity{
 			extraParts.add(extrasKW.get(1));
 		}
 		
+		this.setExtras(extraParts);
 		return extraParts;
 	}
 	
