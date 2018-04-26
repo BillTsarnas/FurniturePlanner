@@ -1,10 +1,8 @@
 package org.uniof.manchester.pattern.web;
 
 import java.util.ArrayList;
-//import java.util.Iterator;
 
-
-public class Box {
+public class BoxWithShelf implements BoxEntity{
 	
 	private String name;
 	private int boxId;
@@ -31,16 +29,16 @@ public class Box {
 	private String door_colour;
 	
 	
-	public Box(int boxId,String name, double height, double width, double depth, double thickness, String colour, String door_colour, ArrayList<Piece> pieces, ArrayList<ExtraParts> extras) {
-		super();
+	public BoxWithShelf(int boxId,String name, double height, double width, double depth, double thickness, String colour, String door_colour, ArrayList<ExtraParts> extrasK) {
+		//super();
 		
 		//------------------------------------------------------------------------------
 		this.boxId = boxId;
 		this.name = name;
 		
-		this.pieces = pieces;
-		this.extras = extras;
 		
+		this.extras = extrasK;
+		this.pieces = pieces;
 		this.height = height; //y
 		this.width = width; //x
 		this.depth = depth; //z
@@ -48,10 +46,68 @@ public class Box {
 		this.thickness = thickness;
 		this.colour = colour;
 		this.door_colour = door_colour;
-				
+		
 	}
 
-
+	public ArrayList<Piece> calculatePieces(double height, double width, double depth, double thickness, String colour, String door_colour,
+			String mat, int num_shelves, int num_drawers) {
+		
+		Material melamine = new Material(0,"melamine", colour, 0.00075f);
+		
+		Material front_mat = new Material(0, mat, door_colour, 0.00075f);
+		
+		ArrayList<Piece> pcs = new ArrayList<Piece>();
+		
+		//-------------------------------------------------------------------------------
+		
+		//create door for box in list index 5
+		//-1 is for the "air"
+		if (width <= 60) {
+			Piece front_door = new Piece(height-0.3, width-0.3, thickness, door_colour, true, front_mat, 0);
+			pcs.add(front_door);
+		}
+		else {
+			Piece front_door1 = new Piece(height-0.3, (width-0.3)/2, thickness, door_colour, true, front_mat, 0);
+			pcs.add(front_door1);
+			Piece front_door2 = new Piece(height-0.3, (width-0.3)/2, thickness, door_colour, true, front_mat, 0);
+			pcs.add(front_door2);
+			
+		}
+						
+		//shelves go to the rest of the indices
+		for(int i = 0; i < num_shelves; i++) {
+			Piece shelf = new Piece(depth-1, width-2*thickness, thickness, colour, false,melamine,0);
+			pcs.add(shelf);
+		}
+				
+		return pcs;
+		
+	}
+	
+	public ArrayList<ExtraParts> calculateExtraParts(ArrayList<ExtraParts> extrasKW, int num_drawers, int num_shelves) {
+		
+		ArrayList<ExtraParts> extraParts = new ArrayList<ExtraParts>();
+		
+		if (width <= 60) {
+			
+			//add 2 handles
+			extraParts.add(extrasKW.get(8));
+		}
+		else {
+			
+			//add 2 handles
+			extraParts.add(extrasKW.get(8));
+			extraParts.add(extrasKW.get(8));
+		}
+		
+		for (int i=0; i<num_shelves; i++) {
+			//shelf stand
+			extraParts.add(extrasKW.get(1));
+		}
+		
+		return extraParts;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -142,6 +198,16 @@ public class Box {
 	}
 
 
+	public double getBack_thickness() {
+		return back_thickness;
+	}
+
+
+	public void setBack_thickness(double back_thickness) {
+		this.back_thickness = back_thickness;
+	}
+
+
 	public String getColour() {
 		return colour;
 	}
@@ -160,18 +226,6 @@ public class Box {
 	public void setDoor_colour(String door_colour) {
 		this.door_colour = door_colour;
 	}
-
-
-	public double getBack_thickness() {
-		return back_thickness;
-	}
-
-
-	public void setBack_thickness(double back_thickness) {
-		this.back_thickness = back_thickness;
-	}
-	
-	
 
 
 }

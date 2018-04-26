@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Box;
+import org.uniof.manchester.pattern.web.BoxEntity;
 import org.uniof.manchester.pattern.web.BoxFactory;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Material;
@@ -74,9 +75,24 @@ public class RegisterOrder extends HttpServlet {
 				Material mater = new Material(0, "some_material", "skata", 1.5f);
 				
 				//create a new instance of the Helper creation class
+				System.out.println("prin factory");
 				BoxFactory factory = new BoxFactory();
+				System.out.println("meta factory");
 				
-				Box box = factory.createBoxShelfDrawers(1,"testbox",72.0, 60.0, 56.0, 1.6, "skata", "kafe" ,extrasK,mater, 1,4);
+				String boxType = "Box with shelf";
+				double height = 72.0;
+				double width = 60.0;
+				double depth = 56.0;
+				double thickness = 1.6;
+				String colour = "wood";
+				String door_colour = "red";
+				String mat = "oksia";
+				String FurType = "K";
+				
+				System.out.println("prin");
+				BoxEntity box = factory.createBox(boxType, height, width, depth, thickness, colour, door_colour, extrasK, mat, FurType);
+				System.out.println("meta");
+				//Box box = factory.createBoxShelfDrawers(1,"testbox",72.0, 60.0, 56.0, 1.6, "skata", "kafe" ,extrasK,mater, 1,4);
 				
 				System.out.println(box.getName());
 				ArrayList<Piece> pcs = box.getPieces();
