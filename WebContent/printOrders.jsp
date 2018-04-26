@@ -53,7 +53,7 @@
                     <tr>
                         <td width="90%">
                             <label class="radio"><%out.print(curr.getName()+" "+curr.getOrderID()); %>
-                                <input type="radio" checked="checked" name="orderIdName" value="<%out.print(curr.getName());%>,<%out.print(curr.getName()+" "+curr.getOrderID());%>">
+                                <input type="radio" checked="checked" name="orderIdName" value="<%out.print(curr.getOrderID());%>">
                                 <span class="checkround"></span>
                             </label>
                         </td> 

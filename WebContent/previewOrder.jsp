@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"
     import="java.util.Iterator" 
     import="java.util.ArrayList" 
-    import="org.uniof.manchester.pattern.web.Client"%>
+    import="org.uniof.manchester.pattern.web.Order"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="css/previewOrder.css"/>
 <link rel="stylesheet" href="css/googleapis.css"/>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="javascript/jquery-1.12.1.min.js"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
@@ -32,139 +31,70 @@
 
   <h1>Preview of order</h1>
   
-  <h2>For client #Client_id</h2>
   
+  <table class="table table-bordered">
+     <thead>
+        <tr>
+           <td><b>For client</b></td> 
+           <td><b>Order name</b></td> 
+           <td><b>Order status</b></td> 
+        </tr>
+     </thead>
+     <tbody>
+        <tr>
+           <td>Constantinos Lebesis</td> 
+           <td>#1</td> 
+           <td>Active</td> 
+        </tr>
+     </tbody>
+   </table>
         <% 
         //int num_ord = (Integer) request.getAttribute("totOrders");
         for (int i=0; i<= 2; i++) {
         %>
-        
         <details>
-           <summary>OrderId #1- lebes_kitch</summary>
-           
-           <table id="table2" class="table table-bordered">
-                 <thead>
-                    <th scope="row" style="color:green;">Box details</th>
-                    <tr>
-                       <th>Piece type</th>
-                       <th>Height</th>
-                       <th>Width</th>
-                       <th>Depth</th>
-                       <th>Num of pieces</th>
-                       <th>Preview piece (3D)</th>
-                    </tr>
-                 </thead>
-              <tbody>
-                 <tr>
-                    <td>Box type 1</td>
-                    <td>12 cm</td>
-                    <td>13 cm</td>
-                    <td>4 cm</td>
-                    <td>2</td>
-                    <td width="10%">
-                       <a class="Preview3D" title="Preview3D" data-toggle="tooltip" onclick="window.location.href='http://localhost:8080/FurniturePlanner/piece3D.jsp'"><i class="material-icons">&#xE84D;</i></a>
-                                 <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#basicModal">
-                 <b>Register new Order for an existing Client</b>
-              </a>
-
-			  <div class="modal fade" id="basicModal" tabindex="-1" role="dialog"
-				aria-labelledby="basicModal" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title" id="myModalLabel">Search Client by Name</h4>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/SearchClient">
-						<div class="modal-body">
-							<div class="searchModal">
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search..."
-										id="searchClient" name="searchName"> <span class="input-group-btn">
-										<input type="hidden" name = "hid_cln_val" value="0">
-										<!-- button class="btn btn-default" type="button"
-											data-toggle="modal" data-target="#searchClientModal">Go!</button-->
-									</span>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-						   <button type="button" class="btn btn-default"
-								data-dismiss="modal">Cancel</button>
-						   <button type="submit" class="btn btn-success">Next</button>
-						</div>
-						</form>
-					</div>
-				</div>
-			</div>
-                    </td>
-                 </tr>
-                 <tr>
-                    <td>Box type 2</td>
-                    <td>19 cm</td>
-                    <td>11 cm</td>
-                    <td>12 cm</td>
-                    <td>1</td>
-                    <td width="10%"> 
-                       <a class="Preview3D" title="Preview3D" data-toggle="tooltip" onclick="window.location.href='http://localhost:8080/FurniturePlanner/piece3D.jsp'"><i class="material-icons">&#xE84D;</i></a>
-                    </td>
-                 </tr>
-              </tbody>
-           </table>
-
+           <summary>Furniture #Kitchen_1</summary>
+           <% 
+           for (int j=0; j<= 2; j++) {
+           %>
            <table class="table table-bordered">
-              <th scope="row" style="color:green;">Order details</th>
-              <tr>
-                 <th scope="row">Furniture type</th>
-                 <td>Kitchen</td>
-              </tr>
-              <tr>
-                 <th scope="row">Furniture name</th>
-                 <td>lebes_kitch</td>
-              </tr>
-              <tr>
-                 <th scope="row">Order Number</th>
-                 <td>#24892105</td>
-              </tr>
- 
-              <tr>
-                 
-                 <table id="table1" class="table table-bordered">
-                    <thead>
-                    <th scope="row" style="color:green;">Client details</th>
-                       <tr>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>City</th>
-                          <th>Country</th>
-                          <th>Postcode</th>
-                          <th>Phone</th>
-                          <th>Mobile Phone</th>
-                          <th>Email</th>
-                       </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Constantinos</td>
-                            <td>Lebesis</td>
-                            <td>Kalamata</td>
-                            <td>Greece</td>
-                            <td>24100</td>
-                            <td>6976780560</td>
-                            <td>2721091390</td>
-                            <td>lebesis.c@gmail.com</td>
-                        </tr>
-                    </tbody>
-                 </table>
-              </tr>
+              <thead>
+              <th scope="row" style="color:green;">Box with 3 shelves</th>
+                 <tr>
+                    <td><b>Number of Pieces</b></td> 
+                    <td><b>Height</b></td> 
+                    <td><b>Width</b></td> 
+                    <td><b>Depth</b></td> 
+                    <td><b>Material</b></td> 
+                    <td><b>Colour</b></td> 
+                    <td><b>Thickness</b></td> 
+                 </tr>
+              </thead>
+              <tbody>
+              <% 
+              for (int s=0; s<= 2; s++) {
+              %>
+                 <tr>
+                    <td>4</td> 
+                    <td>10.32 cm</td> 
+                    <td>13.45 cm</td> 
+                    <td>12.04 cm</td> 
+                    <td>Wood</td> 
+                    <td>Red</td> 
+                    <td>40.90 cm</td> 
+                 </tr> 
+              </tbody>
+              <%
+              } 
+              %>
            </table>
-           </tr>
+
+           <%
+           } 
+           %>
         </details>
         <%
-           } 
+        } 
         %>
         <div class="price_btn">
            <label>Total price</label>
@@ -178,4 +108,4 @@
 </div>    
 </form>
 </body>
-</html>   
+</html>
