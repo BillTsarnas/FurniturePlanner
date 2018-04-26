@@ -36,6 +36,7 @@
             </div>
             <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterOrder">
 	           
+	           <input type="hidden" id = "num_furniture" name = "num_furniture" value="1">
 	           
 	           <table class="table table-bordered">
 	                <thead>
@@ -64,23 +65,22 @@
 	            
 	            <table id="table1" class="table table-bordered">
 	                <thead>
-	                </thead>
-	                <tbody>
 	                	<tr>
 	                        <td width="40%" id="kind">Kind of Furniture </td>
 	                        <td width="40%" id="furnName">Furniture Name </td>
 	                        
 	                        <td width="20%"> </td>
-	                    </tr> 
+	                    </tr>
+	                </thead>
+	                <tbody> 
 	                    <tr>
-	                        <td width="40%">  
-	                          <select class="form-control" id="selector">
+	                        <td width="40%"><select class="form-control" id="selector" name="fur_kind1">
 	                            <option >Choose furniture...</option>
 	                            <option id="kitchen">Kitchen</option>
 	                            <option id="wardrobe">Wardrobe</option>
 	                          </select>
 	                        </td>
-	                        <td width="50%"><input type="text" class="form-control" id="furnitureName"></td>
+	                        <td width="50%"><input type="text" class="form-control" id="furnitureName" name="fur_name1"></td>
 	                        <td width="10%">
 	                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
 	                        </td>
@@ -91,7 +91,7 @@
 				 <input type="hidden" name = "clientId" value="${userId}">
 				 
 	             <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
-	             <button type="submit" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/orderEditing.jsp'">Save</button>
+	             <button type="submit" class="btn btn-success">Save</button>
              </form>
         </div>
     </div> 
