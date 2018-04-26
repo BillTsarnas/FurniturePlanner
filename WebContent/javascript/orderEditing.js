@@ -36,7 +36,7 @@ $(document).ready(function(){
             '</select>' +
             '</td>' +
             '<td>' +
-            '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>' +
+            '<a class="delete" title="Delete" data-toggle="tooltip" id="'+ this.id +',delete"><i class="material-icons">&#xE872;</i></a>' +
             '</td>' +
             '</tr>';
            
@@ -48,31 +48,28 @@ $(document).ready(function(){
     //Delete row
     $(document).on("click", ".delete", function(){
     	
-        
-        
-        //var id = $(this).parents("td").attr("id");
-        var id = $(this).parent("table").id;
+        var id = this.id.split(",")[0];
+        //var id = $(this).parent("table").attr("id");
         
         console.log("Current id: " + id);
-        console.log("Current number: " + $('#num_boxes'+this.id).val());
-        var num_box = parseInt($('#num_boxes'+this.id).val()) - 1;
-        $('#num_boxes'+this.id).val(num_box);
+        //console.log("Current number: " + $('#num_boxes'+this.id).val());
+        var num_box = parseInt($('#num_boxes'+id).val()) - 1;
+        $('#num_boxes'+id).val(num_box);
         
         $(this).parents("tr").remove();
         $(".tbutton").removeAttr("disabled");
         console.log("Deleted a kitchen: Current number: " + num_box);
         
-        //get all the rows of the table
-        var rows = $('#table'+this.id+' > tbody > tr');
+        //get all the rows of the specific table (ex. #table1)
+        var rows = $('#table'+id+' > tbody > tr');
         
         //for every column (td), change the value of attribute "name" of its child input element
-        //so that the names of the fields have the number of the row attached in the end (e.g box_name1)
+        //so that the names of the fields have the number of the row attached in the end (e.g box_name11)
         for(i=0; i<rows.length; i++){
         	cols = rows[i].getElementsByTagName('td');
         	for(j=0; j<cols.length - 1; j++){
-        		cur_name = cols[j].childNodes[0].getAttribute("name");
-        		cur_name = cur_name.substr(0,cur_name.length - 1 ) + (i+1);
-        		cols[j].childNodes[0].setAttribute("name",cur_name);
+	        		cur_name = cur_name.substr(0,cur_name.length - 1 ) + (i+1);
+	        		cols[j].childNodes[0].setAttribute("name",cur_name);
         	}
         }
         //console.log(rows);
