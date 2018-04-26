@@ -10,7 +10,7 @@ $(document).ready(function(){
         console.log("Added a furniture: Current number: " + num_fur);
         
         var row = '<tr>' +
-            '<td><select class="form-control" id="selector" name="fur_kind'+num_fur+'"> <option selected>Choose furniture...</option> <option id="kitchen">Kitchen</option> <option id="wardrobe">Wardrobe</option> <option id="door">Door</option> <option id="other">Other</option> </select></td>' +
+            '<td><select class="form-control" id="selector" name="fur_kind'+num_fur+'"> <option selected>Choose furniture...</option> <option id="kitchen">Kitchen</option> <option id="wardrobe">Wardrobe</option> </select></td>' +
             '<td><input type="text" id="status" class="form-control" name="fur_name'+num_fur+'"></td>' +
             '<td width="10%">' +
 	           '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>' +
