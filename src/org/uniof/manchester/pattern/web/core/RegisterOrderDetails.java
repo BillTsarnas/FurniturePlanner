@@ -129,12 +129,11 @@ public class RegisterOrderDetails extends HttpServlet {
 					System.out.println("Door colour: " + door_colour);
 					System.out.println("Box material: " + box_material);
 
-					// box gets furniture type?
 					Box box = new Box(1, box_type, box_height, box_width, box_depth, box_thick, melamine_colour,
 							door_colour, new ArrayList<Piece>(), exts);
 					
 					//TODO: change box_type
-					BoxEntity calc_box = factory.createBox("Box with 3 drawers", box_height, box_width, box_depth, box_thick,
+					BoxEntity calc_box = factory.createBox(box_type, box_height, box_width, box_depth, box_thick,
 							melamine_colour, door_colour, exts, mat.getName(), fur_kind);
 					
 					//BoxEntity calc_box = factory.createBox(boxType, height, width, depth, thickness, colour, door_colour, extrasK, mat, fur_kind);
@@ -145,8 +144,8 @@ public class RegisterOrderDetails extends HttpServlet {
 						System.out.println("everything's fine");
 
 					// box gets all the calculated pieces and extras from calc_box
-					// box.setPieces(calc_box.getPieces());
-					// box.setExtras(calc_box.getExtras());
+					 box.setPieces(calc_box.getPieces());
+					 box.setExtras(calc_box.getExtras());
 
 					boxes.add(box);
 
@@ -158,9 +157,15 @@ public class RegisterOrderDetails extends HttpServlet {
 			}
 			
 			// Finally, the Order object is created
+			//TODO: insert amount
 			 Order order = new Order(0, furns, client_id, status_code, installment, Float.valueOf(500), order_name );
+			 
+			 //***************************************************************************************************
+			 /*int orderId = dbManager.setOrder(order, false, conn);
+			 System.out.println(orderId);*/
+			//***************************************************************************************************
 
-			// redirect to the order page
+			// redirect to the Preview Order page
 			// RequestDispatcher requestDispatcher =
 			// request.getRequestDispatcher("/order.jsp");
 			// requestDispatcher.forward(request, response);

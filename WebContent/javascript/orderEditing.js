@@ -10,16 +10,30 @@ $(document).ready(function(){
     	console.log("Button " + this.id + "clicked!");
         var index = $("#table"+this.id+" tbody tr:last-child").index();
         var num_box = parseInt($('#num_boxes'+this.id).val()) + 1;
+        
+        var fur_type =$('#fur_kind'+this.id).val();
+        var dropdown="";
+        if(fur_type == "Kitchen"){
+        	dropdown = '<select class="form-control" id="sel_box" name="sel_box'+this.id+num_box+'" >' +
+            '<option id="box_sh">Box with shelf</option>' +
+            '<option id="box_sh3">Box with 3 drawers</option>' +
+            '<option id="box_sh4">Box with 4 drawers</option>' +
+         '</select>';
+        }
+        
+        if(fur_type == "Wardrobe"){
+        	dropdown = '<select class="form-control" id="sel_box" name="sel_box'+this.id+num_box+'" >' +
+            '<option id="box_sh">Box with bar and 2 shelves</option>' +
+            '<option id="box_sh3">Box with 4 shelves and a set of 4 drawers</option>' +
+         '</select>';
+        }
+        
+        
         $('#num_boxes'+this.id).val(num_box);
-        console.log("Added a kitchen: Current number: " + num_box);
+        console.log("Added a " + fur_type + ": Current number: " + num_box);
         var row = '<tr>' +
             '<td>' +
-            '<select class="form-control" id="sel_box" name="sel_box'+this.id+num_box+'" >' +
-               '<option >Select...</option>' +
-               '<option id="box_sh">Box with shelves</option>' +
-               '<option id="box_sh3">Box 3 drawers</option>' +
-               '<option id="box_sh4">Box 4 drawers</option>' +
-            '</select>' +
+            dropdown +
             '</td>' +
             '<td><input class="form-control" type="text" id="height" name="box_height'+this.id+num_box+'"></td>' +
             '<td><input class="form-control" type="text" id="width" name="box_width'+this.id+num_box+'"></td>' +
