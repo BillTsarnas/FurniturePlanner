@@ -1,6 +1,7 @@
 package org.uniof.manchester.pattern.web;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Utility {
 
@@ -25,6 +26,50 @@ public class Utility {
 		pcs.add(back);
 				
 		return pcs;
+		
+	}
+	
+public void calculateTotalCost(Order order) {
+		
+		//set up furniture list
+		ArrayList<Furniture> furList = order.getFurnitures();
+		//set up furniture iterator
+		Iterator<Furniture> furnIt = furList.iterator();
+		
+		//set up box list
+		ArrayList<Box> boxList = new ArrayList<Box>();
+		//set up box iterator
+		Iterator<Box> boxIt;
+		
+		//set up piece list
+		ArrayList<Piece> pieceList = new ArrayList<Piece>(); 
+		//set up piece iterator
+		Iterator<Piece> pieceIt;
+		
+		float totalCost = 0.0f;
+		
+		while (furnIt.hasNext()) {
+
+			Furniture currF = furnIt.next();
+			boxList = currF.getBoxes();
+ 			boxIt = boxList.iterator();
+ 			
+ 			while (boxIt.hasNext()) {
+
+ 				Box currB = boxIt.next();
+ 				pieceList = currB.getPieces();
+ 				pieceIt = pieceList.iterator();
+ 				
+ 	 			while (boxIt.hasNext()) {
+
+ 	 				Piece currP = pieceIt.next();
+ 	 				totalCost = (float) ((float) currP.getHeight()*currP.getWidth()*currP.getThickness()*currP.getMaterial().getCost());
+ 	 	    	}
+ 	    	}
+ 			
+    	}
+				
+		order.setTotalcost(totalCost);
 		
 	}
 }
