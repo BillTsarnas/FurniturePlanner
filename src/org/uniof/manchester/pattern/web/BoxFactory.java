@@ -12,7 +12,7 @@ public class BoxFactory {
 	    
 		Utility default_pieces  = new Utility();
 		
-		if(FurType.equalsIgnoreCase("K")) {
+		if(FurType.equalsIgnoreCase("Kitchen")) {
 			if (boxType == null) {
 				return null;
 			}
@@ -55,7 +55,7 @@ public class BoxFactory {
 			else
 				return null;
 		}
-		else if (FurType.equalsIgnoreCase("W")) {
+		else if (FurType.equalsIgnoreCase("Wardrobe")) {
 			if (boxType == null) {
 				return null;
 			}

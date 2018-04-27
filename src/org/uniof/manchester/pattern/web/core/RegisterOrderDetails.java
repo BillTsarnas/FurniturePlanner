@@ -65,10 +65,10 @@ public class RegisterOrderDetails extends HttpServlet {
 			mats.add(mat);
 
 			// Add a new temporary extra part. A set of extra parts should be stored in the
-			// database
+			// database --- getExtraParts()
 			ArrayList<ExtraParts> exts = new ArrayList<ExtraParts>();
 			for (int l = 0; l < 15; l++) {
-				ExtraParts ext = new ExtraParts(0, "wheel", 1f, "K");
+				ExtraParts ext = new ExtraParts(0, "wheel", 1f, "Kitchen");
 				exts.add(ext);
 			}
 
@@ -124,7 +124,9 @@ public class RegisterOrderDetails extends HttpServlet {
 							door_colour, new ArrayList<Piece>(), exts);
 
 					BoxEntity calc_box = factory.createBox(box_type, box_height, box_width, box_depth, box_thick,
-							melamine_colour, door_colour, exts, mat.getName(), "K");
+							melamine_colour, door_colour, exts, mat.getName(), fur_kind);
+					
+					//BoxEntity calc_box = factory.createBox(boxType, height, width, depth, thickness, colour, door_colour, extrasK, mat, fur_kind);
 
 					if (calc_box == null)
 						System.out.println("calc_box is null");
