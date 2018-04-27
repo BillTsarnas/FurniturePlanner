@@ -3,6 +3,7 @@ package org.uniof.manchester.pattern.web.core;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -13,8 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Order;
+import org.uniof.manchester.pattern.web.Client;
+import org.uniof.manchester.pattern.web.Furniture;
+import org.uniof.manchester.pattern.web.Box;
 import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
@@ -79,6 +84,36 @@ public class ForwardOrder extends HttpServlet {
 					AccessDatabaseManager dbManager = new DatabaseManager();
 				
 					Order order = dbManager.getOrderByOrderId(conn, orderIdInt, false);
+					Client client = dbManager.getClientById(conn, order.getClientId());
+					
+					//TODO to change orderid=1 because BD has data only for orderid=1
+					ArrayList<Furniture> furniture = dbManager.getFurnituresByOrderId(conn, 1, true);
+					
+					//Boxes
+					Iterator<Furniture> crunchifyIterator = furniture.iterator();
+					ArrayList<Integer> furnIdList = new ArrayList<Integer>();
+					while (crunchifyIterator.hasNext()) {
+						Furniture curr = crunchifyIterator.next();
+						furnIdList.add(curr.getFurnitureId());
+						//System.out.println(curr.getFurnitureId());
+					}
+					
+					//ArrayList<Box> box_list = new ArrayList<Box>();
+					ArrayList<String> box_list = new ArrayList<String>();
+					for (int i=0; i<furniture.size(); i++) {
+						ArrayList<Box> temp_list = dbManager.getBoxesByFurnitureId(conn, furnIdList.get(i), true) ;
+						
+						Iterator<Box> crunchifyIteratorTmp = temp_list.iterator();
+						while (crunchifyIteratorTmp.hasNext()) {
+							Box curr = crunchifyIteratorTmp.next();
+							box_list.add(curr.getName()+","+curr.getBack_thickness()+","+curr.getColour()+","+curr.getDepth()+","+curr.getDoor_colour()+","+curr.getHeight()+","+curr.getWidth());
+						}
+					}
+					    		
+					    		
+					request.setAttribute("box_list",box_list); 		
+					request.setAttribute("furniture",furniture);
+					request.setAttribute("client",client);
 					request.setAttribute("order",order);
 					requestDispatcher = request.getRequestDispatcher("/previewOrder.jsp");
 			}

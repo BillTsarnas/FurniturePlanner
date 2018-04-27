@@ -2,7 +2,10 @@
     pageEncoding="ISO-8859-1"
     import="java.util.Iterator" 
     import="java.util.ArrayList" 
-    import="org.uniof.manchester.pattern.web.Order"%>
+    import="org.uniof.manchester.pattern.web.Furniture"
+    import="org.uniof.manchester.pattern.web.Order"
+    import="org.uniof.manchester.pattern.web.Box"
+    import="org.uniof.manchester.pattern.web.Client"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +33,68 @@
 <form class="form-horizontal" role="form" method="post" action="">
 
   <h1>Preview of order</h1>
-  
+  <% 
+    //Order
+    Order ord_obj = (Order) request.getAttribute("order");
+    
+    //Client
+    Client cln_obj = (Client) request.getAttribute("client");
+    int st = ord_obj.getStatus();
+
+    String status = "";
+    
+    if (st == 1) {
+    	status = "Active";
+    }else {
+    	status = "Offer";
+    }
+    
+    //Furnitures
+    ArrayList<Furniture> frn_obj = (ArrayList<Furniture>) request.getAttribute("furniture");
+	System.out.println("Furnitures:");
+	Iterator<Furniture> crunchifyIterator = frn_obj.iterator();
+	ArrayList<String> furnIdList = new ArrayList<String>();
+	while (crunchifyIterator.hasNext()) {
+		Furniture curr = crunchifyIterator.next();
+		furnIdList.add(curr.getName());
+		//System.out.println(curr.getName());
+	}
+	
+	//Boxes
+	ArrayList<String> box_obj = (ArrayList<String>) request.getAttribute("box_list");
+	Iterator<String> crunchifyIteratorBox = box_obj.iterator();
+	//Araaylists of each value
+	//+curr.getColour()+" "+curr.getDepth()+" "+curr.getDoor_colour()+" "+curr.getHeight()+" "+curr.getWidth());
+	ArrayList<String> boxNameList = new ArrayList<String>();
+	ArrayList<String> thicknessList = new ArrayList<String>();
+	ArrayList<String> colourList = new ArrayList<String>();
+	ArrayList<String> depthList = new ArrayList<String>();
+	ArrayList<String> door_colourList = new ArrayList<String>();
+	ArrayList<String> heightList = new ArrayList<String>();
+	ArrayList<String> widthList = new ArrayList<String>();
+	while (crunchifyIteratorBox.hasNext()) {
+		String curr = crunchifyIteratorBox.next();
+		String[] to_split = curr.split(",");
+		boxNameList.add(to_split[0]);
+		thicknessList.add(to_split[1]);
+		colourList.add(to_split[2]);
+		depthList.add(to_split[3]);
+		door_colourList.add(to_split[4]);
+		heightList.add(to_split[5]);
+		widthList.add(to_split[6]);	
+		/*
+		System.out.println("boxNameList"+boxNameList + "size="+boxNameList.size());
+		System.out.println("thicknessList"+thicknessList + "size="+thicknessList.size());
+		System.out.println("colourList"+colourList + "size="+colourList.size());
+		System.out.println("depthList"+depthList + "size="+depthList.size());
+		System.out.println("door_colourList"+door_colourList + "size="+door_colourList.size());
+		System.out.println("heightList"+heightList + "size="+heightList.size());
+		System.out.println("widthList"+widthList + "size="+widthList.size());*/
+		//System.out.println(to_split[0]);
+	}
+	
+  %>
+                
   <!-- client details table -->
   <table class="table table-bordered">
      <thead>
@@ -43,13 +107,15 @@
      </thead>
      <tbody>
         <tr>
-           <td>Constantinos Lebesis</td> 
-           <td>#1</td> 
-           <td>Active</td>   
+           <td><%out.print(cln_obj.getName()); %> <%out.print(cln_obj.getSurname()); %></td> 
+           <td><%out.print(ord_obj.getName()); %></td> 
+           <td><%=status%></td>   
         </tr>
      </tbody>
    </table>
+   <%
    
+   %>
    <!-- installments table -->
    <table class="table table-bordered">
      <thead>
@@ -75,16 +141,16 @@
      </tbody>
    </table>
         <% 
-        for (int i=0; i<= 2; i++) {
+        for (int i=0; i< furnIdList.size(); i++) {
         %>
         <details>
-           <summary>Furniture #Kitchen_1</summary>
+           <summary>Furniture #<%out.print(furnIdList.get(i)); %></summary>
            <% 
-           for (int j=0; j<= 2; j++) {
+           for (int j=0; j< boxNameList.size(); j++) {
            %>
            <table class="table table-bordered">
               <thead>
-              <th scope="row" style="color:green;">Box with 3 shelves</th>
+              <th scope="row" style="color:green;"><%out.print(boxNameList.get(j)); %></th>
                  <tr>
                     <td><b>Number of Pieces</b></td> 
                     <td><b>Height</b></td> 
@@ -97,20 +163,20 @@
               </thead>
               <tbody>
               <% 
-              for (int s=0; s<= 2; s++) {
+              //for (int s=0; s<= 2; s++) {
               %>
                  <tr>
                     <td>4</td> 
-                    <td>10.32 cm</td> 
-                    <td>13.45 cm</td> 
-                    <td>12.04 cm</td> 
-                    <td>Wood</td> 
-                    <td>Red</td> 
-                    <td>40.90 cm</td> 
+                    <td><%out.print(heightList.get(j)); %></td> 
+                    <td><%out.print(widthList.get(j)); %></td> 
+                    <td><%out.print(depthList.get(j)); %></td> 
+                    <td><%out.print(colourList.get(j)); %></td> 
+                    <td>TEST</td> 
+                    <td><%out.print(thicknessList.get(j)); %></td> 
                  </tr> 
               </tbody>
               <%
-              } 
+              //} 
               %>
            </table>
 
@@ -128,7 +194,7 @@
         
         <button type="submit" class="btn btn-danger" style="float: left;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
         <button type="button" class="btn btn-success" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Next</button>
-        <button type="submit" class="btn btn-primary" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/installments.jsp'">Set installments</button>
+        <button type="submit" class="btn btn-primary" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/installments.jsp'">Set new installment</button>
         
            
 </div>    
