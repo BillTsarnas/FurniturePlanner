@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -65,9 +66,10 @@ public class RegisterOrder extends HttpServlet {
 				
 				//create a stub box, testing purposes
 				
-				ArrayList<ExtraParts> extrasK = new ArrayList<ExtraParts>();
+				ArrayList<String> kind = new ArrayList<String>();
+				ArrayList<String> names = new ArrayList<String>();
 				
-				for (int k=0; k<10; k++) {
+				/*for (int k=0; k<10; k++) {
 					ExtraParts ext = new ExtraParts(0,"tmp_extrapart", 2.68f, "K");
 					extrasK.add(ext);
 				}
@@ -107,13 +109,15 @@ public class RegisterOrder extends HttpServlet {
             		System.out.println("--end of piece--");
             	}
             	System.out.println(pcs.size());
-				
+				*/
 				//get the client's ID
 				String clientId = (String) request.getParameter("clientId");
 				
 				//get Order's name
 				String order_name = (String) request.getParameter("order_name");
-				
+				String num_furn = (String) request.getParameter("num_furniture");
+				int num_fur = Integer.parseInt(num_furn);
+				System.out.println("ta phra");
 				//get Order's status: 0 for Active, 1 for offer, 2 for on progress, 3 for declined
 				int status_code =-1;
 				String order_status = (String) request.getParameter("order_status");
@@ -122,19 +126,37 @@ public class RegisterOrder extends HttpServlet {
 				else if (order_status.equals("On Progress")) status_code = 2;
 				else if (order_status.equals("Declined")) status_code = 3;
 				
+				for (int i=0; i<num_fur; i++) {
+					
+					String fur_kind = (String) request.getParameter("fur_kind"+(i+1));
+					String fur_name = (String) request.getParameter("fur_name"+(i+1));
+					
+					kind.add(fur_kind);
+					names.add(fur_name);
+					System.out.println("add"+i);
+				}
+				//System.out.println(kind.size());
 				//create new Order and save it to the database
 				//stub order
-				//Order order = new Order(); order.setClientId(Integer.valueOf(clientId));
+				request.setAttribute("fur_kinds", kind);
+				request.setAttribute("fur_names", names);
 				
-				Order order = new Order(0, null, Integer.valueOf(clientId), status_code, null, 0, order_name );
+				//Order order = new Order(0, null, Integer.valueOf(clientId), status_code, null, 0, order_name );
+				//System.out.println("create order");
+				request.setAttribute("order_name", order_name);
+				request.setAttribute("clientId", clientId);
+				request.setAttribute("status_code", status_code);
+				request.setAttribute("num_furniture", num_fur);
+				
 				//dbManager.setOrder(order, false, conn);
+				//System.out.println("set order");
+				//request.setAttribute("order", order);
+				//System.out.println("setAttribute");
 				
 				//redirect to the order page
-				//RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");
-				//requestDispatcher.forward(request, response);
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/orderEditing.jsp");
+				requestDispatcher.forward(request, response);
 			
-			
-				
 		}catch (SQLException e)
 		{
 			LOG.error("Problemas en la generaci�n del excel de calificaciones desde SQL " +  e);

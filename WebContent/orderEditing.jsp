@@ -32,15 +32,22 @@
       <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterKitchen">
       
       <% 
-        //int num_ord = (Integer) request.getAttribute("totOrders");
-        int num_furniture = 3;
+        
+        int num_ord = (Integer) request.getAttribute("num_furniture");
+      
+      	ArrayList<String> kind_list = (ArrayList<String>) request.getAttribute("fur_kinds");
+        int num_furniture = kind_list.size();
+        
+        ArrayList<String> name_list = (ArrayList<String>) request.getAttribute("fur_names");
+        
+        
         for (int i=0; i< num_furniture; i++) {
         	String tabName = "table"+(i+1);
         	String tbutton = "tbutton"+i;
       %>
   
       <details>
-        <summary>Kitchen - lebes_kitch</summary>
+        <summary><%out.print(name_list.get(i));%></summary>
         <div class="table-wrapper">
         <button type="button" class="tbutton" id="<%=i+1%>" ><i class="fa fa-plus"></i> Add new box</button>
                 
