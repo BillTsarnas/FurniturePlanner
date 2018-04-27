@@ -26,8 +26,10 @@
 <body>
    
 <div class="container">
-      <h1>Details and summary of the order</h1> 
-      <h2>For client #Client_id</h2>
+	  <% String order_name =  (String) request.getAttribute("order_name"); %>
+	  <% String client_id =  (String) request.getAttribute("clientId"); %>
+      <h1>Order details</h1> 
+      <h2>For client #<%out.print(client_id);%>, Order Name: <%out.print(order_name);%> </h2>
       
       <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterKitchen">
       
@@ -75,7 +77,7 @@
                             <td width="10%"><input class="form-control" type="text" id="height" name="box_height<%=i+1%>1"></td>
                             <td width="10%"><input class="form-control" type="text" id="width" name="box_width<%=i+1%>1"></td>
                             <td width="10%"><input class="form-control" type="text" id="depth" name="box_depth<%=i+1%>1"></td>
-                            <td width="10%"><input class="form-control" type="text" id="thik" name="box_thick<%=i+1%>1" value="16"></td>
+                            <td width="10%"><input class="form-control" type="text" id="thik" name="box_thick<%=i+1%>1" value="1.6"></td>
                             <td width="20%"><input type="text" class="form-control" id="melMat" name="mel<%=i+1%>1"></td><td width="10%"><select class="form-control" id="box_colour<%=i+1%>1" name="box_colour<%=i+1%>1" >
 	                               <option id="wood">Wood</option>
 	                               <option id="brown">Brown</option>
@@ -100,6 +102,8 @@
       </details>
       
       <input type="hidden" id = "num_boxes<%=i+1%>" name = "num_boxes<%=i+1%>" value="1">
+      <input type="hidden" id = "fur_kind<%=i+1%>" name = "fur_kind<%=i+1%>" value="<%out.print(kind_list.get(i));%>">
+      <input type="hidden" id = "fur_name<%=i+1%>" name = "fur_name<%=i+1%>" value="<%out.print(name_list.get(i));%>">
       
           <%
            } 

@@ -117,7 +117,7 @@ public class RegisterOrder extends HttpServlet {
 				String order_name = (String) request.getParameter("order_name");
 				String num_furn = (String) request.getParameter("num_furniture");
 				int num_fur = Integer.parseInt(num_furn);
-				System.out.println("ta phra");
+				
 				//get Order's status: 0 for Active, 1 for offer, 2 for on progress, 3 for declined
 				int status_code =-1;
 				String order_status = (String) request.getParameter("order_status");
@@ -135,7 +135,7 @@ public class RegisterOrder extends HttpServlet {
 					names.add(fur_name);
 					System.out.println("add"+i);
 				}
-				//System.out.println(kind.size());
+				
 				//create new Order and save it to the database
 				//stub order
 				request.setAttribute("fur_kinds", kind);

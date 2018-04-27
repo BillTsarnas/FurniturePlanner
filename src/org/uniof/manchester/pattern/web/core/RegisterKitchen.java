@@ -17,6 +17,8 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Box;
+import org.uniof.manchester.pattern.web.BoxEntity;
+import org.uniof.manchester.pattern.web.BoxFactory;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Material;
@@ -68,60 +70,77 @@ public class RegisterKitchen extends HttpServlet {
 				ExtraParts ext = new ExtraParts(0,"wheel",1f, "K");
 				exts.add(ext);
 				
-				//firstly get the number of boxes
-				Integer num_boxes = Integer.valueOf(request.getParameter("num_boxes"));
+				//----------------------------------------------------------------------------------------
 				
-				//create a list of Boxes
+				//firstly, get the number of furniture
+				
+				Integer num_furns = Integer.valueOf(request.getParameter("num_furniture"));
+				
+				
+			//TODO: Materials and Extraparts should be fetched from DB	
+			BoxFactory factory = new BoxFactory();	
+			
+			
+			ArrayList<Furniture> furns = new ArrayList<Furniture>();
+			
+			
+			for (int i = 1; i <= num_furns; i++) {
+
+				// for each furniture, get the number of boxes
+				Integer num_boxes = Integer.valueOf(request.getParameter("num_boxes" + i));
+				String fur_name = (String) request.getParameter("fur_name" + i);
+				String fur_kind = (String) request.getParameter("fur_kind" + i);
+				
 				ArrayList<Box> boxes = new ArrayList<Box>();
 				
-				for(int i=1; i<=num_boxes; i++) {
+				//create a new Furniture and add it to the order list
+				Furniture furn = new Furniture(fur_name, 0, 0, boxes);
+
+				for (int j = 1; j <= num_boxes; j++) {
+
+					String box_type = (String) request.getParameter("sel_box" + i + j);
+					double box_height = Double.valueOf(request.getParameter("box_height" + i + j));
+					double box_width = Double.valueOf(request.getParameter("box_width" + i + j));
+					double box_depth = Double.valueOf(request.getParameter("box_depth" + i + j));
+					double box_thick = Double.valueOf(request.getParameter("box_thick" + i + j));
+					String melamine_colour = (String) request.getParameter("mel" + i + j);
+					String door_colour = (String) request.getParameter("box_colour" + i + j);
+					String box_material = (String) request.getParameter("material" + i + j);
 					
-					//Create a new Box with default thickness 16
-					String box_name = (String) request.getParameter("box_name"+i);
-					Integer box_height = Integer.valueOf(request.getParameter("box_height"+i));
-					Integer box_width = Integer.valueOf(request.getParameter("box_width"+i));
-					Integer box_depth = Integer.valueOf(request.getParameter("box_depth"+i));
-					Integer box_num_shelves = Integer.valueOf(request.getParameter("box_num_shelves"+i));
-					String box_colour = (String) request.getParameter("box_colour"+i);
+					//box gets furniture type?
+					Box box = new Box(1, box_type, box_height, box_width, box_depth, box_thick, melamine_colour, door_colour,
+							new ArrayList<Piece>(), exts);
 					
+					BoxEntity calc_box = factory.createBox(box_type, box_height, box_width, box_depth, box_thick,
+							melamine_colour, door_colour, exts, mat.getName(), "K");
 					
-					//TODO: get the list of extraparts from the database, depending on Kitchen/Wardrobe!!
+					//Num shelves, drawers???
+					/*calc_box.calculatePieces(box_height, box_width, box_depth, box_thick, melamine_colour, 
+							door_colour, mat.getName(), 4, 4);
 					
-					ArrayList<ExtraParts> extrasK = new ArrayList<ExtraParts>();
+					calc_box.calculateExtraParts(exts, 4, 4);
 					
-					for (int k=0; k<10; k++) {
-						ext = new ExtraParts(0,"tmp_extrapart", 2.68f, "K");
-						extrasK.add(ext);
-					}
+					//box gets all the calculated pieces and extras from calc_box
+					//box.setPieces(calc_box.getPieces());
+					//box.setExtras(calc_box.getExtras());*/
 					
-					Material mater = new Material(0, "some_material", box_colour, 1.5f);
-					
-					/*Box box = new BoxOneShelf(1,box_name,box_height, box_width, box_depth, 16, box_colour, "skata",extrasK,mater);
-					System.out.println(box.getName());
-					ArrayList<Piece> pcs = box.getPieces();
-					Iterator<Piece> crunchifyIterator = pcs.iterator();
-					
-                	while (crunchifyIterator.hasNext()) {
-                		Piece curr = crunchifyIterator.next();
-                		System.out.println(curr.getHeight());
-                		System.out.println(curr.getWidth());
-                		System.out.println(curr.getThickness());
-                		System.out.println("--end of piece--");
-                	}*/
-					
-					//boxes.add(box);
+					boxes.add(box);
+
 				}
 				
-				//create new Furniture and save it to the database
-				//Furniture furn = new Furniture(0, boxes,exts,mats);
-				//dbManager.setFurniture(furn, conn);
+				furn.setBoxes(boxes);
+				furns.add(furn);
+
+			}
 				
-				//redirect to the order page
-				//RequestDispatcher requestDispatcher = request.getRequestDispatcher("/order.jsp");
-				//requestDispatcher.forward(request, response);
+			//Finally, the Order object is created
+			//Order order = new Order(0, null, Integer.valueOf(clientId), status_code, null, 0, order_name );
 			
+			// redirect to the order page
+			// RequestDispatcher requestDispatcher =
+			// request.getRequestDispatcher("/order.jsp");
+			// requestDispatcher.forward(request, response);
 			
-				
 		}catch (SQLException e)
 		{
 			LOG.error("Problemas en la generaci�n del excel de calificaciones desde SQL " +  e);
