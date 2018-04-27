@@ -21,7 +21,9 @@ import org.uniof.manchester.pattern.web.BoxEntity;
 import org.uniof.manchester.pattern.web.BoxFactory;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
+import org.uniof.manchester.pattern.web.Installment;
 import org.uniof.manchester.pattern.web.Material;
+import org.uniof.manchester.pattern.web.Order;
 import org.uniof.manchester.pattern.web.Piece;
 import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
@@ -71,6 +73,11 @@ public class RegisterOrderDetails extends HttpServlet {
 				ExtraParts ext = new ExtraParts(0, "wheel", 1f, "Kitchen");
 				exts.add(ext);
 			}
+			
+			//Add a new temporary installment. 
+			ArrayList<Installment> installment = new ArrayList<Installment>();
+			Installment inst = new Installment(0, "polles doseis", 500.0);
+			installment.add(inst);
 
 			// ----------------------------------------------------------------------------------------
 
@@ -100,7 +107,8 @@ public class RegisterOrderDetails extends HttpServlet {
 				Furniture furn = new Furniture(fur_name, 0, 0, boxes);
 
 				for (int j = 1; j <= num_boxes; j++) {
-
+					System.out.println(">>>>>>>>Box " + j);
+					
 					String box_type = (String) request.getParameter("sel_box" + i + j);
 					double box_height = Double.valueOf(request.getParameter("box_height" + i + j));
 					double box_width = Double.valueOf(request.getParameter("box_width" + i + j));
@@ -109,7 +117,7 @@ public class RegisterOrderDetails extends HttpServlet {
 					String melamine_colour = (String) request.getParameter("mel" + i + j);
 					String door_colour = (String) request.getParameter("box_colour" + i + j);
 					String box_material = (String) request.getParameter("material" + i + j);
-
+					
 					System.out.println("Box Type: " + box_type);
 					System.out.println("Box height: " + box_height);
 					System.out.println("Box width: " + box_width);
@@ -122,22 +130,15 @@ public class RegisterOrderDetails extends HttpServlet {
 					// box gets furniture type?
 					Box box = new Box(1, box_type, box_height, box_width, box_depth, box_thick, melamine_colour,
 							door_colour, new ArrayList<Piece>(), exts);
-
-					BoxEntity calc_box = factory.createBox(box_type, box_height, box_width, box_depth, box_thick,
+					
+					//TODO: change box_type
+					BoxEntity calc_box = factory.createBox("Box with 3 drawers", box_height, box_width, box_depth, box_thick,
 							melamine_colour, door_colour, exts, mat.getName(), fur_kind);
 					
 					//BoxEntity calc_box = factory.createBox(boxType, height, width, depth, thickness, colour, door_colour, extrasK, mat, fur_kind);
 
 					if (calc_box == null)
 						System.out.println("calc_box is null");
-
-					// Num shelves, drawers???
-					/*
-					 * calc_box.calculatePieces(box_height, box_width, box_depth, box_thick,
-					 * melamine_colour, door_colour, mat.getName(), 4, 4);
-					 * 
-					 * calc_box.calculateExtraParts(exts, 4, 4);
-					 */
 
 					// box gets all the calculated pieces and extras from calc_box
 					// box.setPieces(calc_box.getPieces());
@@ -151,10 +152,9 @@ public class RegisterOrderDetails extends HttpServlet {
 				furns.add(furn);
 
 			}
-
+			
 			// Finally, the Order object is created
-			// Order order = new Order(0, null, Integer.valueOf(clientId), status_code,
-			// null, 0, order_name );
+			 Order order = new Order(0, furns, 0, 1, installment, Float.valueOf(0), "asda" );
 
 			// redirect to the order page
 			// RequestDispatcher requestDispatcher =

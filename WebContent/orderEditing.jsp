@@ -31,7 +31,7 @@
       <h1>Order details</h1> 
       <h2>For client #<%out.print(client_id);%>, Order Name: <%out.print(order_name);%> </h2>
       
-      <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterKitchen">
+      <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterOrderDetails">
       
       <% 
         

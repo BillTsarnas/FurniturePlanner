@@ -24,7 +24,7 @@ $(document).ready(function(){
             '<td><input class="form-control" type="text" id="height" name="box_height'+this.id+num_box+'"></td>' +
             '<td><input class="form-control" type="text" id="width" name="box_width'+this.id+num_box+'"></td>' +
             '<td><input class="form-control" type="text" id="depth" name="box_depth'+this.id+num_box+'"></td>' +
-            '<td><input class="form-control" type="text" id="thik" name="box_thik'+this.id+num_box+'" value="1.6"></td>' +
+            '<td><input class="form-control" type="text" id="thik" name="box_thick'+this.id+num_box+'" value="1.6"></td>' +
             '<td><input type="text" class="form-control" id="melMat" name="mel'+this.id+num_box+'"></td>' +
             '<td>' +
             '<select class="form-control" id="box_colour" name="box_colour'+this.id+num_box+'" >' +
