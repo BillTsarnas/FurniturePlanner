@@ -80,7 +80,9 @@ public class RegisterOrderDetails extends HttpServlet {
 			installment.add(inst);
 
 			// ----------------------------------------------------------------------------------------
-
+			String order_name = (String) request.getParameter("order_name");
+			Integer status_code = Integer.valueOf(request.getParameter("status_code"));
+			Integer client_id = Integer.valueOf(request.getParameter("client_id"));
 			// firstly, get the number of furniture
 
 			Integer num_furns = Integer.valueOf(request.getParameter("num_furniture"));
@@ -139,6 +141,8 @@ public class RegisterOrderDetails extends HttpServlet {
 
 					if (calc_box == null)
 						System.out.println("calc_box is null");
+					else
+						System.out.println("everything's fine");
 
 					// box gets all the calculated pieces and extras from calc_box
 					// box.setPieces(calc_box.getPieces());
@@ -154,7 +158,7 @@ public class RegisterOrderDetails extends HttpServlet {
 			}
 			
 			// Finally, the Order object is created
-			 Order order = new Order(0, furns, 0, 1, installment, Float.valueOf(0), "asda" );
+			 Order order = new Order(0, furns, client_id, status_code, installment, Float.valueOf(500), order_name );
 
 			// redirect to the order page
 			// RequestDispatcher requestDispatcher =

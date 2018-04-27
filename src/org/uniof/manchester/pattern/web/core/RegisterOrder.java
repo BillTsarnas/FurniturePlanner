@@ -142,11 +142,15 @@ public class RegisterOrder extends HttpServlet {
 				request.setAttribute("fur_names", names);
 				
 				//Order order = new Order(0, null, Integer.valueOf(clientId), status_code, null, 0, order_name );
-				//System.out.println("create order");
+				//System.out.println("before set1");
 				request.setAttribute("order_name", order_name);
+				//System.out.println("before set2");
 				request.setAttribute("clientId", clientId);
+				//System.out.println("before set3");
 				request.setAttribute("status_code", status_code);
+				//System.out.println("before set4");
 				request.setAttribute("num_furniture", num_fur);
+				//System.out.println("end");
 				
 				//dbManager.setOrder(order, false, conn);
 				//System.out.println("set order");

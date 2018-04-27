@@ -28,6 +28,7 @@
 <div class="container">
 	  <% String order_name =  (String) request.getAttribute("order_name"); %>
 	  <% String client_id =  (String) request.getAttribute("clientId"); %>
+	  <% String status_code =  String.valueOf(request.getAttribute("status_code")); %>
       <h1>Order details</h1> 
       <h2>For client #<%out.print(client_id);%>, Order Name: <%out.print(order_name);%> </h2>
       
@@ -110,7 +111,10 @@
           %>
           
         
-      <input type="hidden" id = "num_furnitures" name = "num_furniture" value="<%=num_furniture%>">   
+      <input type="hidden" id = "num_furnitures" name = "num_furniture" value="<%=num_furniture%>">
+      <input type="hidden" id = "order_name" name = "order_name" value="<%=order_name%>">    
+      <input type="hidden" id = "status_code" name = "status_code" value="<%=status_code%>">
+      <input type="hidden" id = "client_id" name = "client_id" value="<%=client_id%>">
           
       <button type="submit" class="btn btn-success" style="float: right;">Save</button>
       <button type="button" class="btn btn-danger" style="float: right;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
