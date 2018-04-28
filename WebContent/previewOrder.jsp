@@ -184,6 +184,9 @@
         %>
 		<details> 
 			<summary>Furniture #<%out.print(currF.getName()); %></summary> 
+			<table>
+			<thead></thead>
+			<tbody><tr><td>
 		<% 
            while (boxIt.hasNext()) {
         	   System.out.println("enter box while");
@@ -296,6 +299,10 @@
 			<%
             } 
             %> 
+            </td>
+            </tr>
+			</tbody>
+            </table>
            </details>
 
 		<%
