@@ -63,22 +63,27 @@ public class RegisterOrderDetails extends HttpServlet {
 
 			// Add a new temporary material. A set of materials should be stored in the
 			// database
-			ArrayList<Material> mats = new ArrayList<Material>();
-			Material mat = new Material(0, "melamine", "black", 5);
-			mats.add(mat);
+			/*
+			 * ArrayList<Material> mats = new ArrayList<Material>(); Material = new
+			 * Material(0, "melamine", "black", 5); mats.add(mat);
+			 */
 
 			// Add a new temporary extra part. A set of extra parts should be stored in the
 			// database --- getExtraParts()
 			ArrayList<ExtraParts> exts = new ArrayList<ExtraParts>();
-			for (int l = 0; l < 15; l++) {
-				ExtraParts ext = new ExtraParts(0, "wheel", 1f, "Kitchen");
-				exts.add(ext);
-			}
-			
-			//Add a new temporary installment. 
-			ArrayList<Installment> installment = new ArrayList<Installment>();
-			Installment inst = new Installment(0, "polles doseis", 500.0);
-			installment.add(inst);
+			/*
+			 * for (int l = 0; l < 15; l++) { ExtraParts ext = new ExtraParts(0, "wheel",
+			 * 1f, "Kitchen"); exts.add(ext); }
+			 */
+
+			// ArrayList<ExtraParts> ext = getExtraPartsByType(conn, type);
+
+			// Add a new temporary installment.
+			/*
+			 * ArrayList<Installment> installment = new ArrayList<Installment>();
+			 * Installment inst = new Installment(0, "polles doseis", 500.0);
+			 * installment.add(inst);
+			 */
 
 			// ----------------------------------------------------------------------------------------
 			String order_name = (String) request.getParameter("order_name");
@@ -103,7 +108,8 @@ public class RegisterOrderDetails extends HttpServlet {
 				String fur_kind = (String) request.getParameter("fur_kind" + i);
 
 				System.out.println(">>>Num Boxes " + num_boxes);
-
+				exts = dbManager.getExtraPartsByType(conn, fur_kind);
+				System.out.println("pairnw extra parts");
 				ArrayList<Box> boxes = new ArrayList<Box>();
 
 				// create a new Furniture and add it to the order list
@@ -111,7 +117,7 @@ public class RegisterOrderDetails extends HttpServlet {
 
 				for (int j = 1; j <= num_boxes; j++) {
 					System.out.println(">>>>>>>>Box " + j);
-					
+
 					String box_type = (String) request.getParameter("sel_box" + i + j);
 					double box_height = Double.valueOf(request.getParameter("box_height" + i + j));
 					double box_width = Double.valueOf(request.getParameter("box_width" + i + j));
@@ -120,7 +126,9 @@ public class RegisterOrderDetails extends HttpServlet {
 					String melamine_colour = (String) request.getParameter("mel" + i + j);
 					String door_colour = (String) request.getParameter("box_colour" + i + j);
 					String box_material = (String) request.getParameter("material" + i + j);
-					
+
+					// mat = new Material(0, box_material, door_colour, 5);
+
 					System.out.println("Box Type: " + box_type);
 					System.out.println("Box height: " + box_height);
 					System.out.println("Box width: " + box_width);
@@ -132,12 +140,13 @@ public class RegisterOrderDetails extends HttpServlet {
 
 					Box box = new Box(1, box_type, box_height, box_width, box_depth, box_thick, melamine_colour,
 							door_colour, new ArrayList<Piece>(), exts);
-					
-					//TODO: change box_type
+
+					// TODO: change box_type
 					BoxEntity calc_box = factory.createBox(box_type, box_height, box_width, box_depth, box_thick,
-							melamine_colour, door_colour, exts, mat.getName(), fur_kind);
-					
-					//BoxEntity calc_box = factory.createBox(boxType, height, width, depth, thickness, colour, door_colour, extrasK, mat, fur_kind);
+							melamine_colour, door_colour, exts, box_material, fur_kind);
+
+					// BoxEntity calc_box = factory.createBox(boxType, height, width, depth,
+					// thickness, colour, door_colour, extrasK, mat, fur_kind);
 
 					if (calc_box == null)
 						System.out.println("calc_box is null");
@@ -145,8 +154,8 @@ public class RegisterOrderDetails extends HttpServlet {
 						System.out.println("everything's fine");
 
 					// box gets all the calculated pieces and extras from calc_box
-					 box.setPieces(calc_box.getPieces());
-					 box.setExtras(calc_box.getExtras());
+					box.setPieces(calc_box.getPieces());
+					box.setExtras(calc_box.getExtras());
 
 					boxes.add(box);
 
@@ -156,17 +165,20 @@ public class RegisterOrderDetails extends HttpServlet {
 				furns.add(furn);
 
 			}
-			
+
 			// Finally, the Order object is created
-			//TODO: insert amount
-			 Order order = new Order(0, furns, client_id, status_code, installment, Float.valueOf(500), order_name );
-			 Utility costCalculator  = new Utility();
-			 costCalculator.calculateTotalCost(order);
-			 System.out.println("Total order cost" + order.getTotalcost());
-			 //***************************************************************************************************
-			 /*int orderId = dbManager.setOrder(order, false, conn);
-			 System.out.println(orderId);*/
-			//***************************************************************************************************
+			// TODO: insert amount
+			Order order = new Order(0, furns, client_id, status_code, new ArrayList<Installment>(), Float.valueOf(500),
+					order_name);
+			Utility costCalculator = new Utility();
+			costCalculator.calculateTotalCost(order);
+			System.out.println("Total order cost" + order.getTotalcost());
+			// ***************************************************************************************************
+			/*
+			 * int orderId = dbManager.setOrder(order, false, conn);
+			 * System.out.println(orderId);
+			 */
+			// ***************************************************************************************************
 
 			// redirect to the Preview Order page
 			// RequestDispatcher requestDispatcher =
