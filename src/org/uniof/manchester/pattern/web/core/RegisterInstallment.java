@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+import org.uniof.manchester.pattern.web.Client;
+import org.uniof.manchester.pattern.web.Installment;
+import org.uniof.manchester.pattern.web.Order;
 import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
@@ -52,27 +55,31 @@ public class RegisterInstallment extends HttpServlet {
 		// TODO Auto-generated method stub
 		String amount = (String) request.getParameter("amount");
 		String payMethod = (String) request.getParameter("payMethod");
-
+		String orderId = (String) request.getParameter("orderId");
 		
 		Connection conn = null;
 		
 		try {
 				conn  = getConnection();	
 				AccessDatabaseManager dbManager = new DatabaseManager();
-				//Client client = dbManager.getUserById(conn, 1);
-				//Client client = new Client(0,  firstName,  lastName,  mphone,  phone,  email,
-				//		address+", "+city+", "+postCode+", "+country);
+				//create new installment
+				Installment installment = new Installment(0, payMethod, Double.valueOf(amount));
 				
-				//dbManager.setClient(client, conn);
-				
-				//int userId = dbManager.setClient(client, conn);
-				//System.out.println("Client '"+ userId +"' saved");
-				
-				//get the newclient's ID?
-				//request.setAttribute("userId",userId);
-				
-				//redirect to the order page
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/installments.jsp");
+				//register the installment to th db
+				int instId = dbManager.setInstallment(installment, Integer.parseInt(orderId), conn);
+				System.out.println("set installment "+ instId);
+				//retrieve order and client objects from db
+				Order order = dbManager.getOrderByOrderId(conn, Integer.parseInt(orderId), true);
+				System.out.println("client id "+ order.getClientId());
+				Client client = dbManager.getClientById(conn, order.getClientId());
+				System.out.println("client name "+ client.getName());
+				System.out.println("installments length "+ order.getInstallments().size());
+				//set attributes
+				request.setAttribute("order", order);
+				request.setAttribute("client", client);
+								
+				//redirect to the preview order page
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/previewOrder.jsp");
 				requestDispatcher.forward(request, response);
 			
 			

@@ -52,7 +52,7 @@ public class BoxWithShelf implements BoxEntity{
 	public ArrayList<Piece> calculatePieces(double height, double width, double depth, double thickness, String colour, String door_colour,
 			String mat, int num_shelves, int num_drawers, int melId) {
 		
-		Material melamine = new Material(1,"melamine", colour, 0.00075f);
+		Material melamine = new Material(1,"Melamine", colour, 0.00075f);
 		
 		Material front_mat = new Material(melId, mat, door_colour, 0.0056f);
 		

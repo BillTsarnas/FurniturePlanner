@@ -172,7 +172,7 @@ public class RegisterOrderDetails extends HttpServlet {
 
 			// Finally, the Order object is created
 			// TODO: insert amount
-			Order order = new Order(0, furns, client_id, status_code, new ArrayList<Installment>(), Float.valueOf(500),
+			Order order = new Order(999, furns, client_id, status_code, new ArrayList<Installment>(), Float.valueOf(500),
 					order_name);
 			
 			Utility costCalculator = new Utility();
@@ -180,6 +180,8 @@ public class RegisterOrderDetails extends HttpServlet {
 			System.out.println("Total order cost" + order.getTotalcost());
 			
 			int orderId = dbManager.setOrder(order, true, conn);
+			order.setOrderID(orderId);
+			
 			System.out.println("set order");
 			Client client = dbManager.getClientById(conn, client_id);
 			request.setAttribute("client",client);

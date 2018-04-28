@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"
+    import="org.uniof.manchester.pattern.web.Order"
+    import="org.uniof.manchester.pattern.web.Client"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,6 +26,18 @@
 </head>
 <body>
    
+   <% 
+    //Order id
+    Order order = (Order) request.getAttribute("order");
+    
+    //Client id 
+    Client client = (Client) request.getAttribute("client");
+    
+    //current number of installments
+    String numInst = (String) request.getAttribute("numInst");
+    
+    %>
+   
     <div class="container">
         <div class="table-wrapper">
 
@@ -31,8 +45,10 @@
                 <div class="row">
                     <!--<div class="col-sm-8"><h2><b>Installment Details for <% out.print(request.getParameter("firstName")); %></b></h2></div>-->
                     <div class="col-sm-8"><h2><b>Installment Details</b></h2>
-                    <h4>client - Nikos Lymperopoulos</h4>
-                    <h4>clientId: #12 - orderId: #14</h4>
+                    <h4>Order Name: <% out.print(order.getName()); %></h4>
+                    <h4>Order Id: <% out.print(order.getOrderID()); %></h4>
+                    <h4>Client Name: <% out.print(client.getName()); %> <% out.print(client.getSurname()); %></h4>
+                    <h4>Client Id: <% out.print(client.getClientId()); %></h4>
                     </div>
 
                 </div>
@@ -48,12 +64,12 @@
                         <td width="33%"><b><p>Payment method</p></b></td>
                       </tr> 
                       <tr>
-                        <td width="34%" ><input type="text" value="4" class="form-control" id="num_install" disabled></td>
+                        <td width="34%" ><input type="text" value="<% out.print(Integer.parseInt(numInst+1)); %>" class="form-control" id="num_install" disabled></td>
                         <td width="33%" ><input type="text" class="form-control" id="amount" name="amount"></td>
                         <td width="33%" id="payment">  
                             <select class="form-control" id="sel_status data-width="100%" name="payMethod">
                               <option >select...</option>
-                              <option id="card">Debit/credit card</option>
+                              <option id="card">Debit/Credit card</option>
                               <option id="cash">Cash</option>
                               <option id="check">Check</option>
 
@@ -62,9 +78,9 @@
                       </tr>
                   </tbody>
               </table>
-  
+  			  <input type="hidden" name = "orderId" value="<% out.print(order.getOrderID()); %>">
               <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
-              <button type="submit" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/order.jsp'">Save</button>
+              <button type="submit" class="btn btn-success">Save</button>
 
              </form>
         </div>
