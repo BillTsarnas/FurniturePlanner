@@ -114,6 +114,8 @@
 <div class="container">
 
         <% 
+        double temp_h = 0;
+        double temp_w = 0;
         while (furnIt.hasNext()) {
 
 			Furniture currF = furnIt.next();
@@ -128,6 +130,8 @@
 				Box currB = boxIt.next();
 				pieceList = currB.getPieces();
 				pieceIt = pieceList.iterator();
+				
+				
            %>
            <table class="table table-bordered">
               <thead>
@@ -143,21 +147,35 @@
               </thead>
               <tbody>
               <% 
+              boolean typeNum = false;
               while (pieceIt.hasNext()) {
 
 	 				Piece currP = pieceIt.next();
+	 				
+					//
+					
+					if ( temp_h == currP.getHeight() ){
+						if ( temp_w == currP.getHeight() ){
+							typeNum = true;							
+						}
+					}
+					temp_h = currP.getHeight();
+					temp_w = currP.getHeight();
+              
+              
               %>
                  <tr>
-                    <td>4</td> 
-                    <td>TEST</td> 
+                    <td>to_fulfill</td>
                     <td><%out.print(currP.getHeight()); %></td> 
                     <td><%out.print(currP.getWidth()); %></td> 
-                    <td><%out.print(currP.getMaterial()); %></td> 
+                    <td><%out.print(currP.getMaterial().getName()); %></td> 
                     <td><%out.print(currP.getColour()); %></td>  
                     <td><%out.print(currP.getThickness()); %></td> 
                  </tr> 
               </tbody>
-              <%
+              <% 
+              
+            
               } 
               %>
            </table>
@@ -171,7 +189,7 @@
         %>
         <div class="price_btn">
            <label>Total price</label>
-           <p>3000.30&euro;</p>
+           <p><%out.print(order.getTotalcost()); %>&pound;;</p>
         </div>
         
         <button type="submit" class="btn btn-danger" style="float: left;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
