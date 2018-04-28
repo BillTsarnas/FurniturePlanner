@@ -3,6 +3,7 @@
     import="java.util.Iterator" 
     import="java.util.ArrayList" 
     import="org.uniof.manchester.pattern.web.Piece"
+    import="org.uniof.manchester.pattern.web.ExtraParts"
     import="org.uniof.manchester.pattern.web.Furniture"
     import="org.uniof.manchester.pattern.web.Order"
     import="org.uniof.manchester.pattern.web.Box"
@@ -44,10 +45,14 @@
 
     String status = "";
     
-    if (st == 1) {
+    if (st == 0) {
     	status = "Active";
-    }else {
+    }else if (st == 1) {
     	status = "Offer";
+    }else if (st == 2) {
+    	status = "On Progress";
+    }else if (st == 3){
+    	status = "Declined";
     }
     
 	//set up furniture list
@@ -64,6 +69,12 @@
 	ArrayList<Piece> pieceList = new ArrayList<Piece>(); 
 	//set up piece iterator
 	Iterator<Piece> pieceIt;
+	
+	//set up extras list
+	ArrayList<ExtraParts> extraPartsList = new ArrayList<ExtraParts>();
+	//set up extras iterator
+	Iterator<ExtraParts> extraPartsIt;
+	
   %>
   
   <div class="container">
@@ -71,6 +82,7 @@
   <div class="col-xs-6">
   
             <table class="table">
+            <caption>Order details</caption>
               <thead>
                 <tr>
                   <th class="col-md-1">Name</th>
@@ -84,7 +96,7 @@
                   <td class="col-md-1"><%out.print(cln_obj.getName()); %></td>
                   <td class="col-md-1"><%out.print(cln_obj.getSurname()); %></td>
                   <td class="col-md-2"><%out.print(order.getName()); %></td>
-                  <td class="col-md-3"><%out.print(order.getStatus()); %></td>
+                  <td class="col-md-3"><%=status%></td>
                 </tr>
 
               </tbody>
@@ -94,18 +106,19 @@
   <div class="col-xs-6">
     
             <table class="table">
+            <caption>Installment details</caption>
               <thead>
                 <tr>
-                  <th class="col-md-1">Installments</th>
-                  <th class="col-md-2">Amount</th>
-                  <th class="col-md-3">Payment</th>
+                  <th width="60%">Installment number</th>
+                  <th width="20%">Amount</th>
+                  <th  width="20%">Payment</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td class="col-md-1">4</td>
-                  <td class="col-md-2">1.000</td>
-                  <td class="col-md-3">Cash</td>
+                  <td>4</td>
+                  <td>1.000</td>
+                  <td>Cash</td>
                 </tr>
               </tbody>
             </table>
@@ -124,29 +137,71 @@
         %>
         <details>
            <summary>Furniture #<%out.print(currF.getName()); %></summary>
-           <% 
+        <% 
            while (boxIt.hasNext()) {
 
 				Box currB = boxIt.next();
 				pieceList = currB.getPieces();
-				pieceIt = pieceList.iterator();
+				pieceIt = pieceList.iterator();	
 				
+				extraPartsList = currB.getExtras();
+				extraPartsIt = extraPartsList.iterator();
 				
-           %>
+		 %>
+		 <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th width="50%" style="color:green;"><%out.print(currB.getName()); %></th>
+                </tr>
+              </thead>
+         </table>
+           <div class="col-xs-6">
            <table class="table table-bordered">
               <thead>
-              <th scope="row" style="color:green;"><%out.print(currB.getName()); %></th>
+                <tr>
+                  <th width="50%" style="color:green;">Extra parts</th>
+                </tr>
+                <tr>
+                  <th class="col-md-1">Part name</th>
+                  <th class="col-md-2">Part cost</th>
+                </tr>
+              </thead>
+              <tbody>
+              <%	
+				while (extraPartsIt.hasNext()) {
+					
+					ExtraParts currE = extraPartsIt.next();
+              %>
+                <tr>
+                  <td class="col-md-1"><%out.print(currE.getName()); %></td>
+                  <td class="col-md-2"><%out.print(currE.getCost()); %></td>
+                </tr>
+
+              </tbody>
+              <%
+				}
+              %>
+           </table>
+           </div>
+           
+           <div class="col-xs-6">
+           <table class="table table-bordered">
+              <thead>
                  <tr>
-                    <td><b>Number of Pieces</b></td> 
-                    <td><b>Height</b></td> 
-                    <td><b>Width</b></td> 
-                    <td><b>Material</b></td> 
-                    <td><b>Colour</b></td> 
-                    <td><b>Thickness</b></td> 
+                    <th width="50%" style="color:green;">Pieces</th>
+                 </tr>
+                 <tr>
+                    <td width="10%"><b>Number of Pieces</b></td> 
+                    <td width="5%"><b>Height</b></td> 
+                    <td width="5%"><b>Width</b></td> 
+                    <td width="10%"><b>Material</b></td> 
+                    <td width="10%"><b>Colour</b></td> 
+                    <td width="10%"><b>Thickness</b></td> 
                  </tr>
               </thead>
               <tbody>
               <% 
+		      
               boolean typeNum = false;
               while (pieceIt.hasNext()) {
 
@@ -179,9 +234,11 @@
               } 
               %>
            </table>
+           </div>
            <%
             } 
            %>
+
         </details>
         
         <%
