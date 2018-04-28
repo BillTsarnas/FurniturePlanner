@@ -5,7 +5,7 @@ use furnitureplanner;
 
 SET SQL_SAFE_UPDATES = 0;
 
-/*SET GLOBAL innodb_buffer_pool_size=268435456;
+SET GLOBAL innodb_buffer_pool_size=268435456;
 /*We create our main table where we are performing our data analysis*/
 
 CREATE TABLE CLIENTS 
@@ -64,11 +64,14 @@ CREATE TABLE ORDER_INSTALLMENTS
     PRIMARY KEY(orderid, installmentid)
 );
 
+/*
 insert into ORDER_INSTALLMENTS (orderid, installmentid) VALUES 
 (1,1),
 (1,2),
 (1,3),
 (1,4);
+*/
+
 
 CREATE TABLE INSTALLMENTS 
 (
@@ -125,7 +128,7 @@ CREATE TABLE PIECE_MATERIAL
     PRIMARY KEY(pieceid,materialid)
 );
 
-insert into PIECE_MATERIAL (pieceid, materialid) VALUES
+/*insert into PIECE_MATERIAL (pieceid, materialid) VALUES
 (1,3),
 (2,1),
 (3,2),
@@ -138,7 +141,7 @@ insert into PIECE_MATERIAL (pieceid, materialid) VALUES
 (10,1),
 (11,1),
 (12,1),
-(13,1);
+(13,1);*/
 
 CREATE TABLE MATERIAL_CATALOGUE 
 (
@@ -152,7 +155,8 @@ CREATE TABLE MATERIAL_CATALOGUE
 INSERT INTO MATERIAL_CATALOGUE(name,cost,colour) VALUES
 ('melamine',50.0,'black'),
 ('oak',2000.0,'brown'),
-('maple', 250.0,'dark');
+('maple', 250.0,'dark'),
+('beech wood', 250.0,'dark');
 
 
 
@@ -166,54 +170,8 @@ CREATE TABLE BOX_EXTRAPARTS
     PRIMARY KEY(extrapartid,boxid)
 );
 
-insert into BOX_EXTRAPARTS (boxid, extrapartid,numof) VALUES
-(1,3,1),
-(1,4,1),
-(1,5,1),
-(1,6,1),
-(1,7,1),
-(2,1,1),
-(2,2,1),
-(2,3,1),
-(2,4,1),
-(2,5,1),
-(2,6,1),
-(2,7,1),
-(3,2,1),
-(3,3,1),
-(3,4,1),
-(3,5,1),
-(3,6,1),
-(4,5,1),
-(4,6,1),
-(4,7,1),
-(5,1,1),
-(5,2,1),
-(5,3,1),
-(5,4,1),
-(5,5,1),
-(6,2,1),
-(6,3,1),
-(7,4,1),
-(7,5,1),
-(7,2,1),
-(7,1,1),
-(8,4,1),
-(8,5,1),
-(8,3,1),
-(9,5,1),
-(9,4,1),
-(9,1,1),
-(10,5,1),
-(10,4,1),
-(11,3,1),
-(11,5,1),
-(12,1,1),
-(12,4,1),
-(13,1,1),
-(13,2,1),
-(13,3,1),
-(13,4,1);
+/*insert into BOX_EXTRAPARTS (boxid, extrapartid,numof) VALUES*/
+
 
 CREATE TABLE EXTRAPARTS_CATALOGUE 
 (
@@ -244,7 +202,7 @@ CREATE TABLE BOX_PIECES
     PRIMARY KEY(pieceid,boxid)
 );
 
-
+/*
 INSERT INTO BOX_PIECES(boxid,pieceid) VALUES
 (1,1),
 (1,2),
@@ -258,7 +216,7 @@ INSERT INTO BOX_PIECES(boxid,pieceid) VALUES
 (4,2),
 (5,1),
 (5,2),
-(5,5);
+(5,5);*/
 
 
 CREATE TABLE PIECES_PROPERTIES
@@ -295,7 +253,7 @@ CREATE TABLE FURNITURE_BOXES
     boxid 				int NOT NULL,
     PRIMARY KEY(furnitureid,boxid)
 );
-
+/*
 insert into FURNITURE_BOXES (furnitureid, boxid) VALUES
 (1,1),
 (1,2),
@@ -308,7 +266,7 @@ insert into FURNITURE_BOXES (furnitureid, boxid) VALUES
 (4,4),
 (4,5),
 (5,4),
-(5,5);
+(5,5);*/
 
 CREATE TABLE BOXES_CATALOGUE 
 (
