@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"
     import="java.util.Iterator" 
     import="java.util.ArrayList" 
+    import="org.uniof.manchester.pattern.web.Piece"
     import="org.uniof.manchester.pattern.web.Furniture"
     import="org.uniof.manchester.pattern.web.Order"
     import="org.uniof.manchester.pattern.web.Box"
@@ -30,6 +31,41 @@
 
 <body>
 
+
+<form class="form-horizontal" role="form" method="post" action="">
+
+  <% 
+    //Order
+    Order order = (Order) request.getAttribute("order");
+    
+    //Client
+    Client cln_obj = (Client) request.getAttribute("client");
+    int st = order.getStatus();
+
+    String status = "";
+    
+    if (st == 1) {
+    	status = "Active";
+    }else {
+    	status = "Offer";
+    }
+    
+	//set up furniture list
+	ArrayList<Furniture> furList = order.getFurnitures();
+	//set up furniture iterator
+	Iterator<Furniture> furnIt = furList.iterator();
+	
+	//set up box list
+	ArrayList<Box> boxList = new ArrayList<Box>();
+	//set up box iterator
+	Iterator<Box> boxIt;
+	
+	//set up piece list
+	ArrayList<Piece> pieceList = new ArrayList<Piece>(); 
+	//set up piece iterator
+	Iterator<Piece> pieceIt;
+  %>
+  
   <div class="container">
   <h1>Preview of order</h1>
   <div class="col-xs-6">
@@ -38,17 +74,17 @@
               <thead>
                 <tr>
                   <th class="col-md-1">Name</th>
-                  <th class="col-md-1">Lastname</th>
+                  <th class="col-md-1">Surname</th>
                   <th class="col-md-2">Order name</th>
                   <th class="col-md-3">Order status</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td class="col-md-1">Constantinos</td>
-                  <td class="col-md-1">Lebesis</td>
-                  <td class="col-md-2">#lebes_order</td>
-                  <td class="col-md-3">Active</td>
+                  <td class="col-md-1"><%out.print(cln_obj.getName()); %></td>
+                  <td class="col-md-1"><%out.print(cln_obj.getSurname()); %></td>
+                  <td class="col-md-2"><%out.print(order.getName()); %></td>
+                  <td class="col-md-3"><%out.print(order.getStatus()); %></td>
                 </tr>
 
               </tbody>
@@ -76,89 +112,30 @@
   </div>
   </div>
 <div class="container">
-<form class="form-horizontal" role="form" method="post" action="">
 
-
-
-  <% 
-    //Order
-    Order ord_obj = (Order) request.getAttribute("order");
-    
-    //Client
-    Client cln_obj = (Client) request.getAttribute("client");
-    int st = ord_obj.getStatus();
-
-    String status = "";
-    
-    if (st == 1) {
-    	status = "Active";
-    }else {
-    	status = "Offer";
-    }
-    
-    //Furnitures
-    ArrayList<Furniture> frn_obj = (ArrayList<Furniture>) request.getAttribute("furniture");
-	System.out.println("Furnitures:");
-	Iterator<Furniture> crunchifyIterator = frn_obj.iterator();
-	ArrayList<String> furnIdList = new ArrayList<String>();
-	while (crunchifyIterator.hasNext()) {
-		Furniture curr = crunchifyIterator.next();
-		furnIdList.add(curr.getName());
-		//System.out.println(curr.getName());
-	}
-	
-	//Boxes
-	ArrayList<String> box_obj = (ArrayList<String>) request.getAttribute("box_list");
-	Iterator<String> crunchifyIteratorBox = box_obj.iterator();
-	//Araaylists of each value
-	//+curr.getColour()+" "+curr.getDepth()+" "+curr.getDoor_colour()+" "+curr.getHeight()+" "+curr.getWidth());
-	ArrayList<String> boxNameList = new ArrayList<String>();
-	ArrayList<String> thicknessList = new ArrayList<String>();
-	ArrayList<String> colourList = new ArrayList<String>();
-	ArrayList<String> depthList = new ArrayList<String>();
-	ArrayList<String> door_colourList = new ArrayList<String>();
-	ArrayList<String> heightList = new ArrayList<String>();
-	ArrayList<String> widthList = new ArrayList<String>();
-	while (crunchifyIteratorBox.hasNext()) {
-		String curr = crunchifyIteratorBox.next();
-		String[] to_split = curr.split(",");
-		boxNameList.add(to_split[0]);
-		thicknessList.add(to_split[1]);
-		colourList.add(to_split[2]);
-		depthList.add(to_split[3]);
-		door_colourList.add(to_split[4]);
-		heightList.add(to_split[5]);
-		widthList.add(to_split[6]);	
-		/*
-		System.out.println("boxNameList"+boxNameList + "size="+boxNameList.size());
-		System.out.println("thicknessList"+thicknessList + "size="+thicknessList.size());
-		System.out.println("colourList"+colourList + "size="+colourList.size());
-		System.out.println("depthList"+depthList + "size="+depthList.size());
-		System.out.println("door_colourList"+door_colourList + "size="+door_colourList.size());
-		System.out.println("heightList"+heightList + "size="+heightList.size());
-		System.out.println("widthList"+widthList + "size="+widthList.size());*/
-		//System.out.println(to_split[0]);
-	}
-	
-  %>
-
-  
         <% 
-        for (int i=0; i< furnIdList.size(); i++) {
+        while (furnIt.hasNext()) {
+
+			Furniture currF = furnIt.next();
+			boxList = currF.getBoxes();
+ 			boxIt = boxList.iterator();
         %>
         <details>
-           <summary>Furniture #<%out.print(furnIdList.get(i)); %></summary>
+           <summary>Furniture #<%out.print(currF.getName()); %></summary>
            <% 
-           for (int j=0; j< boxNameList.size(); j++) {
+           while (boxIt.hasNext()) {
+
+				Box currB = boxIt.next();
+				pieceList = currB.getPieces();
+				pieceIt = pieceList.iterator();
            %>
            <table class="table table-bordered">
               <thead>
-              <th scope="row" style="color:green;"><%out.print(boxNameList.get(j)); %></th>
+              <th scope="row" style="color:green;"><%out.print(currB.getName()); %></th>
                  <tr>
                     <td><b>Number of Pieces</b></td> 
                     <td><b>Height</b></td> 
                     <td><b>Width</b></td> 
-                    <td><b>Depth</b></td> 
                     <td><b>Material</b></td> 
                     <td><b>Colour</b></td> 
                     <td><b>Thickness</b></td> 
@@ -166,29 +143,31 @@
               </thead>
               <tbody>
               <% 
-              //for (int s=0; s<= 2; s++) {
+              while (pieceIt.hasNext()) {
+
+	 				Piece currP = pieceIt.next();
               %>
                  <tr>
                     <td>4</td> 
-                    <td><%out.print(heightList.get(j)); %></td> 
-                    <td><%out.print(widthList.get(j)); %></td> 
-                    <td><%out.print(depthList.get(j)); %></td> 
-                    <td><%out.print(colourList.get(j)); %></td> 
                     <td>TEST</td> 
-                    <td><%out.print(thicknessList.get(j)); %></td> 
+                    <td><%out.print(currP.getHeight()); %></td> 
+                    <td><%out.print(currP.getWidth()); %></td> 
+                    <td><%out.print(currP.getMaterial()); %></td> 
+                    <td><%out.print(currP.getColour()); %></td>  
+                    <td><%out.print(currP.getThickness()); %></td> 
                  </tr> 
               </tbody>
               <%
-              //} 
+              } 
               %>
            </table>
-
            <%
-           } 
+            } 
            %>
         </details>
+        
         <%
-        } 
+        }
         %>
         <div class="price_btn">
            <label>Total price</label>
