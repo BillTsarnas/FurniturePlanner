@@ -37,7 +37,7 @@
 
                 </div>
             </div>
-            <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterOrder">
+            <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterInstallment">
              
              
               <table class="table table-bordered">
@@ -48,10 +48,10 @@
                         <td width="33%"><b><p>Payment method</p></b></td>
                       </tr> 
                       <tr>
-                        <td width="34%" ><input type="text" value="4" class="form-control" id="num_install"></td>
-                        <td width="33%" ><input type="text" class="form-control" id="amount"></td>
+                        <td width="34%" ><input type="text" value="4" class="form-control" id="num_install" disabled></td>
+                        <td width="33%" ><input type="text" class="form-control" id="amount" name="amount"></td>
                         <td width="33%" id="payment">  
-                            <select class="form-control" id="sel_status data-width="100%">
+                            <select class="form-control" id="sel_status data-width="100%" name="payMethod">
                               <option >select...</option>
                               <option id="card">Debit/credit card</option>
                               <option id="cash">Cash</option>
