@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public interface BoxEntity {
 
 	public ArrayList<Piece> calculatePieces(double height, double width, double depth, double thickness, String colour, String door_colour,
-			String mat, int num_shelves, int num_drawers);
+			String mat, int num_shelves, int num_drawers, int melId);
 	
 	public ArrayList<ExtraParts> calculateExtraParts(ArrayList<ExtraParts> extrasKW, int num_drawers, int num_shelves);
 	

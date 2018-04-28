@@ -9,7 +9,18 @@ public class BoxFactory {
 	}
 	
 	public BoxEntity createBox(String boxType, double height, double width, double depth, double thickness, String colour, String door_colour, ArrayList<ExtraParts> extrasKW, String mat, String FurType){
-	    
+	    int melId;
+		if(mat.equalsIgnoreCase("Melamine"))
+			melId = 1;
+		else if(mat.equalsIgnoreCase("Oak"))
+			melId = 2;
+		else if(mat.equalsIgnoreCase("Maple"))
+			melId = 3;
+		else if(mat.equalsIgnoreCase("Beech wood"))
+			melId = 4;
+		else
+			melId = 1;
+		
 		Utility default_pieces  = new Utility();
 		
 		if(FurType.equalsIgnoreCase("Kitchen")) {
@@ -23,7 +34,7 @@ public class BoxFactory {
 				//calculate and set the default pieces
 				box.getPieces().addAll(default_pieces.createBoxDefaultPieces(height, width, depth, thickness, colour, box.getBack_thickness()));
 				//calculate the special pieces
-				box.calculatePieces(height, width, depth, thickness, colour, door_colour, mat, 1, 0);
+				box.calculatePieces(height, width, depth, thickness, colour, door_colour, mat, 1, 0, melId);
 				//System.out.println("Mphka!!!!!!!");
 				//set the extra parts
 				box.calculateExtraParts(extrasKW, 0, 1);
@@ -35,7 +46,7 @@ public class BoxFactory {
 				//calculate and set the default pieces
 				box.getPieces().addAll(default_pieces.createBoxDefaultPieces(height, width, depth, thickness, colour, box.getBack_thickness()));
 				//calculate the special pieces
-				box.calculatePieces(height, width, depth, thickness, colour, door_colour, mat, 0, 3);
+				box.calculatePieces(height, width, depth, thickness, colour, door_colour, mat, 0, 3, melId);
 				//set the extra parts
 				box.calculateExtraParts(extrasKW, 3, 0);
 				return box;
@@ -46,7 +57,7 @@ public class BoxFactory {
 				//calculate and set the default pieces
 				box.getPieces().addAll(default_pieces.createBoxDefaultPieces(height, width, depth, thickness, colour, box.getBack_thickness()));
 				//calculate the special pieces
-				box.calculatePieces(height, width, depth, thickness, colour, door_colour, mat, 0, 4);
+				box.calculatePieces(height, width, depth, thickness, colour, door_colour, mat, 0, 4, melId);
 				//set the extra parts
 				box.calculateExtraParts(extrasKW, 4, 0);
 				return box;
@@ -65,7 +76,7 @@ public class BoxFactory {
 				//calculate and set the default pieces
 				box.getPieces().addAll(default_pieces.createBoxDefaultPieces(height, width, depth, thickness, colour, box.getBack_thickness()));
 				//calculate the special pieces
-				box.calculatePieces(height, width, depth, thickness, colour, door_colour, mat, 2, 0);
+				box.calculatePieces(height, width, depth, thickness, colour, door_colour, mat, 2, 0, melId);
 				//set the extra parts
 				box.calculateExtraParts(extrasKW, 0, 2);
 				return box;
@@ -76,7 +87,7 @@ public class BoxFactory {
 				//calculate and set the default pieces
 				box.getPieces().addAll(default_pieces.createBoxDefaultPieces(height, width, depth, thickness, colour, box.getBack_thickness()));
 				//calculate the special pieces
-				box.calculatePieces(height, width, depth, thickness, colour, door_colour, mat, 4, 4);
+				box.calculatePieces(height, width, depth, thickness, colour, door_colour, mat, 4, 4, melId);
 				//set the extra parts
 				box.calculateExtraParts(extrasKW, 4, 4);
 				return box;

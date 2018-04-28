@@ -50,11 +50,11 @@ public class BoxShelfDrawers implements BoxEntity{
 	}
 
 	public ArrayList<Piece> calculatePieces(double height, double width, double depth, double thickness, String colour, String door_colour,
-			String mat, int num_shelves, int num_drawers) {
+			String mat, int num_shelves, int num_drawers, int melId) {
 		
-		Material melamine = new Material(0,"melamine", colour, 0.00075f);
+		Material melamine = new Material(1,"melamine", colour, 0.00075f);
 		
-		Material front_mat = new Material(0, mat, door_colour, 0.0056f);
+		Material front_mat = new Material(melId, mat, door_colour, 0.0056f);
 		
 		ArrayList<Piece> pcs = new ArrayList<Piece>();
 		
@@ -121,29 +121,42 @@ public class BoxShelfDrawers implements BoxEntity{
 
 	public ArrayList<ExtraParts> calculateExtraParts(ArrayList<ExtraParts> extrasKW, int num_drawers, int num_shelves) {
 		
-		ArrayList<ExtraParts> extraParts = new ArrayList<ExtraParts>();
 		
+		
+		ArrayList<ExtraParts> extraParts = new ArrayList<ExtraParts>();
+		int num_handles;
 		if (width <= 60) {
 			
 			//add 1 handles
-			extraParts.add(extrasKW.get(1));
+			//extraParts.add(extrasKW.get(1));
+			num_handles = 1;
 		}
 		else {
 			
 			//add 2 handles
-			extraParts.add(extrasKW.get(1));
-			extraParts.add(extrasKW.get(1));
+			/*ExtraParts hola = extrasKW.get(1);
+			hola.setNumof(2);
+			extraParts.add(hola);*/
+			num_handles = 2;
 		}
 		
-		for (int i=0; i<num_shelves; i++) {
+		/*for (int i=0; i<num_shelves; i++) {
 			//shelf stand
 			extraParts.add(extrasKW.get(2));
-		}
+		}*/
+		//shelf stand
+		ExtraParts hola = extrasKW.get(2);
+		hola.setNumof(4*num_shelves);
+		extraParts.add(hola);
 		
-		for (int i=0; i<num_drawers; i++) {
+		/*for (int i=0; i<num_drawers; i++) {
 			//handles
 			extraParts.add(extrasKW.get(2));
-		}
+		}*/
+		//handles
+		hola = extrasKW.get(1);
+		hola.setNumof(num_drawers+num_handles);
+		extraParts.add(hola);
 		
 		this.setExtras(extraParts);
 		return extraParts;

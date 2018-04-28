@@ -50,11 +50,11 @@ public class BoxWithDrawers implements BoxEntity{
 	}
 
 	public ArrayList<Piece> calculatePieces(double height, double width, double depth, double thickness, String colour, String door_colour,
-			String mat, int num_shelves, int num_drawers) {
+			String mat, int num_shelves, int num_drawers, int melId) {
 		
-		Material melamine = new Material(0,"melamine", colour, 0.00075f);
+		Material melamine = new Material(1,"melamine", colour, 0.00075f);
 		
-		Material front_mat = new Material(0, mat, door_colour, 0.0056f);
+		Material front_mat = new Material(melId, mat, door_colour, 0.0056f);
 		
 		ArrayList<Piece> pcs = new ArrayList<Piece>();
 		
@@ -91,13 +91,22 @@ public class BoxWithDrawers implements BoxEntity{
 		
 		ArrayList<ExtraParts> extraParts = new ArrayList<ExtraParts>();
 		
-		for (int i=0; i<num_drawers; i++) {
+		/*for (int i=0; i<num_drawers; i++) {
 			//handle
 			extraParts.add(extrasKW.get(1));
-			//2 drawer drivers with brakes
-			extraParts.add(extrasKW.get(2));
-			extraParts.add(extrasKW.get(2));
-		}
+			//2 drawer drivers with brakes			
+			ExtraParts hola = extrasKW.get(1);
+			hola.setNumof(2);
+			extraParts.add(hola);
+		}*/
+		//handle
+		ExtraParts hola = extrasKW.get(1);
+		hola.setNumof(num_drawers);
+		extraParts.add(hola);
+		//2 drawer drivers with brakes
+		hola = extrasKW.get(2);
+		hola.setNumof(2*num_drawers);
+		extraParts.add(hola);
 		
 		this.setExtras(extraParts);
 		return extraParts;

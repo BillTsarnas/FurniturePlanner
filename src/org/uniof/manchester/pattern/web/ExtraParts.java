@@ -6,14 +6,29 @@ public class ExtraParts {
 	private String name;
 	private float cost;
 	private String type;
+	private int numof;
 	
 	
-	public ExtraParts(int extraPartId, String name, float cost, String type) {
+	public ExtraParts(int extraPartId, String name, float cost, String type, int numof) {
 		super();
 		this.extraPartId = extraPartId;
 		this.name = name;
 		this.cost = cost;
+		this.numof = numof;
 	}
+
+	
+
+	public int getNumof() {
+		return numof;
+	}
+
+
+
+	public void setNumof(int numof) {
+		this.numof = numof;
+	}
+
 
 
 	public int getExtraPartId() {

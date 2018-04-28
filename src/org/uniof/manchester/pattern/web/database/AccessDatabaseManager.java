@@ -41,7 +41,7 @@ public interface AccessDatabaseManager {
 	
 	public void setExtraParts(ArrayList<ExtraParts> extraparts, int boxId, Connection conn) throws SQLException;
 	
-	public void setExtraPartRelation(int extrapartId, int boxId, Connection conn) throws SQLException;
+	public void setExtraPartRelation(int extrapartId, int boxId, int numof , Connection conn) throws SQLException;
 	
 	public ArrayList<Client> getClientsByName(Connection conn, String clientName, boolean complete) throws SQLException;
 	

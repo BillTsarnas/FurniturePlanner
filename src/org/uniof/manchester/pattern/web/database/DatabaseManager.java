@@ -600,7 +600,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 			while (boxesIterator.hasNext())
 			{
 				ExtraParts extrapart = boxesIterator.next();
-				setExtraPartRelation(extrapart.getExtraPartId(),boxId,conn);
+				setExtraPartRelation(extrapart.getExtraPartId(),boxId,extrapart.getNumof(),conn);
 			}
 
 		} finally {
@@ -611,7 +611,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 		}
 	}
 
-	public void setExtraPartRelation(int extrapartId, int boxId, Connection conn) throws SQLException {
+	public void setExtraPartRelation(int extrapartId, int boxId, int numof, Connection conn) throws SQLException {
 
 		Statement st = null;
 
@@ -619,7 +619,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 			//Insert the relationship
 			st = conn.createStatement();
-		    st.executeUpdate("INSERT INTO BOX_EXTRAPARTS (boxid, extrapartid) " + "VALUES ("+boxId+", "+extrapartId+")");
+		    st.executeUpdate("INSERT INTO BOX_EXTRAPARTS (boxid, extrapartid, numof) " + "VALUES ("+boxId+", "+extrapartId+","+numof+")");
 		
 
 		} finally {
@@ -1085,8 +1085,9 @@ public class DatabaseManager implements AccessDatabaseManager {
 									"       ec.name," + 
 									"       ec.cost," + 
 									"       ec.type" + 
+									"       t.numof" + 
 									"		from EXTRAPARTS_CATALOGUE ec, " + 
-									"		(select distinct pe.extrapartid extrapartid from BOX_EXTRAPARTS pe where pe.boxid="+boxId+") t " + 
+									"		(select distinct pe.extrapartid extrapartid,numof from BOX_EXTRAPARTS pe where pe.boxid="+boxId+") t " + 
 									"		where ec.extrapartid = t.extrapartid");
 
 			while(rs.next()){
@@ -1095,8 +1096,9 @@ public class DatabaseManager implements AccessDatabaseManager {
 				String name = rs.getString("name");
 				float cost = rs.getFloat("cost");
 				String type = rs.getString("type");
+				int numof = rs.getInt("numof");
 
-				ExtraParts extrapart = new ExtraParts(extraPartId,name, cost,type);
+				ExtraParts extrapart = new ExtraParts(extraPartId,name, cost,type,numof);
 				extraparts.add(extrapart);
 			}
 
@@ -1136,7 +1138,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 				String name = rs.getString("name");
 				float cost = rs.getFloat("cost");
 
-				ExtraParts extrapart = new ExtraParts(extraPartId,name, cost,type);
+				ExtraParts extrapart = new ExtraParts(extraPartId,name, cost,type,1);
 				extraparts.add(extrapart);
 			}
 
