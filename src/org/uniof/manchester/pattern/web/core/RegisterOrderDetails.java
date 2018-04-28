@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.uniof.manchester.pattern.web.Box;
 import org.uniof.manchester.pattern.web.BoxEntity;
 import org.uniof.manchester.pattern.web.BoxFactory;
+import org.uniof.manchester.pattern.web.Client;
 import org.uniof.manchester.pattern.web.ExtraParts;
 import org.uniof.manchester.pattern.web.Furniture;
 import org.uniof.manchester.pattern.web.Installment;
@@ -109,7 +111,9 @@ public class RegisterOrderDetails extends HttpServlet {
 
 				System.out.println(">>>Num Boxes " + num_boxes);
 				exts = dbManager.getExtraPartsByType(conn, fur_kind);
+				
 				System.out.println("pairnw extra parts");
+				System.out.println(exts.size());
 				ArrayList<Box> boxes = new ArrayList<Box>();
 
 				// create a new Furniture and add it to the order list
@@ -173,6 +177,11 @@ public class RegisterOrderDetails extends HttpServlet {
 			Utility costCalculator = new Utility();
 			costCalculator.calculateTotalCost(order);
 			System.out.println("Total order cost" + order.getTotalcost());
+			
+			Client client = dbManager.getClientById(conn, client_id);
+			request.setAttribute("client",client);
+			request.setAttribute("order",order);
+			System.out.println("set attr final ok");
 			// ***************************************************************************************************
 			/*
 			 * int orderId = dbManager.setOrder(order, false, conn);
@@ -181,9 +190,9 @@ public class RegisterOrderDetails extends HttpServlet {
 			// ***************************************************************************************************
 
 			// redirect to the Preview Order page
-			// RequestDispatcher requestDispatcher =
-			// request.getRequestDispatcher("/order.jsp");
-			// requestDispatcher.forward(request, response);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/previewOrder.jsp");
+			System.out.println("redirect ok");
+			requestDispatcher.forward(request, response);
 
 		} catch (SQLException e) {
 			LOG.error("Problemas en la generaci�n del excel de calificaciones desde SQL " + e);

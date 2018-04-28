@@ -5,7 +5,7 @@ use furnitureplanner;
 
 SET SQL_SAFE_UPDATES = 0;
 
-SET GLOBAL innodb_buffer_pool_size=268435456;
+/*SET GLOBAL innodb_buffer_pool_size=268435456;
 /*We create our main table where we are performing our data analysis*/
 
 CREATE TABLE CLIENTS 
@@ -216,19 +216,22 @@ CREATE TABLE EXTRAPARTS_CATALOGUE
     extrapartid            int NOT NULL AUTO_INCREMENT,
     name 				    varchar(255),
     cost                 	varchar(255),
-    type                    char(1),
+    type                    varchar(255),
     PRIMARY KEY(extrapartid)
 );
 
 
 INSERT INTO EXTRAPARTS_CATALOGUE(name,cost,type) VALUES
-('Rail','5','K'),
-('Handle', '1','K'),
-('Wheel_small','2','W'),
-('Dish Case','3','W'),
-('Cutlery Case','2','W'),
-('Trash Can','4','W'),
-('Wardrobe bar','2','W');
+('Rail','5','Kitchen'),
+('Handle', '1','Kitchen'),
+('small wheel','2','Wardrobe'),
+('Dish Case','3','Wardrobe'),
+('Cutlery Case','2','Wardrobe'),
+('Trash Can','4','Kitchen'),
+('Wardrobe bar','2','Wardrobe'),
+('Full extention wheel','2','Kitchen'),
+('Drawer drivers with brakes','2','Wardrobe'),
+('shelf stand','2','Wardrobe');
 
 
 CREATE TABLE BOX_PIECES

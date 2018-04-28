@@ -92,22 +92,22 @@ public class BoxWithBar implements BoxEntity{
 		if (width <= 60) {
 			
 			//add 2 handles
-			extraParts.add(extrasKW.get(8));
+			extraParts.add(extrasKW.get(1));
 		}
 		else {
 			
 			//add 2 handles
-			extraParts.add(extrasKW.get(8));
-			extraParts.add(extrasKW.get(8));
+			extraParts.add(extrasKW.get(1));
+			extraParts.add(extrasKW.get(1));
 		}
 		
 		for (int i=0; i<num_shelves; i++) {
 			//shelf stand
-			extraParts.add(extrasKW.get(1));
+			extraParts.add(extrasKW.get(2));
 		}
 		
 		//bar
-		extraParts.add(extrasKW.get(8));
+		extraParts.add(extrasKW.get(3));
 		
 		this.setExtras(extraParts);
 		return extraParts;

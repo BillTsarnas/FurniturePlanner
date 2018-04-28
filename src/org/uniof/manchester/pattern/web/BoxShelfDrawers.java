@@ -126,23 +126,23 @@ public class BoxShelfDrawers implements BoxEntity{
 		if (width <= 60) {
 			
 			//add 1 handles
-			extraParts.add(extrasKW.get(8));
+			extraParts.add(extrasKW.get(1));
 		}
 		else {
 			
 			//add 2 handles
-			extraParts.add(extrasKW.get(8));
-			extraParts.add(extrasKW.get(8));
+			extraParts.add(extrasKW.get(1));
+			extraParts.add(extrasKW.get(1));
 		}
 		
 		for (int i=0; i<num_shelves; i++) {
 			//shelf stand
-			extraParts.add(extrasKW.get(1));
+			extraParts.add(extrasKW.get(2));
 		}
 		
 		for (int i=0; i<num_drawers; i++) {
 			//handles
-			extraParts.add(extrasKW.get(1));
+			extraParts.add(extrasKW.get(2));
 		}
 		
 		this.setExtras(extraParts);

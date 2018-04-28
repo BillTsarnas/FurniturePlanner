@@ -1123,7 +1123,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 			String query = 	" select ec.extrapartid, " + 
 					"       ec.name," + 
 					"       ec.cost" + 
-					"from EXTRAPARTS_CATALOGUE ec " + 
+					" from EXTRAPARTS_CATALOGUE ec " + 
 					"where ec.type = ?";
 
 			ps = conn.prepareStatement(query);
@@ -1132,7 +1132,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 
 			while(rs.next()){
 
-				int extraPartId = rs.getInt("pieceid");
+				int extraPartId = rs.getInt("extrapartid");
 				String name = rs.getString("name");
 				float cost = rs.getFloat("cost");
 
