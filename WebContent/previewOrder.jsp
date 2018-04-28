@@ -27,12 +27,59 @@
 
 
 </head>
+
 <body>
 
+  <div class="container">
+  <h1>Preview of order</h1>
+  <div class="col-xs-6">
+  
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="col-md-1">Name</th>
+                  <th class="col-md-1">Lastname</th>
+                  <th class="col-md-2">Order name</th>
+                  <th class="col-md-3">Order status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="col-md-1">Constantinos</td>
+                  <td class="col-md-1">Lebesis</td>
+                  <td class="col-md-2">#lebes_order</td>
+                  <td class="col-md-3">Active</td>
+                </tr>
+
+              </tbody>
+            </table>
+        
+  </div>
+  <div class="col-xs-6">
+    
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="col-md-1">Installments</th>
+                  <th class="col-md-2">Amount</th>
+                  <th class="col-md-3">Payment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="col-md-1">4</td>
+                  <td class="col-md-2">1.000</td>
+                  <td class="col-md-3">Cash</td>
+                </tr>
+              </tbody>
+            </table>
+  </div>
+  </div>
 <div class="container">
 <form class="form-horizontal" role="form" method="post" action="">
 
-  <h1>Preview of order</h1>
+
+
   <% 
     //Order
     Order ord_obj = (Order) request.getAttribute("order");
@@ -94,52 +141,8 @@
 	}
 	
   %>
-                
-  <!-- client details table -->
-  <table class="table table-bordered">
-     <thead>
-     <th scope="row" style="color:blue;">Client details</th>
-        <tr>
-           <td width="20%"><b>For client</b></td> 
-           <td width="20%"><b>Order name</b></td> 
-           <td width="10%"><b>Order status</b></td> 
-        </tr>
-     </thead>
-     <tbody>
-        <tr>
-           <td><%out.print(cln_obj.getName()); %> <%out.print(cln_obj.getSurname()); %></td> 
-           <td><%out.print(ord_obj.getName()); %></td> 
-           <td><%=status%></td>   
-        </tr>
-     </tbody>
-   </table>
-   <%
-   
-   %>
-   <!-- installments table -->
-   <table class="table table-bordered">
-     <thead>
-     <th scope="row" style="color:blue;">Installment details</th>
-        <tr>
-           <td width="40%"><b>Installments</b></td> 
-           <td width="30%"><b>Amount</b></td> 
-           <td width="30%"><b>Payment method</b></td> 
-        </tr>
-     </thead>
-     <tbody>
-        <% 
-        for (int c=0; c<= 1; c++) {
-        %>
-        <tr>
-           <td>4</td> 
-           <td>300&euro;</td> 
-           <td>Credit/Debit card</td> 
-        </tr>
-        <%
-        } 
-        %>
-     </tbody>
-   </table>
+
+  
         <% 
         for (int i=0; i< furnIdList.size(); i++) {
         %>

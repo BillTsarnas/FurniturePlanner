@@ -30,7 +30,10 @@
             <div class="table-title">
                 <div class="row">
                     <!--<div class="col-sm-8"><h2><b>Installment Details for <% out.print(request.getParameter("firstName")); %></b></h2></div>-->
-                    <div class="col-sm-8"><h2><b>Installment Details for:</b> Nikos Lymperopoulos</h2></div>
+                    <div class="col-sm-8"><h2><b>Installment Details</b></h2>
+                    <h4>client - Nikos Lymperopoulos</h4>
+                    <h4>clientId: #12 - orderId: #14</h4>
+                    </div>
 
                 </div>
             </div>
@@ -40,14 +43,14 @@
               <table class="table table-bordered">
                   <tbody>
                       <tr>
-                        <td width="20%"><b><p>Installments</b></p></td>
-                        <td width="40%"><b><p>Amount</p></b></td>
-                        <td width="40%"><b><p>Payment method</p></b></td>
+                        <td width="34%"><b><p>Installment number</b></p></td>
+                        <td width="33%"><b><p>Amount</p></b></td>
+                        <td width="33%"><b><p>Payment method</p></b></td>
                       </tr> 
                       <tr>
-                        <td width="20%" ><input type="number" class="form-control" id="num_install"></td>
-                        <td width="40%" ><input type="text" class="form-control" id="amount"></td>
-                        <td width="40%" id="payment">  
+                        <td width="34%" ><input type="text" value="4" class="form-control" id="num_install"></td>
+                        <td width="33%" ><input type="text" class="form-control" id="amount"></td>
+                        <td width="33%" id="payment">  
                             <select class="form-control" id="sel_status data-width="100%">
                               <option >select...</option>
                               <option id="card">Debit/credit card</option>
