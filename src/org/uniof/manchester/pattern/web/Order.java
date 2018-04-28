@@ -22,18 +22,7 @@ public class Order {
 		this.totalcost = totalcost;
 		this.name = name;
 	}
-	
-	//The no - argument constructor creates stub/test objects
-	public Order() {
-		this.orderID = 0;
-		this.furnitures = null;
-		this.clientId = 1;
-		this.status = 1;
-		this.installments = null;
-		this.totalcost = 500;
-		this.name = "An order";
-	}
-	
+		
 	public int getOrderID() {
 		return orderID;
 	}
@@ -53,16 +42,10 @@ public class Order {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
-	public double getTotal_cost() {
-		return totalcost;
-	}
-
 	
 	public ArrayList<Installment> getInstallments() {
 		return installments;
 	}
-
 
 	public void setInstallments(ArrayList<Installment> installments) {
 		this.installments = installments;
@@ -71,7 +54,6 @@ public class Order {
 	public int getClientId() {
 		return clientId;
 	}
-
 
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
@@ -85,7 +67,6 @@ public class Order {
 		this.totalcost = totalcost;
 	}
 
-	
 	public String getName() {
 		return name;
 	}

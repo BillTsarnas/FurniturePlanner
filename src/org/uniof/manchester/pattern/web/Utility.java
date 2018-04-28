@@ -60,10 +60,13 @@ public void calculateTotalCost(Order order) {
  				pieceList = currB.getPieces();
  				pieceIt = pieceList.iterator();
  				
- 	 			while (boxIt.hasNext()) {
+ 	 			while (pieceIt.hasNext()) {
 
  	 				Piece currP = pieceIt.next();
- 	 				totalCost = (float) ((float) currP.getHeight()*currP.getWidth()*currP.getThickness()*currP.getMaterial().getCost());
+ 	 				if(currP.getThickness() == 0.8)
+ 	 					totalCost += (float) ((float) currP.getHeight()*currP.getWidth()*0.00095f);
+ 	 				else
+ 	 					totalCost += (float) ((float) currP.getHeight()*currP.getWidth()*currP.getMaterial().getCost());
  	 	    	}
  	    	}
  			

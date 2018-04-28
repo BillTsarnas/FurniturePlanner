@@ -54,7 +54,7 @@ public class BoxShelfDrawers implements BoxEntity{
 		
 		Material melamine = new Material(0,"melamine", colour, 0.00075f);
 		
-		Material front_mat = new Material(0, mat, door_colour, 0.001f);
+		Material front_mat = new Material(0, mat, door_colour, 0.0056f);
 		
 		ArrayList<Piece> pcs = new ArrayList<Piece>();
 		

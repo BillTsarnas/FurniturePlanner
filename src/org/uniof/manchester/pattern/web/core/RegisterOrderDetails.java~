@@ -25,7 +25,6 @@ import org.uniof.manchester.pattern.web.Installment;
 import org.uniof.manchester.pattern.web.Material;
 import org.uniof.manchester.pattern.web.Order;
 import org.uniof.manchester.pattern.web.Piece;
-import org.uniof.manchester.pattern.web.Utility;
 import org.uniof.manchester.pattern.web.database.AccessDatabaseManager;
 import org.uniof.manchester.pattern.web.database.DatabaseManager;
 
@@ -160,9 +159,7 @@ public class RegisterOrderDetails extends HttpServlet {
 			// Finally, the Order object is created
 			//TODO: insert amount
 			 Order order = new Order(0, furns, client_id, status_code, installment, Float.valueOf(500), order_name );
-			 Utility costCalculator  = new Utility();
-			 costCalculator.calculateTotalCost(order);
-			 System.out.println("Total order cost" + order.getTotalcost());
+			 
 			 //***************************************************************************************************
 			 /*int orderId = dbManager.setOrder(order, false, conn);
 			 System.out.println(orderId);*/
