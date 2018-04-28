@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"
     import="java.util.Iterator" 
     import="java.util.ArrayList" 
+    import="org.uniof.manchester.pattern.web.Installment"
     import="org.uniof.manchester.pattern.web.Piece"
     import="org.uniof.manchester.pattern.web.ExtraParts"
     import="org.uniof.manchester.pattern.web.Furniture"
@@ -60,6 +61,13 @@
 	//set up furniture iterator
 	Iterator<Furniture> furnIt = furList.iterator();
 	
+	//set up installments list
+	ArrayList<Installment> instList = order.getInstallments();
+	//set up installments iterator
+	Iterator<Installment> instIt = instList.iterator();
+	
+	
+	
 	//set up box list
 	ArrayList<Box> boxList = new ArrayList<Box>();
 	//set up box iterator
@@ -103,6 +111,11 @@
             </table>
         
   </div>
+  
+  <%
+  if (!order.getInstallments().isEmpty()){
+  %>
+  
   <div class="col-xs-6">
     
             <table class="table">
@@ -115,15 +128,30 @@
                 </tr>
               </thead>
               <tbody>
+              <%
+              int i = 1;
+              while (instIt.hasNext()) {
+
+      			Installment currIn = instIt.next();
+      			//instIt = currIn.getAmount()
+       			//boxIt = boxList.iterator();
+              %>
                 <tr>
-                  <td>4</td>
-                  <td>1.000</td>
-                  <td>Cash</td>
+                  <td><%out.print(i); %></td>
+                  <td><%out.print(currIn.getAmount()); %></td>
+                  <td><%out.print(currIn.getPaytype()); %>.</td>
                 </tr>
+              <%
+              i++;
+              }
+              %>
               </tbody>
             </table>
   </div>
-  </div>
+  <%
+  }
+  %>
+</div>
 <div class="container">
 
         <% 
@@ -200,8 +228,7 @@
                  </tr>
               </thead>
               <tbody>
-              <% 
-		      
+              <%
               boolean typeNum = false;
               while (pieceIt.hasNext()) {
 
@@ -246,7 +273,8 @@
         %>
         <div class="price_btn">
            <label>Total price</label>
-           <p><%out.print(order.getTotalcost()); %>&pound;;</p>
+           <hr style="border: none; border-bottom: 1px solid black;">
+           <p><%out.print(String.format("%.2f", order.getTotalcost()) ); %> &pound;</p>
         </div>
         
         <button type="submit" class="btn btn-danger" style="float: left;" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>

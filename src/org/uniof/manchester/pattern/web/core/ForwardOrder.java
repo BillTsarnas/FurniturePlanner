@@ -84,38 +84,15 @@ public class ForwardOrder extends HttpServlet {
 					AccessDatabaseManager dbManager = new DatabaseManager();
 				
 					Order order = dbManager.getOrderByOrderId(conn, orderIdInt, false);
+					System.out.println("Phra order"+order.getClientId());
+					
 					Client client = dbManager.getClientById(conn, order.getClientId());
-					
-					//TODO to change orderid=1 because BD has data only for orderid=1
-					ArrayList<Furniture> furniture = dbManager.getFurnituresByOrderId(conn, 1, true);
-					
-					//Boxes
-					Iterator<Furniture> crunchifyIterator = furniture.iterator();
-					ArrayList<Integer> furnIdList = new ArrayList<Integer>();
-					while (crunchifyIterator.hasNext()) {
-						Furniture curr = crunchifyIterator.next();
-						furnIdList.add(curr.getFurnitureId());
-						//System.out.println(curr.getFurnitureId());
-					}
-					
-					//ArrayList<Box> box_list = new ArrayList<Box>();
-					ArrayList<String> box_list = new ArrayList<String>();
-					for (int i=0; i<furniture.size(); i++) {
-						ArrayList<Box> temp_list = dbManager.getBoxesByFurnitureId(conn, furnIdList.get(i), true) ;
-						
-						Iterator<Box> crunchifyIteratorTmp = temp_list.iterator();
-						while (crunchifyIteratorTmp.hasNext()) {
-							Box curr = crunchifyIteratorTmp.next();
-							box_list.add(curr.getName()+","+curr.getBack_thickness()+","+curr.getColour()+","+curr.getDepth()+","+curr.getDoor_colour()+","+curr.getHeight()+","+curr.getWidth());
-						}
-					}
-					    		
-					    		
-					request.setAttribute("box_list",box_list); 		
-					request.setAttribute("furniture",furniture);
+					System.out.println("Phra order"+order.getClientId());
+					   
 					request.setAttribute("client",client);
 					request.setAttribute("order",order);
 					requestDispatcher = request.getRequestDispatcher("/previewOrder.jsp");
+					//requestDispatcher.forward(request, response);
 			}
 			catch (SQLException e)
 			{
