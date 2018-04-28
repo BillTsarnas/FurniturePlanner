@@ -79,13 +79,13 @@
                             <td width="10%"><input class="form-control" type="text" id="width" name="box_width<%=i+1%>1"></td>
                             <td width="10%"><input class="form-control" type="text" id="depth" name="box_depth<%=i+1%>1"></td>
                             <td width="10%"><input class="form-control" type="text" id="thik" name="box_thick<%=i+1%>1" value="1.6"></td>
-                            <td width="20%"><input type="text" class="form-control" id="melMat" name="mel<%=i+1%>1"></td><td width="10%"><select class="form-control" id="box_colour<%=i+1%>1" name="box_colour<%=i+1%>1" >
+                            <td width="10%"><input type="text" class="form-control" id="melMat" name="mel<%=i+1%>1"></td><td width="10%"><select class="form-control" id="box_colour<%=i+1%>1" name="box_colour<%=i+1%>1" >
 	                               <option id="wood">Wood</option>
 	                               <option id="brown">Brown</option>
 	                               <option id="red">Red</option>
 	                               <option id="white">White</option>
 	                           </select>
-                            </td><td width="10%"><select class="form-control" id="material" name="material<%=i+1%>1" >
+                            </td><td width="20%"><select class="form-control" id="material" name="material<%=i+1%>1" >
 	                               <option id = "melamin">Melamine</option>
 	                               <option id="oak">Oak</option>
 	                               <option id="maple">Maple</option>
