@@ -75,11 +75,11 @@
 	                           </select><% } %><%if(kind_list.get(i).equals("Wardrobe"))  {%><select class="form-control" id="sel_box" name="sel_box<%=i+1%>1" >
 	                               <option id="box_sh">Box with bar and 2 shelves</option>
 	                               <option id="box_sh3">Box with 4 shelves and a set of 4 drawers</option>
-	                         </select><% } %></td><td width="10%"><input class="form-control" type="text" id="height" name="box_height<%=i+1%>1"></td>
-                            <td width="10%"><input class="form-control" type="text" id="width" name="box_width<%=i+1%>1"></td>
-                            <td width="10%"><input class="form-control" type="text" id="depth" name="box_depth<%=i+1%>1"></td>
-                            <td width="10%"><input class="form-control" type="text" id="thik" name="box_thick<%=i+1%>1" value="1.6"></td>
-                            <td width="10%"><input type="text" class="form-control" id="melMat" name="mel<%=i+1%>1"></td><td width="10%"><select class="form-control" id="box_colour<%=i+1%>1" name="box_colour<%=i+1%>1" >
+	                         </select><% } %></td><td width="10%"><input class="form-control" type="text" id="height" name="box_height<%=i+1%>1" required></td>
+                            <td width="10%"><input class="form-control" type="text" id="width" name="box_width<%=i+1%>1" required></td>
+                            <td width="10%"><input class="form-control" type="text" id="depth" name="box_depth<%=i+1%>1" required></td>
+                            <td width="10%"><input class="form-control" type="text" id="thik" name="box_thick<%=i+1%>1" value="1.6" required></td>
+                            <td width="10%"><input type="text" class="form-control" id="melMat" name="mel<%=i+1%>1" required></td><td width="10%"><select class="form-control" id="box_colour<%=i+1%>1" name="box_colour<%=i+1%>1" >
 	                               <option id="wood">Wood</option>
 	                               <option id="brown">Brown</option>
 	                               <option id="red">Red</option>

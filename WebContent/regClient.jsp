@@ -33,7 +33,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="textinput">First Name</label>
                 <div class="col-sm-10">
-                  <input type="text" placeholder="First Name" class="form-control" name="firstName">
+                  <input type="text" placeholder="First Name" class="form-control" name="firstName" required>
                 </div>
               </div>
               

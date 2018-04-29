@@ -48,7 +48,7 @@
 	                        <td width="30%"><b><p>Select status:</p></b></td>
 	                    </tr> 
 	                    <tr>
-	                    	<td width="50%" ><input required type="text" class="form-control" id="name_order" name="order_name"></td>
+	                    	<td width="50%" ><input type="text" class="form-control" id="name_order" name="order_name" required></td>
 	                        <td width="50%">  
 	                          <select class="form-control" id="sel_status data-width="100%" name="order_status">
 	                            <option selected id="active">Active</option>
@@ -78,7 +78,7 @@
 	                            <option id="wardrobe">Wardrobe</option>
 	                          </select>
 	                        </td>
-	                        <td width="50%"><input required type="text" class="form-control" id="furnitureName" name="fur_name1"></td>
+	                        <td width="50%"><input type="text" class="form-control" id="furnitureName" name="fur_name1" required></td>
 	                        <td width="10%">
 	                            <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
 	                        </td>

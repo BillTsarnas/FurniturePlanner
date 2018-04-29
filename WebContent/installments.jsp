@@ -65,7 +65,7 @@
                       </tr> 
                       <tr>
                         <td width="34%" ><input type="text" value="<% out.print(Integer.parseInt(numInst+1)); %>" class="form-control" id="num_install" disabled></td>
-                        <td width="33%" ><input type="text" class="form-control" id="amount" name="amount"></td>
+                        <td width="33%" ><input type="text" class="form-control" id="amount" name="amount" required></td>
                         <td width="33%" id="payment">  
                             <select class="form-control" id="sel_status data-width="100%" name="payMethod">
                               <option >select...</option>
