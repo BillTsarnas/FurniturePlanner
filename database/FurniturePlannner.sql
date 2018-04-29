@@ -184,15 +184,20 @@ CREATE TABLE EXTRAPARTS_CATALOGUE
 
 
 INSERT INTO EXTRAPARTS_CATALOGUE(name,cost,type) VALUES
-('Rail','5','Kitchen'),
-('Handle', '1','Kitchen'),
-('small wheel','2','Wardrobe'),('Dish Case','3','Wardrobe'),
+('Handle', '5','Kitchen'),
+('Handle', '5','Wardrobe'),
+('shelf stand','0.5','Wardrobe'),
+('shelf stand','0.5','Kitchen'),
+('Wardrobe bar','5','Wardrobe'),
+('Drawer drivers with brakes','7','Kitchen'),
+('Full extention drawer drivers','10','Kitchen'),
+('Drawer drivers with brakes','7','Wardrobe'),
+('small wheel','2','Wardrobe'),
+('Dish Case','3','Wardrobe'),
 ('Cutlery Case','2','Wardrobe'),
 ('Trash Can','4','Kitchen'),
-('Wardrobe bar','2','Wardrobe'),
-('Full extention wheel','2','Kitchen'),
-('Drawer drivers with brakes','2','Wardrobe'),
-('shelf stand','2','Wardrobe');
+('Rail','5','Kitchen'),
+('Drawer drivers with brakes','2','Wardrobe');
 
 
 CREATE TABLE BOX_PIECES
