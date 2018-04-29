@@ -1084,7 +1084,7 @@ public class DatabaseManager implements AccessDatabaseManager {
 			rs = st.executeQuery(	" select ec.extrapartid, " + 
 									"       ec.name," + 
 									"       ec.cost," + 
-									"       ec.type" + 
+									"       ec.type," + 
 									"       t.numof" + 
 									"		from EXTRAPARTS_CATALOGUE ec, " + 
 									"		(select distinct pe.extrapartid extrapartid,numof from BOX_EXTRAPARTS pe where pe.boxid="+boxId+") t " + 
