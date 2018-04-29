@@ -110,17 +110,17 @@ public class BoxWithBar implements BoxEntity{
 		}*/
 		
 		//add 2 handles
-		ExtraParts hola = extrasKW.get(1);
+		ExtraParts hola = extrasKW.get(0);
 		hola.setNumof(num_handles);
 		extraParts.add(hola);
 		
 		//shelf stand
-		hola = extrasKW.get(2);
+		hola = extrasKW.get(1);
 		hola.setNumof(4*num_shelves);
 		extraParts.add(hola);
 		
 		//bar
-		extraParts.add(extrasKW.get(3));
+		extraParts.add(extrasKW.get(2));
 		
 		this.setExtras(extraParts);
 		return extraParts;

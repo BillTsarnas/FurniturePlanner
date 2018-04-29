@@ -154,12 +154,12 @@ public class BoxShelfDrawers implements BoxEntity{
 			extraParts.add(extrasKW.get(2));
 		}*/
 		//handles
-		hola = extrasKW.get(1);
+		hola = extrasKW.get(0);
 		hola.setNumof(num_drawers+num_handles);
 		extraParts.add(hola);
 		
 		//Drawer drivers with brakes
-		hola = extrasKW.get(4);
+		hola = extrasKW.get(3);
 		hola.setNumof(num_drawers*2);
 		extraParts.add(hola);
 		

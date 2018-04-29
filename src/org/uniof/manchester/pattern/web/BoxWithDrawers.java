@@ -100,11 +100,11 @@ public class BoxWithDrawers implements BoxEntity{
 			extraParts.add(hola);
 		}*/
 		//handle
-		ExtraParts hola = extrasKW.get(1);
+		ExtraParts hola = extrasKW.get(0);
 		hola.setNumof(num_drawers);
 		extraParts.add(hola);
 		//2 drawer drivers with brakes
-		hola = extrasKW.get(4);
+		hola = extrasKW.get(2);
 		hola.setNumof(2*num_drawers);
 		extraParts.add(hola);
 		

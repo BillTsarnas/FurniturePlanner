@@ -111,12 +111,12 @@ public class BoxWithShelf implements BoxEntity{
 		}*/
 		
 		//add handles
-		ExtraParts hola = extrasKW.get(1);
+		ExtraParts hola = extrasKW.get(0);
 		hola.setNumof(num_handles);
 		extraParts.add(hola);
 		
 		//shelf stand
-		hola = extrasKW.get(2);
+		hola = extrasKW.get(1);
 		hola.setNumof(4*num_shelves);
 		extraParts.add(hola);
 		
