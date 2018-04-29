@@ -25,7 +25,7 @@
 
 
 </head>
-<body>
+<body background="img/background.jpg">
 
 <div class="container">
         <div class="table-wrapper">

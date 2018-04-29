@@ -15,7 +15,7 @@
 
 <title>Order Details</title>
 </head>
-<body>
+<body background="img/background.jpg">
 
 <div class="container">
     <div class="table-wrapper">
@@ -23,7 +23,7 @@
           <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/RegisterClient">
             <fieldset>
 
-              <legend>Furniture App v1.0</legend>
+              <legend> </legend>
               <div class="panel panel-default">
                 <div class="panel-body">
                     Order for new Client

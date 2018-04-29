@@ -1,28 +1,15 @@
 .productboxOne {
-    position: absolute;
+	position: absolute;
     left: 300px;
-    top: 50px;
-    width: 300px;
-    background-color:#ffffff;
-    padding:10px;
-    margin-bottom:10px;
-    -webkit-box-shadow: 0 8px 6px -6px  #999;
-    -moz-box-shadow: 0 8px 6px -6px  #999;
-    box-shadow: 0 8px 6px -6px #999;
+    top: 70px;
+    background: none;
 }
 
 .productboxTwo {
     position: absolute;
     left: 650px;
-    top: 50px;
-
-    width: 300px;
-    background-color:#ffffff;
-    padding:10px;
-    margin-bottom:10px;
-    -webkit-box-shadow: 0 8px 6px -6px  #999;
-    -moz-box-shadow: 0 8px 6px -6px  #999;
-    box-shadow: 0 8px 6px -6px #999;
+    top: 70px;
+    background: none;
 }
 
 .producttitle {
@@ -50,9 +37,9 @@
     height: 50px;
 }
 
-.btn-primary{
-    width: 200px;
-    height: 100px;
+.btn-success.btn-sm{
+    width: 300px;
+    height: 50px;
 }
 
 .btn-dark{

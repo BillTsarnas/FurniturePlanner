@@ -24,7 +24,7 @@
 
 
 </head>
-<body>
+<body background="img/background.jpg">
    
    <% 
     //Order id

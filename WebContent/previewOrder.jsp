@@ -31,7 +31,7 @@
 
 </head>
 
-<body>
+<body background="img/background.jpg">
 
 
 	<form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/SetInstallment">

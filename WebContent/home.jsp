@@ -29,28 +29,20 @@
 
 
 </head>
+<body background="img/background.jpg">
 
-
-    <div class="productboxOne" style="width:230px; heigh:70px">
-        <div class="producttitle"></div>
-        <div class="productprice">
-          <div class="pull-right">
-            <button type="button" class="btn btn-success btn-sm" onclick="location.href='http://localhost:8080/FurniturePlanner/regClient.jsp'" style="heigh:100px">
-            <b>Register new Order for new Client</b>
-            </button>
-          </div>
-        </div>
+    <div class="productboxOne">
+        <button type="button" class="btn btn-success btn-sm" onclick="location.href='http://localhost:8080/FurniturePlanner/regClient.jsp'" >
+        <b>Register new Order for new Client</b>
+        </button>
     </div>
-    <div class="productboxTwo" style="width:260px; heigh:70px">
-        <div class="producttitle"></div>
-        <div class="productprice">
-          <div class="pull-right">
+    <div class="productboxTwo">
           <!--button type="button" class="btn btn-success btn-sm" onclick="location.href='http://localhost:8080/FurniturePlanner/.jsp'" style="heigh:100px">
             <b>Register new Order for an existing Client</b>
             </button-->
-              <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#basicModal">
+              <button href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#basicModal">
                  <b>Register new Order for an existing Client</b>
-              </a>
+              </button>
 
 			  <div class="modal fade" id="basicModal" tabindex="-1" role="dialog"
 				aria-labelledby="basicModal" aria-hidden="true">
@@ -114,8 +106,6 @@
 				</div>
 			</div>
 		</div>
-        </div>
-    </div>
 
     <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/SearchClient">
     <div class="searchOne">

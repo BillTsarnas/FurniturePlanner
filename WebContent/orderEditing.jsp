@@ -23,7 +23,7 @@
 
 
 </head>
-<body>
+<body background="img/background.jpg">
    
 <div class="container">
 	  <% String order_name =  (String) request.getAttribute("order_name"); %>

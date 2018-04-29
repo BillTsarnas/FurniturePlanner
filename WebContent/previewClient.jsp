@@ -20,7 +20,7 @@
 
 
 </head>
-<body>
+<body background="img/background.jpg">
 
 <div class="container">
 <form class="form-horizontal" role="form" method="post" action="">
