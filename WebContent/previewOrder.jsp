@@ -94,7 +94,7 @@
 					<caption>Order details</caption>
 					<thead>
 						<tr>
-							<th class="col-md-1">Name</th>
+							<th class="col-md-2"> Client Name</th>
 							<th class="col-md-1">Surname</th>
 							<th class="col-md-2">Order name</th>
 							<th class="col-md-3">Order status</th>
@@ -199,6 +199,7 @@
 				
 		 %>
 			<table class="table table-bordered">
+			
 				<thead>
 					<tr>
 						<th width="50%" style="color: green;">
@@ -206,48 +207,72 @@
 						</th>
 					</tr>
 				</thead>
-			</table>
-			<div class="col-xs-6">
-				<table class="table table-bordered">
+				
+			<tbody>
+			<tr>
+			<td style="width:40%">
+			
+			<!-- div class="col-xs-6"-->
+				<table style="border: 1; background: #F5F7FA" class="table table-bordered">
+				<!-- class="table table-bordered" -->
 					<thead>
 						<tr>
 							<th width="50%" style="color: green;">Extra parts</th>
 						</tr>
 						<tr>
+							<th class="col-md-2">Number of pieces</th>
 							<th class="col-md-1">Part name</th>
-							<th class="col-md-2">Part cost</th>
+							<th class="col-md-2">Cost</th>
 						</tr>
 					</thead>
 					<tbody>
 				<%	
+				float totalExtraPartsCost = 0;
 				while (extraPartsIt.hasNext()) {
 					System.out.println("enter extra while");
 					ExtraParts currE = extraPartsIt.next();
                %>
 						<tr>
+							<td class="col-md-2">
+								<%out.print(currE.getNumof()); %>
+							</td>
 							<td class="col-md-1">
 								<%out.print(currE.getName()); %>
 							</td>
 							<td class="col-md-2">
-								<%out.print(currE.getCost()); %>
+								<%out.print(String.format("%.2f", currE.getCost())); totalExtraPartsCost+=currE.getCost();%> &pound;
 							</td>
 						</tr>
 				<%
 				}
                %>
+               			<tr>
+							<td style="visibility: hidden">
+							</td>
+							<td style="visibility: hidden">
+							</td>
+							<td class="col-md-2">
+								Total: <%out.print(totalExtraPartsCost); %> &pound;
+							</td>
+					</tr>
 					</tbody>
 			
 				</table>
-			</div>
-
-			<div class="col-xs-6">
-				<table class="table table-bordered">
+			<!-- /div-->
+			
+				</td>
+				<td  style="width:60%">
+				
+				
+			<!-- div class="col-xs-6"-->
+				<table style="border: 1; background: #F5F7FA" class="table table-bordered">
+				<!-- class="table table-bordered" -->
 					<thead>
 						<tr>
 							<th width="50%" style="color: green;">Pieces</th>
 						</tr>
 						<tr>
-							<td width="10%"><b>Number of Pieces</b></td>
+							<%//td width="10%"><b>Number of Pieces</b></td%>
 							<td width="5%"><b>Height</b></td>
 							<td width="5%"><b>Width</b></td>
 							<td width="10%"><b>Material</b></td>
@@ -273,7 +298,7 @@
               
               			%>
 						<tr>
-							<td>to_fulfill</td>
+							<%//<td>to_fulfill</td>%>
 							<td>
 								<%out.print(currP.getHeight()); %>
 							</td>
@@ -295,7 +320,14 @@
               } 
               %>
 				</table>
-			</div>
+			<!-- /div-->
+			
+			</td>
+				</tr>
+				</tbody>
+				</table>
+				
+			<%//<table><thead></thead><tbody><tr><td><%out.print(currB.getSizeInSqMts()); %><%//</td></tr></tbody></table>%>
 			<%
             } 
             %> 
@@ -308,9 +340,10 @@
 		<%
         }
         %>
-			<div class="price_btn">
+			<div class="price_btn" style="text-align: right">
 				<label>Total price</label>
-				<hr style="border: none; border-bottom: 1px solid black;">
+				<!--hr style="border: none; border-bottom: 1px solid #333; align: right; width: 100%"-->
+				<hr align="right" width="13%" style="border-bottom: 1px solid #333">
 				<p> <%out.print(String.format("%.2f", order.getTotalcost()) ); %> &pound; </p>
 			</div>
 			<input type="hidden" name="orderId" value="<% out.print(order.getOrderID()); %>"> 

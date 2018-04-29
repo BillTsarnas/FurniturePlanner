@@ -46,7 +46,13 @@ public void calculateTotalCost(Order order) {
 		//set up piece iterator
 		Iterator<Piece> pieceIt;
 		
+		//set up extra parts list
+		ArrayList<ExtraParts> extraList = new ArrayList<ExtraParts>(); 
+		//set up piece iterator
+		Iterator<ExtraParts> extraIt;
+		
 		float totalCost = 0.0f;
+		double currentBoxCost = 0.0;
 		
 		while (furnIt.hasNext()) {
 
@@ -60,14 +66,33 @@ public void calculateTotalCost(Order order) {
  				pieceList = currB.getPieces();
  				pieceIt = pieceList.iterator();
  				
+ 				extraList = currB.getExtras();
+ 				extraIt = extraList.iterator();
+ 				
+ 				
+	 				
+ 				while (extraIt.hasNext()) {
+
+ 					ExtraParts currE = extraIt.next();
+ 	 				totalCost += (float) ((float) currE.getCost());
+ 	 				currentBoxCost += currE.getCost();
+ 	 		}
+ 				
  	 			while (pieceIt.hasNext()) {
 
  	 				Piece currP = pieceIt.next();
- 	 				if(currP.getThickness() == 0.8)
+ 	 				
+ 	 				if(currP.getThickness() == 0.8) {
  	 					totalCost += (float) ((float) currP.getHeight()*currP.getWidth()*0.00095f);
- 	 				else
+ 	 					currentBoxCost += currP.getHeight()*currP.getWidth()*0.00095f;
+ 	 				}
+ 	 				else {
  	 					totalCost += (float) ((float) currP.getHeight()*currP.getWidth()*currP.getMaterial().getCost());
+ 	 					currentBoxCost += currP.getHeight()*currP.getWidth()*currP.getMaterial().getCost();
+ 	 				}
  	 	    	}
+ 	 			currB.setSizeInSqMts(currentBoxCost);
+ 	 			currentBoxCost = 0.0;
  	    	}
  			
     	}

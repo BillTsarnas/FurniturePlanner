@@ -18,7 +18,7 @@ public class Box {
 	private double height;
 	private double width;
 	private double depth;
-	private double sizeInSqMts; //total surface size for all the sides combined
+	private double sizeInSqMts; //currently is the cost of each box
 	
 	//16 or 18, 16 can be default
 	private double thickness = 1.6;
