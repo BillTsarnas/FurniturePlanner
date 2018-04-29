@@ -1,0 +1,109 @@
+/* Base Fonts */
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);
+body {
+  
+  font-family: oswald;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+}
+body .container {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  left: 0;
+  right: 0;
+}
+body .intro {
+  font-size: 30px;
+  color: #ee4e56;
+}
+body .sub {
+  font-size: 26px;
+  letter-spacing: 1.4px;
+  margin-top: -4px;
+  color: #4e56ee;
+}
+body .desc {
+  font-size: 27px;
+  letter-spacing: 1.23px;
+  margin-top: 4px;
+  color: #020000;
+}
+body .fade {
+  font-size: 53px;
+  margin-top: -14px;
+  color: #ffff66;
+}
+body .bounce {
+  font-size: 44.5px;
+  margin-top: -18px;
+  color: #4eee96;
+}
+body .dash2 {
+  margin-top: -10px;
+}
+body .usage {
+  font-size: 30px;
+}
+
+
+
+
+
+
+
+
+.wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+ 
+}
+.card {
+  
+}
+.spinner {
+    width: 100px;
+    height: 100px;
+    background: #eee;
+    border-radius: 50%;
+    position: relative;
+    margin: 50px;
+    display: inline-block;
+}
+.spinner:after,
+.spinner:before {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.spinner:after{
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    border: 8px solid transparent;
+    border-top-color: orangered;
+    border-left-color: orangered;
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    0%{
+        transform: rotate(0deg);
+        opacity: .8;
+    }
+    95%{
+        transform: rotate(1000deg);
+        opacity: 1;
+    }
+    100%{
+        transform: rotate(1080deg);
+        opacity: .9;
+    }
+}

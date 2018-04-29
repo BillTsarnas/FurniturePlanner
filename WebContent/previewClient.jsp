@@ -32,7 +32,7 @@
                 %>
 
   <h1>Full details for client <%out.print(client_obj.getName()); %></h1>
-
+  <div class="contTbl">
         <table class="table table-bordered">
 
            <summary>ClientID - <%out.print(client_obj.getClientId()); %></summary>
@@ -61,7 +61,7 @@
                  <td><%out.print(client_obj.getEmail()); %></td>
               </tr>
         </table>
-        
+        </div>
         <button type="button" class="btn btn-success" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Ok</button>
              
 </form>
