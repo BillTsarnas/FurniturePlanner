@@ -53,7 +53,7 @@
 	                          <select class="form-control" id="sel_status data-width="100%" name="order_status">
 	                            <option selected id="active">Active</option>
 	                            <option id="offer">Offer</option>
-	                            <option id="progress">On progress</option>
+	                            <option id="progress">On Progress</option>
 	                            <option id="declined">Declined</option>
 	                          </select>
 	                        </td>

@@ -64,11 +64,10 @@
                         <td width="33%"><b><p>Payment method</p></b></td>
                       </tr> 
                       <tr>
-                        <td width="34%" ><input type="text" value="<% out.print(Integer.parseInt(numInst+1)); %>" class="form-control" id="num_install" disabled></td>
+                        <td width="34%" ><input type="text" value="<% out.print(Integer.parseInt(numInst) + 1); %>" class="form-control" id="num_install" disabled></td>
                         <td width="33%" ><input type="text" class="form-control" id="amount" name="amount" required></td>
                         <td width="33%" id="payment">  
                             <select class="form-control" id="sel_status data-width="100%" name="payMethod">
-                              <option >select...</option>
                               <option id="card">Debit/Credit card</option>
                               <option id="cash">Cash</option>
                               <option id="check">Check</option>
@@ -79,7 +78,7 @@
                   </tbody>
               </table>
   			  <input type="hidden" name = "orderId" value="<% out.print(order.getOrderID()); %>">
-              <button type="button" class="btn btn-danger" onclick="window.location.href='http://localhost:8080/FurniturePlanner/home.jsp'">Cancel</button>
+              <button type="button" class="btn btn-danger" onclick="history.back()">Cancel</button>
               <button type="submit" class="btn btn-success">Save</button>
 
              </form>
