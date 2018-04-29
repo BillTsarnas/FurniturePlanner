@@ -7,7 +7,7 @@ public class Utility {
 
 	public ArrayList<Piece> createBoxDefaultPieces(double height, double width, double depth, double thickness, String colour, double back_thickness) {
 		
-		Material melamine = new Material(0,"melamine", "wood", 0.00075f);
+		Material melamine = new Material(1,"Melamine", colour, 0.00075f);
 		
 		ArrayList<Piece> pcs = new ArrayList<Piece>();
 		

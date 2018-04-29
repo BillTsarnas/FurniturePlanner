@@ -64,16 +64,19 @@ public class RegisterInstallment extends HttpServlet {
 				AccessDatabaseManager dbManager = new DatabaseManager();
 				//create new installment
 				Installment installment = new Installment(0, payMethod, Double.valueOf(amount));
-				
+				System.out.println("installment amount"+ Double.valueOf(amount));
 				//register the installment to th db
 				int instId = dbManager.setInstallment(installment, Integer.parseInt(orderId), conn);
 				System.out.println("set installment "+ instId);
 				//retrieve order and client objects from db
 				Order order = dbManager.getOrderByOrderId(conn, Integer.parseInt(orderId), true);
 				System.out.println("client id "+ order.getClientId());
+				
+				System.out.println("material  "+ order.getFurnitures().get(0).getBoxes().get(0).getPieces().get(0).getMaterial().getName());
 				Client client = dbManager.getClientById(conn, order.getClientId());
 				System.out.println("client name "+ client.getName());
 				System.out.println("installments length "+ order.getInstallments().size());
+				
 				//set attributes
 				request.setAttribute("order", order);
 				request.setAttribute("client", client);

@@ -83,7 +83,7 @@ public class ForwardOrder extends HttpServlet {
 					
 					AccessDatabaseManager dbManager = new DatabaseManager();
 				
-					Order order = dbManager.getOrderByOrderId(conn, orderIdInt, false);
+					Order order = dbManager.getOrderByOrderId(conn, orderIdInt, true);
 					System.out.println("Phra order"+order.getClientId());
 					
 					Client client = dbManager.getClientById(conn, order.getClientId());

@@ -152,7 +152,7 @@
 								<%out.print(currIn.getAmount()); %>
 							</td>
 							<td>
-								<%out.print(currIn.getPaytype()); %>.
+								<%out.print(currIn.getPaytype()); %>
 							</td>
 						</tr>
 						<%
@@ -272,7 +272,6 @@
 							<th width="50%" style="color: green;">Pieces</th>
 						</tr>
 						<tr>
-							<%//td width="10%"><b>Number of Pieces</b></td%>
 							<td width="5%"><b>Height</b></td>
 							<td width="5%"><b>Width</b></td>
 							<td width="10%"><b>Material</b></td>
@@ -282,10 +281,15 @@
 					</thead>
 					<tbody>
 						<%
-			              boolean typeNum = false;
+			              //boolean typeNum = false;
 			              while (pieceIt.hasNext()) {
 			            	  System.out.println("enter pieces while");
 				 				Piece currP = pieceIt.next();
+				 				System.out.println("pieces height"+currP.getHeight());
+				 				System.out.println("pieces width"+currP.getWidth());
+				 				System.out.println("pieces material"+currP.getMaterial().getName());
+				 				System.out.println("pieces color"+currP.getColour());
+				 				System.out.println("pieces thickness"+currP.getThickness());
 				 				
 								/*if ( temp_h == currP.getHeight() ){
 									if ( temp_w == currP.getHeight() ){
@@ -298,7 +302,7 @@
               
               			%>
 						<tr>
-							<%//<td>to_fulfill</td>%>
+
 							<td>
 								<%out.print(currP.getHeight()); %>
 							</td>
@@ -316,30 +320,29 @@
 							</td>
 						</tr>
 					</tbody>
+					<%System.out.println("after pinaka");%>
 			  <%
               } 
               %>
 				</table>
-			<!-- /div-->
 			
 			</td>
 				</tr>
 				</tbody>
 				</table>
 				
-			<%//<table><thead></thead><tbody><tr><td><%out.print(currB.getSizeInSqMts()); %><%//</td></tr></tbody></table>%>
-			<%
-            } 
-            %> 
+			 <%
+              } 
+              %> 
             </td>
             </tr>
 			</tbody>
             </table>
            </details>
 
-		<%
-        }
-        %>
+		 <%
+              } 
+              %>
 			<div class="price_btn" style="text-align: right">
 				<label>Total price</label>
 				<!--hr style="border: none; border-bottom: 1px solid #333; align: right; width: 100%"-->
