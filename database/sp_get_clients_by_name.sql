@@ -10,13 +10,17 @@ BEGIN
 DECLARE id                  INT;
 DECLARE abuscar              VARCHAR(510);
 
+drop table if exists TMPLIST;
+drop table if exists TEMP_CLIENTS; 
+drop table if exists TEMP_CLIENTS_IDS; 
+
 CREATE TEMPORARY TABLE TMPLIST 
 (
 ID 				INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY,
 CADENA          VARCHAR(510)
 );
 
-CREATE TEMPORARY TABLE TEMP_CLIENTS 
+CREATE TEMPORARY TABLE TEMP_CLIENTS
 (
  id                  INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY,
  clientId            INTEGER,
