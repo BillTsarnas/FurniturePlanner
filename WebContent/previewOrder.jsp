@@ -87,6 +87,7 @@
   %>
 
 		<div class="container">
+		
 			<h1>Preview of order</h1>
 			<div class="col-xs-6">
 
