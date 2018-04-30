@@ -31,6 +31,7 @@
 </head>
 <body background="img/background.jpg">
 
+<div class="container">
     <div class="productboxOne">
         <button type="button" class="btn btn-success btn-sm" onclick="location.href='http://localhost:8080/FurniturePlanner/regClient.jsp'" >
         <b>Register new Order for new Client</b>
@@ -60,7 +61,7 @@
 							<div class="searchModal">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Search..."
-										id="searchClient" name="searchName"> <span class="input-group-btn">
+										id="searchClient" name="searchName" required> <span class="input-group-btn">
 										<input type="hidden" name = "hid_cln_val" value="0">
 										<!-- button class="btn btn-default" type="button"
 											data-toggle="modal" data-target="#searchClientModal">Go!</button-->
@@ -111,7 +112,7 @@
     <div class="searchOne">
         <h3>Preview details of the client</h3>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Insert clients name.." id="searchClient" name="searchName">
+          <input type="text" class="form-control" placeholder="Insert clients name.." id="searchClient" name="searchName" required>
           <input type="hidden" name = "hid_cln_val" value="1">
           <span class="input-group-btn">
             <button class="btn btn-default" type="submit" data-toggle="modal" data-target="#searchClientModal">Go!</button>
@@ -134,6 +135,6 @@
     </form>
 
 
-
+</div>
 </body>
 </html>                            
